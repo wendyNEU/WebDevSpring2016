@@ -11,4 +11,11 @@ body {
 #dashboard{
     height:30px;
 }
+footer{
+    width:100%;
+    background-color: #FFF;
+    position:fixed;
+    bottom: 0px;
+    text-align: center;
+}
 

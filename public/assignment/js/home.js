@@ -45,4 +45,14 @@ $( document ).ready( function() {
         e.stopPropagation();
         $("#subpage").load("./forms.html");
     });
+    $("#tagforms").click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        $("#subpage").load("./forms.html");
+    });
+    $("#tagfields").click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        $("#subpage").load("./form-fields.html");
+    });
 });
