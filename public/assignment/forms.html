@@ -1,4 +1,70 @@
-<ul class="nav nav-tabs">
-    <li role="presentation" class="active" id="tagforms"><a href="#">Forms</a></li>
-    <li role="presentation" id="tagfields"><a href="#">Fields</a></li>
-</ul>
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <h1>Forms</h1>
+        <h1></h1>
+        <div class="well">
+            <ul id="forms_fields" class="nav nav-tabs">
+                <li class="active"><a href="#tagforms" data-toggle="tab">Forms</a></li>
+                <li class=""><a href="#tagfileds" data-toggle="tab">Fields</a></li>
+            </ul>
+            <div id="forms_filels_content" class="tab-content">
+                <div class="tab-pane fade active in" id="tagforms">
+                    <div class="row">
+                        <div class="table table-striped col-xs-15 col-md-10">
+                            <table id="admin" class="grid table table-bordered table-sortable">
+                                <thead>
+                                <tr>
+                                    <th><button class="btn btn-primary glyphicon glyphicon-triangle-bottom"></button>Form Name</th>
+                                    <th><button class="btn btn-primary glyphicon glyphicon-triangle-bottom"></button>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody class="ui-sortable">
+                                <tr>
+                                    <td class="col-xs-3 col-md-2"><input type="text" value="User Name"
+                                                                         class="form-control">
+                                    </td>
+                                    <td class="col-xs-3 col-md-2">
+                                        <button class="btn btn-primary glyphicon glyphicon-plus"></button>
+                                        <button class="btn btn-primary glyphicon glyphicon-ok"></button>
+                                    </td>
+                                </tr>
+                                <!--
+                                <tr>
+                                    <script>
+                                        for(var i=0;i<4;i++){
+                                            var user = "User"+i;
+                                            document.write("<td>"+user+"</td>\n");
+                                            document.write("<td>");
+                                            document.write("<button class=\"btn btn-primary glyphicon glyphicon-remove\"></button>");
+                                            document.write("<button class=\"btn btn-primary glyphicon glyphicon-pencil\"></button>");
+                                            document.write("</td>");
+                                    }
+                                    </script>
+                                </tr>
+                                -->
+                                <tr>
+                                    <td class="col-xs-3 col-md-2">User1</td>
+                                    <td class="col-xs-3 col-md-2">
+                                        <button class="btn btn-primary glyphicon glyphicon-remove"></button>
+                                        <button class="btn btn-primary glyphicon glyphicon-pencil"></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-3 col-md-2">User2</td>
+                                    <td class="col-xs-3 col-md-2">
+                                        <button class="btn btn-primary glyphicon glyphicon-remove"></button>
+                                        <button class="btn btn-primary glyphicon glyphicon-pencil"></button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tagfileds">
+                    <h1>Fields tab!</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

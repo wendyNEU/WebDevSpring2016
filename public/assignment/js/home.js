@@ -28,7 +28,7 @@ $( document ).ready( function() {
     $("#navside_home").click(function(e){
         e.preventDefault();
         e.stopPropagation();
-        $("#subpage").load("./home.html");
+        $("#subpage").load("./welcome.html");
     });
     $("#navside_profile").click(function(e){
         e.preventDefault();
@@ -54,5 +54,9 @@ $( document ).ready( function() {
         e.preventDefault();
         e.stopPropagation();
         $("#subpage").load("./form-fields.html");
+    });
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var target = $(e.target).attr("href") // activated tab
+        alert(target);
     });
 });
