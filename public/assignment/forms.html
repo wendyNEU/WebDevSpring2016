@@ -56,9 +56,9 @@
                 <div class="tab-pane fade" id="tagfileds">
                     <hr>
                     <div class="row">
-                        <div class="col-sm-12 col-md-12" id="exist_fields">
+                        <div class="col-sm-12 col-md-12">
                             <form>
-                                <div class="col-sm-12">
+                                <div class="col-sm-12" id="exist_fields">
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-6">
                                             <label for="firstnamefield" class="form-control-label">First Name:</label>
@@ -134,18 +134,12 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 col-md-6">
-                                            <label for="licensefield" class="form-control-label">License
-                                                Agreement:</label>
-                                            <div class="input-group" id="licensefield">
-                                                <span class="input-group-addon">
-                                                    <div class="radio">
-                                                        <label><input type="radio" name="yes">Yes</label>
-                                                    </div>
-                                                    <div class="radio">
-                                                        <label><input type="radio" name="no">No</label>
-                                                    </div>
-                                                </span>
-                                            </div>
+                                            <label for="licensefield" class="form-control-label">License Agreement:</label>
+                                            <br>
+                                            <form action="" id="licensefield">
+                                                <input type="radio" name="gender" value="male">Yes<br>
+                                                <input type="radio" name="gender" value="female">No<br>
+                                            </form>
                                         </div>
                                         <div class="col-sm-6 col-md-6">
                                             <button class="btn btn-primary glyphicon glyphicon-pencil"></button>
@@ -172,8 +166,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <button class="btn btn-primary glyphicon glyphicon-plus"></button>
+                        <div class="col-md-6" id="add_fields">
+                            <button class="btn btn-primary glyphicon glyphicon-plus" onclick='window.open("./form-fields.html","windowName","align=center,width=800,height=600,scrollbars=no")'></button>
                         </div>
                     </div>
                 </div>
