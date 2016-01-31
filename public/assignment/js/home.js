@@ -5,6 +5,16 @@
 
 $( document ).ready( function() {
     var newWindow;
+    //click link nav to fields
+    $("#register_form").click(function (e){
+        $('.nav-tabs a[href="#tagfileds"]').tab('show');
+    });
+    $("#contact_list").click(function (e){
+        $('.nav-tabs a[href="#tagfileds"]').tab('show');
+    });
+    $("#todo_list").click(function (e){
+        $('.nav-tabs a[href="#tagfileds"]').tab('show');
+    });
 
     $("#nav_register").click(function(e){
         e.preventDefault();
@@ -55,7 +65,6 @@ $( document ).ready( function() {
         var target = $(e.target).attr("href") // activated tab
         alert(target);
     });
-
     $("#new_field").click(function(e){
         e.preventDefault();
         e.stopPropagation();
@@ -130,4 +139,5 @@ $( document ).ready( function() {
             newWindow.focus();
         }
     });
+
 });
