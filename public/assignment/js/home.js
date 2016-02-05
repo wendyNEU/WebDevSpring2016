@@ -9,7 +9,6 @@ $(document).ready(function () {
     //navigate sidebar highline and activate each sidebar when click
     $('.nav-sidebar li a').click(function (e) {
         e.preventDefault();
-        e.stopPropagation();
         $("#subpage").load($(this).attr('href'));
 
         $('.nav-sidebar li').removeClass('active');
@@ -18,13 +17,6 @@ $(document).ready(function () {
         if (!$parent.hasClass('active')) {
             $parent.addClass('active');
         }
-        e.preventDefault();
-    });
-
-    $("#form_maker").click(function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $("#subpage").load("./welcome.html");
     });
 
     //load subpage when click each navigation link on the top
