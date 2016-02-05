@@ -1,268 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="./css/dashboard.css">
-</head>
-<body>
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Form Maker</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="./register.html" id="nav_register">Register</a></li>
-                <li><a href="./login.html" id="nav_login">Login</a></li>
-                <li><a href="./profile.html" id="nav_profile">Username</a></li>
-                <li><a href="./logout.html" id="nav_logout">Logout</a></li>
+<div class="row">
+    <div class="col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+        <h1>Forms</h1>
+        <h1></h1>
+        <div class="well" id="tabs">
+            <ul id="forms_fields" class="nav nav-tabs">
+                <li class="active"><a href="#tagforms" data-toggle="tab" id="forms">Forms</a></li>
+                <li class=""><a href="#tagfields" data-toggle="tab" id="fields">Fields</a></li>
             </ul>
-        </div>
-    </div>
-</nav>
+            <div id="forms_filels_content" class="tab-content">
+                <div class="tab-pane active in" id="tagforms">
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li id="navside_home" class="active"><a href="#">Home</a></li>
-                <li id="navside_profile"><a href="./profile.html">Profile</a></li>
-                <li id="navside_admin"><a href="./admin.html">Admin</a></li>
-                <li id="navside_forms"><a href="./forms.html">Forms</a></li>
-            </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <div class="row placeholders" id="subpage">
-                <div class="row">
-                    <div class="col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
-                        <h1>Forms</h1>
-                        <h1></h1>
-                        <div class="well" id="tabs">
-                            <ul id="forms_fields" class="nav nav-tabs">
-                                <li class="active"><a href="#tagforms1" data-toggle="tab">Forms</a></li>
-                                <li class=""><a href="#tagfields1" data-toggle="tab">Fields</a></li>
-                            </ul>
-                            <div id="forms_filels_content" class="tab-content">
-                                <div class="tab-pane fade active in" id="tagforms1">
-                                    <div class="row">
-                                        <div class="table table-striped col-xs-15 col-md-10">
-                                            <table id="admin" class="grid table table-bordered table-sortable">
-                                                <thead>
-                                                <tr>
-                                                    <th>
-                                                        <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
-                                                        Form Name
-                                                    </th>
-                                                    <th>
-                                                        <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
-                                                        Action
-                                                    </th>
-                                                </tr>
-                                                </thead>
-                                                <tbody class="ui-sortable">
-                                                <tr>
-                                                    <td class="col-xs-3 col-md-2"><input type="text" value="Form Name"
-                                                                                         class="form-control">
-                                                    </td>
-                                                    <td class="col-xs-3 col-md-2">
-                                                        <button class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
-                                                        <button class="btn-xs btn-primary glyphicon glyphicon-ok"></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-3 col-md-2" class="open-tab" id="register_form"><a href="form-fields.html">Registration Form</a></td>
-                                                    <td class="col-xs-3 col-md-2">
-                                                        <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
-                                                        <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-3 col-md-2" class="open-tab" id="contact_list"><a href="form-fields.html">Contact List</a></td>
-                                                    <td class="col-xs-3 col-md-2">
-                                                        <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
-                                                        <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-xs-3 col-md-2" class="open-tab" id="todo_list"><a href="form-fields.html">To Do List</a></td>
-                                                    <td class="col-xs-3 col-md-2">
-                                                        <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
-                                                        <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="tagfields1">
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-12">
-                                            <form>
-                                                <div class="col-sm-12" id="exist_fields">
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <label for="firstnamefield" class="form-control-label">First Name:</label>
-                                                            <input type="text" class="form-control" id="firstnamefield">
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <button class="btn btn-primary glyphicon glyphicon-pencil"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-plus"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-remove"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-align-justify"></button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <label for="lastnamefield" class="form-control-label">Last Name:</label>
-                                                            <input type="text" class="form-control" id="lastnamefield">
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <button class="btn btn-primary glyphicon glyphicon-pencil"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-plus"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-remove"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-align-justify"></button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <label for="dobfield" class="form-control-label">Date of Birth:</label>
-                                                            <input type="date" class="form-control" id="dobfield">
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <button class="btn btn-primary glyphicon glyphicon-pencil"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-plus"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-remove"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-align-justify"></button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <label for="genderfield" class="form-control-label">Gender:</label>
-                                                            <div class="dropdown" id="genderfield">
-                                                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Gender<span class="caret"></span></button>
-                                                                <ul class="dropdown-menu">
-                                                                    <li><a href="#">Male</a></li>
-                                                                    <li><a href="#">Female</a></li>
-                                                                </ul>
-                                                            </div>
-                                                            <!--
-                                                            <select class="form-control" id="genderfield">
-                                                                <option>Male</option>
-                                                                <option>Female</option>
-                                                            </select>
-                                                            -->
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <button class="btn btn-primary glyphicon glyphicon-pencil"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-plus"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-remove"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-align-justify"></button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <label for="rolesfield" class="form-control-label">Roles</label>
-                                                            <div id="rolesfield">
-                                                                <div class="checkbox">
-                                                                    <label><input type="checkbox" value="admin">Admin</label>
-                                                                </div>
-                                                                <div class="checkbox">
-                                                                    <label><input type="checkbox" value="student">Student</label>
-                                                                </div>
-                                                                <div class="checkbox">
-                                                                    <label><input type="checkbox" value="user">User</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <button class="btn btn-primary glyphicon glyphicon-pencil"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-plus"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-remove"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-align-justify"></button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <label for="licensefield" class="form-control-label">License Agreement:</label>
-                                                            <br>
-                                                            <form action="" id="licensefield">
-                                                                <input type="radio" name="gender" value="male">Yes<br>
-                                                                <input type="radio" name="gender" value="female">No<br>
-                                                            </form>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <button class="btn btn-primary glyphicon glyphicon-pencil"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-plus"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-remove"></button>
-                                                            <button class="btn btn-primary glyphicon glyphicon-align-justify"></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="form-group">
-                                            <div class="col-md-6">
-                                                <label for="selectfield">Add New Field:</label>
-                                                <div class="dropdown">
-                                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Field Type<span class="caret"></span></button>
-                                                    <ul class="dropdown-menu" id="selectfield">
-                                                        <li><a href="#">Single Line Text Field</a></li>
-                                                        <li><a href="#">Date Field</a></li>
-                                                        <li><a href="#">Dropdown Field</a></li>
-                                                        <li><a href="#">Checkboxes Field</a></li>
-                                                        <li><a href="#">Radio Buttons Field</a></li>
-                                                    </ul>
-                                                </div>
-                                                <!--
-                                                <select class="form-control" id="selectfield">
-                                                    <option>Single Line Text Field</option>
-                                                    <option>Date Field</option>
-                                                    <option>Dropdown Field</option>
-                                                    <option>Checkboxes Field</option>
-                                                    <option>Radio Buttons Field</option>
-                                                </select>
-                                                -->
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6" id="add_fields">
-                                            <button class="btn btn-primary glyphicon glyphicon-plus" onclick='window.open("./form-fields.html","windowName","align=center,width=800,height=600,scrollbars=no")'></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="table-responsive">
+                            <table id="admin" class="grid table table-bordered table-sortable  table-striped">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
+                                        Form Name
+                                    </th>
+                                    <th>
+                                        <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
+                                        Action
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="ui-sortable">
+                                <tr>
+                                    <td class="col-xs-3 col-md-2"><input type="text" value="Form Name"
+                                                                         class="form-control">
+                                    </td>
+                                    <td class="col-xs-3 col-md-2">
+                                        <button class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
+                                        <button class="btn-xs btn-primary glyphicon glyphicon-ok"></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-3 col-md-2" class="open-tab" id="register_form"><a href="./form-fields.html">Registration
+                                        Form</a></td>
+                                    <td class="col-xs-3 col-md-2">
+                                        <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
+                                        <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-3 col-md-2" class="open-tab" id="contact_list"><a href="./form-fields.html">Contact List</a>
+                                    </td>
+                                    <td class="col-xs-3 col-md-2">
+                                        <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
+                                        <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-3 col-md-2" class="open-tab" id="todo_list"><a href="./form-fields.html">To Do List</a></td>
+                                    <td class="col-xs-3 col-md-2">
+                                        <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
+                                        <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
+
                 </div>
+                <div class="tab-pane" id="tagfields"></div>
             </div>
         </div>
     </div>
 </div>
-<footer>Copyright @Di Qiu</footer>
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
 <script src="./js/home.js"></script>
-</body>
-</html>
