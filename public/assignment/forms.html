@@ -4,13 +4,13 @@
         <h1></h1>
         <div class="well" id="tabs">
             <ul id="forms_fields" class="nav nav-tabs">
-                <li class="active"><a href="#tagforms" data-toggle="tab" id="forms">Forms</a></li>
-                <li class=""><a href="#tagfields" data-toggle="tab" id="fields">Fields</a></li>
+                <li id="forms" class="active"><a href="#tagforms" data-toggle="tab">Forms</a></li>
+                <li id="fields" class=""><a href="#tagfields" data-toggle="tab">Fields</a></li>
             </ul>
-            <div id="forms_filels_content" class="tab-content">
+            <div id="forms_fileds_content" class="tab-content">
                 <div class="tab-pane active in" id="tagforms">
                     <div class="table-responsive">
-                        <table id="forms_list" class="grid table table-bordered table-sortable table-striped">
+                        <table id="forms_list" class="grid table table-striped table-bordered table-sortable">
                             <thead>
                             <tr>
                                 <th>
@@ -29,8 +29,14 @@
                                                                      class="form-control">
                                 </td>
                                 <td class="col-xs-3 col-md-2">
-                                    <button class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
-                                    <button class="btn-xs btn-primary glyphicon glyphicon-ok"></button>
+                                    <div class="row">
+                                        <div class="col-xs-1 col-md-1">
+                                            <button class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
+                                        </div>
+                                        <div class="col-xs-1 col-md-1">
+                                            <button class="btn-xs btn-primary glyphicon glyphicon-ok"></button>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -38,8 +44,14 @@
                                         href="./form-fields.html">Registration
                                     Form</a></td>
                                 <td class="col-xs-3 col-md-2">
-                                    <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
-                                    <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
+                                    <div class="row">
+                                        <div class="col-xs-1 col-md-1">
+                                            <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
+                                        </div>
+                                        <div class="col-xs-1 col-md-1">
+                                            <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -47,16 +59,28 @@
                                         href="./form-fields.html">Contact List</a>
                                 </td>
                                 <td class="col-xs-3 col-md-2">
-                                    <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
-                                    <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
+                                    <div class="row">
+                                        <div class="col-xs-1 col-md-1">
+                                            <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
+                                        </div>
+                                        <div class="col-xs-1 col-md-1">
+                                            <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-xs-3 col-md-2" class="open-tab" id="todo_list"><a
                                         href="./form-fields.html">To Do List</a></td>
                                 <td class="col-xs-3 col-md-2">
-                                    <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
-                                    <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
+                                    <div class="row">
+                                        <div class="col-xs-1 col-md-1">
+                                            <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
+                                        </div>
+                                        <div class="col-xs-1 col-md-1">
+                                            <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>

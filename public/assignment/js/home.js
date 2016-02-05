@@ -18,6 +18,12 @@ $(document).ready(function () {
         e.preventDefault();
     });
 
+    $("#form_maker").click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $("#subpage").load("./welcome.html");
+    });
+
     //load subpage when click each navigation link on the top
     $("#nav_register").click(function (e) {
         e.preventDefault();
@@ -82,12 +88,16 @@ $(document).ready(function () {
             $('#tagforms').removeClass("in");
             $('#tagfields').addClass("active");
             $('#tagfields').addClass("in");
+            $('#forms').removeClass("active");
+            $('#fields').addClass("active");
 
         } else if ($('#tagfields').hasClass("active")) {
             $('#tagfields').removeClass("active");
             $('#tagfields').removeClass("in");
             $('#tagforms').addClass("active");
             $('#tagforms').addClass("in");
+            $('#fields').removeClass("active");
+            $('#forms').addClass("active");
         }
         e.preventDefault();
         e.stopPropagation();
@@ -96,7 +106,6 @@ $(document).ready(function () {
     //when click add_fields button popup field setting window
     $("#add_fields").click(function (e) {
         newWindow = window.open('./field_setting.html', "Fields Setting", "width=350,height=250");
-
         // Puts focus on the newWindow
         if (window.focus) {
             newWindow.focus();
