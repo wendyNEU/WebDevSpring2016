@@ -6,16 +6,19 @@
 $(document).ready(function () {
     var newWindow;
 
-    $("#register_form").click(function (e) {
-        $('.nav-tabs a[href="#tagfileds"]').tab('show');
-    });
-    $("#contact_list").click(function (e) {
-        $('.nav-tabs a[href="#tagfileds"]').tab('show');
-    });
-    $("#todo_list").click(function (e) {
-        $('.nav-tabs a[href="#tagfileds"]').tab('show');
+    //navigate sidebar highline and activate each sidebar when click
+    $('.nav-sidebar li a').click(function (e) {
+
+        $('.nav-sidebar li').removeClass('active');
+
+        var $parent = $(this).parent();
+        if (!$parent.hasClass('active')) {
+            $parent.addClass('active');
+        }
+        e.preventDefault();
     });
 
+    //load subpage when click each navigation link on the top
     $("#nav_register").click(function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -36,6 +39,8 @@ $(document).ready(function () {
         e.stopPropagation();
         $("#subpage").load("./logout.html");
     });
+
+    //load subpage when click each navigation side link on the left
     $("#navside_home").click(function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -58,12 +63,37 @@ $(document).ready(function () {
         $("#subpage").load("./forms.html");
     });
 
-    $("#new_field").click(function (e) {
+    //activate each tab when click tab
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log("new field");
-        newWindow.close();
+        $('#tagfields').load('./form-fields.html');
+        var target = $(e.target).attr("href") // activated tab
     });
+
+    //load form_fields.html when activate second tab
+    $("table#forms_list tbody tr td a").click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $('#tagfields').load('./form-fields.html');
+
+        if ($('#tagforms').hasClass("active")) {
+            $('#tagforms').removeClass("active");
+            $('#tagforms').removeClass("in");
+            $('#tagfields').addClass("active");
+            $('#tagfields').addClass("in");
+
+        } else if ($('#tagfields').hasClass("active")) {
+            $('#tagfields').removeClass("active");
+            $('#tagfields').removeClass("in");
+            $('#tagforms').addClass("active");
+            $('#tagforms').addClass("in");
+        }
+        e.preventDefault();
+        e.stopPropagation();
+    });
+
+    //when click add_fields button popup field setting window
     $("#add_fields").click(function (e) {
         newWindow = window.open('./field_setting.html', "Fields Setting", "width=350,height=250");
 
@@ -72,58 +102,11 @@ $(document).ready(function () {
             newWindow.focus();
         }
     });
-
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        console.log("switch");
-        console.log($(this));
-        console.log($('#tagfields'));
+    //when finish field setting and submit close popup window
+    $("#new_field").click(function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $('#tagfields').load('./form-fields.html');
-        var target = $(e.target).attr("href") // activated tab
-    });
-
-    $('.nav-sidebar li a').click(function (e) {
-
-        $('.nav-sidebar li').removeClass('active');
-
-        var $parent = $(this).parent();
-        if (!$parent.hasClass('active')) {
-            $parent.addClass('active');
-        }
-        e.preventDefault();
-    });
-
-    $("table#admin tbody tr td a").click(function (e) {
-        console.log("active");
-        console.log("switch");
-        console.log($(this));
-        console.log($('#tagfields'));
-        e.preventDefault();
-        e.stopPropagation();
-        $('#tagfields').load('./form-fields.html');
-
-        if ($('#tagforms').hasClass("active")) {
-            //$('#fields').attr("href");
-
-            console.log("active tagforms");
-            $('#tagforms').removeClass("active");
-            $('#tagforms').removeClass("in");
-            $('#tagfields').addClass("active");
-            $('#tagfields').addClass("in");
-
-        } else if ($('#tagfields').hasClass("active")) {
-            //$('#forms').attr("href");
-
-            console.log("active tagfields");
-            $('#tagfields').removeClass("active");
-            $('#tagfields').removeClass("in");
-            $('#tagforms').addClass("active");
-            $('#tagforms').addClass("in");
-        }
-        e.preventDefault();
-        e.stopPropagation();
-
+        newWindow.close();
     });
 
 });
