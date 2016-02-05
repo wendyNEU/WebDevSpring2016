@@ -8,6 +8,9 @@ $(document).ready(function () {
 
     //navigate sidebar highline and activate each sidebar when click
     $('.nav-sidebar li a').click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $("#subpage").load($(this).attr('href'));
 
         $('.nav-sidebar li').removeClass('active');
 
@@ -44,29 +47,6 @@ $(document).ready(function () {
         e.preventDefault();
         e.stopPropagation();
         $("#subpage").load("./logout.html");
-    });
-
-    //load subpage when click each navigation side link on the left
-    $("#navside_home").click(function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $("#subpage").load("./welcome.html");
-    });
-    $("#navside_profile").click(function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $("#subpage").load("./profile.html");
-    });
-    $("#navside_admin").click(function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $("#subpage").load("./admin.html");
-    });
-
-    $("#navside_forms").click(function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        $("#subpage").load("./forms.html");
     });
 
     //activate each tab when click tab
