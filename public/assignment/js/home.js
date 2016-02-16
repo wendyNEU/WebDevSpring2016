@@ -23,29 +23,29 @@ $(document).ready(function () {
     $("#nav_register").click(function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $("#subpage").load("./register.html");
+        $("#subpage").load("../users/register.view.html");
     });
     $("#nav_login").click(function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $("#subpage").load("./login.html");
+        $("#subpage").load("../users/login.view.html");
     });
     $("#nav_profile").click(function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $("#subpage").load("./profile.html");
+        $("#subpage").load("../users/profile.view.html");
     });
     $("#nav_logout").click(function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $("#subpage").load("./logout.html");
+        $("#subpage").load("../users/logout.view.html");
     });
 
     //activate each tab when click tab
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $('#tagfields').load('./form-fields.html');
+        $('#tagfields').load('../forms/fields.view.html');
         var target = $(e.target).attr("href") // activated tab
     });
 
@@ -53,7 +53,7 @@ $(document).ready(function () {
     $("table#forms_list tbody tr td a").click(function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $('#tagfields').load('./form-fields.html');
+        $('#tagfields').load('../forms/fields.view.html');
 
         if ($('#tagforms').hasClass("active")) {
             $('#tagforms').removeClass("active");
@@ -77,7 +77,7 @@ $(document).ready(function () {
 
     //when click add_fields button popup field setting window
     $("#add_fields").click(function (e) {
-        newWindow = window.open('./field_setting.html', "Fields Setting", "width=350,height=250");
+        newWindow = window.open('../forms/field_setting.view.html', "Fields Setting", "width=350,height=250");
         // Puts focus on the newWindow
         if (window.focus) {
             newWindow.focus();
