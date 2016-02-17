@@ -3,7 +3,7 @@
         .module('FormBuilderApp')
         .controller('MainController', MainController);
     function MainController($scope,$rootScope){
-        $rootScope.newUser = { "_id":0, "firstname": "", "lastname": "", "username": "", "password": ""};
+        $rootScope.newUser = { "_id":123, "firstname": "", "lastname": "", "username": "", "password": ""};
         console.log("MainController");
     }
 })();

@@ -28,8 +28,8 @@
             },
 
             findAllUsers: function (callback) {
-                for (var usr in cur_users) {
-                    callback(usr);
+                for(var i=0;i<cur_users.length;i++){
+                    callback(cur_users[i]);
                 }
             },
 
@@ -39,15 +39,12 @@
                 callback(user);
             },
             deleteUserById: function (userId, callback) {
-                var i = 0;
-                for (var usr in cur_users) {
-                    if (userId._id === usr._id) {
-                        cur_users.remove(i);
-                        break;
+                for(var i=0;i<cur_users.length;i++) {
+                    if (userId._id ===cur_users[i]._id){
+                        cur_users.splice(i,1);
                     }
-                    i++;
                 }
-                callback(cur_usrs);
+                callback(cur_users);
             },
             updateUser: function (userId, user, callback) {
                 for(var i=0;i<cur_users.length;i++){

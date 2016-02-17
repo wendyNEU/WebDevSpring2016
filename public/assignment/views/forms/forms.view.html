@@ -25,60 +25,30 @@
                             </thead>
                             <tbody class="ui-sortable">
                             <tr>
-                                <td class="col-xs-3 col-md-2"><input type="text" value="Form Name"
+                                <td class="col-xs-3 col-md-2"><input ng-model="newform.title" type="text" value="Form Name"
                                                                      class="form-control">
                                 </td>
                                 <td class="col-xs-3 col-md-2">
                                     <div class="row">
                                         <div class="col-xs-1 col-md-1">
-                                            <button class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
+                                            <button ng-click="addForm()" class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
                                         </div>
                                         <div class="col-xs-1 col-md-1">
-                                            <button class="btn-xs btn-primary glyphicon glyphicon-ok"></button>
+                                            <button ng-click="updateForm()" class="btn-xs btn-primary glyphicon glyphicon-ok"></button>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr ng-repeat="form in forms">
                                 <td class="col-xs-3 col-md-2" class="open-tab" id="register_form"><a
-                                        href="fields.view.html">Registration
-                                    Form</a></td>
+                                        href="fields.view.html">{{form.title}}</a></td>
                                 <td class="col-xs-3 col-md-2">
                                     <div class="row">
                                         <div class="col-xs-1 col-md-1">
-                                            <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
+                                            <button ng-click="deleteForm($index)" class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
                                         </div>
                                         <div class="col-xs-1 col-md-1">
-                                            <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="col-xs-3 col-md-2" class="open-tab" id="contact_list"><a
-                                        href="fields.view.html">Contact List</a>
-                                </td>
-                                <td class="col-xs-3 col-md-2">
-                                    <div class="row">
-                                        <div class="col-xs-1 col-md-1">
-                                            <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
-                                        </div>
-                                        <div class="col-xs-1 col-md-1">
-                                            <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="col-xs-3 col-md-2" class="open-tab" id="todo_list"><a
-                                        href="fields.view.html">To Do List</a></td>
-                                <td class="col-xs-3 col-md-2">
-                                    <div class="row">
-                                        <div class="col-xs-1 col-md-1">
-                                            <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
-                                        </div>
-                                        <div class="col-xs-1 col-md-1">
-                                            <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
+                                            <button ng-click="selectForm($index)" class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
                                         </div>
                                     </div>
                                 </td>
