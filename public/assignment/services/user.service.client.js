@@ -8,11 +8,11 @@
 
     function UserService() {
         var cur_users = [
-            {"_id": 123, "firstName": "Alice", "lastName": "Wonderland", "username": "alice", "password": "alice"},
-            {"_id": 234, "firstName": "Bob", "lastName": "Hope", "username": "bob", "password": "bob"},
-            {"_id": 345, "firstName": "Charlie", "lastName": "Brown", "username": "charlie", "password": "charlie"},
-            {"_id": 456, "firstName": "Dan", "lastName": "Craig", "username": "dan", "password": "dan"},
-            {"_id": 567, "firstName": "Edward", "lastName": "Norton", "username": "ed", "password": "ed"}
+            {"_id": 123, "firstname": "Alice", "lastname": "Wonderland", "username": "alice", "password": "alice"},
+            {"_id": 234, "firstname": "Bob", "lastname": "Hope", "username": "bob", "password": "bob"},
+            {"_id": 345, "firstname": "Charlie", "lastname": "Brown", "username": "charlie", "password": "charlie"},
+            {"_id": 456, "firstname": "Dan", "lastname": "Craig", "username": "dan", "password": "dan"},
+            {"_id": 567, "firstname": "Edward", "lastname": "Norton", "username": "ed", "password": "ed"}
         ];
         return {
             findUserByUsernameAndPassword: function (username, password, callback) {
@@ -48,13 +48,9 @@
                 callback(cur_usrs);
             },
             updateUser: function (userId, user, callback) {
-                for (var usr in cur_users) {
-                    if (userId === usr._id) {
-                        user._id = usr._id;
-                        user.firstName = usr.firstName;
-                        user.lastName = usr.lastName;
-                        user.username = usr.username;
-                        user.password = usr.password;
+                for(var i=0;i<cur_users.length;i++){
+                    if(userId===cur_users[i]._id){
+                        cur_users.splice(i,1,user);
                         callback(user);
                         break;
                     }
