@@ -8,33 +8,32 @@
             <div class="form-group">
                 <label for="username" class="col-sm-3 control-label">User Name:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="username" placeholder="Username">
+                    <input ng-model="regis_username" type="text" class="form-control" id="username" placeholder="Username">
                 </div>
             </div>
             <div class="form-group">
                 <label for="password" class="col-sm-3 control-label">Password:</label>
                 <div class="col-sm-9">
-                    <input type="password" class="form-control" id="password" placeholder="Password">
+                    <input ng-model="regis_pass" type="password" class="form-control" id="password" placeholder="Password">
                 </div>
             </div>
             <div class="form-group">
                 <label for="verifypassword" class="col-sm-3 control-label">Verify Password:</label>
                 <div class="col-sm-9">
-                    <input type="password" class="form-control" id="verifypassword"
+                    <input ng-model="regis_veripass" type="password" class="form-control" id="verifypassword"
                            placeholder="Verify Password">
                 </div>
             </div>
             <div class="form-group">
                 <label for="email" class="col-sm-3 control-label">Email:</label>
                 <div class="col-sm-9">
-                    <input type="email" class="form-control" id="email" placeholder="Email">
+                    <input ng-model="regis_email" type="email" class="form-control" id="email" placeholder="Email">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-9 col-sm-offset-3">
-                    <button type="button" form="register_form" value="Submit"
-                            class="col-sm-12 btn btn-default btn-info"
-                            onclick="$('#subpage').load('../users/profile.view.html')">Register
+                    <button ng-click="register()" type="button" form="register_form" value="Submit"
+                            class="col-sm-12 btn btn-default btn-info">Register
                     </button>
                 </div>
             </div>

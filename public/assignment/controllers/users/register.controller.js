@@ -4,9 +4,16 @@
 (function(){
     angular
         .module('FormBuilderApp')
-        .controller('RegisterController', RegisterController);
+        .controller('RegisterController', ['$scope', '$location','UserService',RegisterController]);
 
-    function RegisterController($scope){
+    function RegisterController($scope, $location, UserService){
         console.log("RegisterController");
+        $scope.register = function(UserService){
+            var user = { "firstName":"Di", "lastName":"Qiu","username":$scope.regis_username, "password":$scope.regis_pass};
+            UserService.createUser(user,function(usr){
+                $rootScope.newUser = usr;
+            });
+            $location.path('./views/users/profile.view.html');
+        }
     }
 })();
