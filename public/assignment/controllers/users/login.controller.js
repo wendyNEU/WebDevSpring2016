@@ -4,9 +4,26 @@
 (function(){
     angular
         .module('FormBuilderApp')
-        .controller('LoginController', LoginController);
+        .controller('LoginController',['$scope','$rootScope','$location','UserService' ,LoginController]);
 
-    function LoginController($scope){
+    function LoginController($scope,$rootScope,$location,UserService){
         console.log("LoginController");
+        $scope.user = {"username": "", "password": ""};
+        if($rootScope.newUser!=null) {
+            $scope.user.password = $rootScope.newUser.password;
+            $scope.user.username = $rootScope.newUser.username;
+        }
+
+        $scope.login = function(){
+            UserService.findUserByUsernameAndPassword($scope.user.username,$scope.user.password,function(usr){
+                if(usr==null){ alert("login fail");}
+                else{
+                    console.log(usr);
+                    $rootScope.newUser = usr;
+                    $location.path('/profile');
+                }
+
+            })
+        }
     }
 })();

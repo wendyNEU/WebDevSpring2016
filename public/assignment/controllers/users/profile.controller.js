@@ -4,13 +4,13 @@
 (function(){
     angular
         .module('FormBuilderApp')
-        .controller('ProfileController', ['$scope','$rootScope','UserService',ProfileController]);
+        .controller('ProfileController', ['$scope','$rootScope','$location','UserService',ProfileController]);
 
-    function ProfileController($scope,$rootScope,UserService){
+    function ProfileController($scope,$rootScope,$location,UserService){
         console.log("ProfileController");
         $scope.user = {"firstname": "", "lastname": "", "username": "", "password": "","email":""};
-        $scope.user.firstname="default";
-        $scope.user.lastname="default";
+        $scope.user.firstname=$rootScope.newUser.firstname;
+        $scope.user.lastname=$rootScope.newUser.lastname;
         $scope.user.password = $rootScope.newUser.password;
         $scope.user.username = $rootScope.newUser.username;
         $scope.user.email = "default";
@@ -23,7 +23,12 @@
             update_user.username = $scope.user.username;
             update_user._id = $rootScope._id;
             UserService.updateUser($rootScope.newUser._id,update_user,function(usr){
-                $rootScope.newUser = usr;
+                if(usr==null){
+                    alert("login fail.")
+                }else{
+                    $rootScope.newUser = usr;
+                    $location.path('/profile');
+                }
             });
         }
 

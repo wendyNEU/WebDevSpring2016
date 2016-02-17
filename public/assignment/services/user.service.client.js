@@ -16,13 +16,15 @@
         ];
         return {
             findUserByUsernameAndPassword: function (username, password, callback) {
-                for (var usr in cur_users) {
-                    if (usr.username === username && usr.password === password) {
-                        callback(usr);
-                        return;
+                var find = false;
+                for(var i=0;i<cur_users.length;i++){
+                    if (cur_users[i].username === username && cur_users[i].password === password) {
+                        callback(cur_users[i]);
+                        find = true;
+                        break;
                     }
                 }
-                callback(null);
+                if(!find) callback(null);
             },
 
             findAllUsers: function (callback) {
