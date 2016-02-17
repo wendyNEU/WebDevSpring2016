@@ -1,113 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../../css/styles.css">
-</head>
-<body>
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="navbar-brand" id="form_maker">Form Maker</div>
+<div class="row" ng-controller="HomeController">
+    <div class="col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+        <div class="row">
+            <h1 class="col-xs-18 col-md-12">Welcome!</h1>
+            <h1></h1>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="../views/users/register.view.html" id="nav_register">Register</a></li>
-                <li><a href="../views/users/login.view.html" id="nav_login">Login</a></li>
-                <li><a href="../views/users/profile.view.html" id="nav_profile">Username</a></li>
-                <li><a href="../views/users/logout.view.html" id="nav_logout">Logout</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li id="navside_home" class="active"><a href="welcome.view.html">Home</a></li>
-                <li id="navside_profile"><a href="../users/profile.view.html">Profile</a></li>
-                <li id="navside_admin"><a href="../admin/admin.view.html">Admin</a></li>
-                <li id="navside_forms"><a href="../forms/forms.view.html">Forms</a></li>
-            </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <div class="row placeholders" id="subpage">
-                <div class="row">
-                    <div class="col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
-                        <div class="row">
-                            <h1 class="col-xs-18 col-md-12">Welcome!</h1>
-                            <h1></h1>
-                        </div>
-                        <div class="row well">
-                            <h2 id="center_title">Lorem Ipsum</h2>
-                            <div class="col-sm-6 col-md-6">
-                                <h4>What is Lorem Ipsum</h4>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
-                                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                <h4>Where does it come from?</h4>
-                                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                                    classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin
-                                    professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,
-                                    consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical
-                                    literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33
-                                    of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This
-                                    book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of
-                                    Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
-                            </div>
-                            <div class="col-sm-6 col-md-6">
-                                <h4>Why do we use it?</h4>
-                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when
-                                    looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                                    distribution of letters, as opposed to using 'Content here, content here', making it look like
-                                    readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                                    default model text, and a search for 'lorem ipsum' will uncover many web sites still in their
-                                    infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose
-                                    (injected humour and the like).</p>
-                                <h4>Where can I get some?</h4>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                                    alteration in some form, by injected humour, or randomised words which don't look even slightly
-                                    believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't
-                                    anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet
-                                    tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                                    It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures,
-                                    to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free
-                                    from repetition, injected humour, or non-characteristic words etc.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="row well">
+            <h2 id="center_title">Lorem Ipsum</h2>
+            <div class="col-sm-6 col-md-6">
+                <h4>What is Lorem Ipsum</h4>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
+                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <h4>Where does it come from?</h4>
+                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
+                    classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin
+                    professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words,
+                    consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical
+                    literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33
+                    of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This
+                    book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of
+                    Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <h4>Why do we use it?</h4>
+                <p>It is a long established fact that a reader will be distracted by the readable content of a page when
+                    looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                    distribution of letters, as opposed to using 'Content here, content here', making it look like
+                    readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+                    default model text, and a search for 'lorem ipsum' will uncover many web sites still in their
+                    infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose
+                    (injected humour and the like).</p>
+                <h4>Where can I get some?</h4>
+                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered
+                    alteration in some form, by injected humour, or randomised words which don't look even slightly
+                    believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't
+                    anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet
+                    tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
+                    It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures,
+                    to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free
+                    from repetition, injected humour, or non-characteristic words etc.</p>
             </div>
         </div>
     </div>
 </div>
-<footer>Copyright @Di Qiu</footer>
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
-<script src="../../js/home.js"></script>
-</body>
-</html>
