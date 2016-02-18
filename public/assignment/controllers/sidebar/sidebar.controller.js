@@ -18,7 +18,11 @@
         }
 
         $scope.isAdmin = function(){
-            return $rootScope.newUser._id===0&&$rootScope.newUser.admin===0;
+            if($rootScope.newUser._id===0) return false;
+            for(var i=0;i<$rootScope.newUser.roles.length;i++){
+                if($rootScope.newUser.roles[i]==="admin") return true;
+            }
+            return false;
         }
     }
 })();

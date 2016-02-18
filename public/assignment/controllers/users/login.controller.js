@@ -19,6 +19,7 @@
                 if(usr==null){ alert("login fail");}
                 else{
                     $rootScope.newUser= usr;
+                    console.log($rootScope.newUser);
                     $location.path('/profile');
                 }
 

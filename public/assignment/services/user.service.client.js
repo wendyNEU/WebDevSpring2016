@@ -8,12 +8,17 @@
 
     function UserService() {
         var cur_users = [
-            {"_id": 123, "firstname": "Alice", "lastname": "Wonderland", "username": "alice", "password": "alice"},
-            {"_id": 234, "firstname": "Bob", "lastname": "Hope", "username": "bob", "password": "bob"},
-            {"_id": 345, "firstname": "Charlie", "lastname": "Brown", "username": "charlie", "password": "charlie"},
-            {"_id": 456, "firstname": "Dan", "lastname": "Craig", "username": "dan", "password": "dan"},
-            {"_id": 567, "firstname": "Edward", "lastname": "Norton", "username": "ed", "password": "ed"}
-        ];
+            {        "_id":123, "firstname":"Alice",            "lastname":"Wonderland",
+                "username":"alice",  "password":"alice",   "roles": ["student"]                },
+            {        "_id":234, "firstname":"Bob",              "lastname":"Hope",
+                "username":"bob",    "password":"bob",     "roles": ["admin"]                },
+            {        "_id":345, "firstname":"Charlie",          "lastname":"Brown",
+                "username":"charlie","password":"charlie", "roles": ["faculty"]                },
+            {        "_id":456, "firstname":"Dan",              "lastname":"Craig",
+                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"]},
+            {        "_id":567, "firstname":"Edward",           "lastname":"Norton",
+                "username":"ed",     "password":"ed",      "roles": ["student"]                }
+        ]
         return {
             findUserByUsernameAndPassword: function (username, password, callback) {
                 var find = false;
