@@ -35,8 +35,8 @@
                     controller: 'ProfileController'
                 })
                 .when('/nav_logout', {
-                    templateUrl: './views/users/logout.view.html',
-                    controller: 'LogoutController'
+                    templateUrl: './views/home/home.view.html',
+                    controller: 'HeaderController'
                 })
         }]);
 })();

@@ -37,6 +37,7 @@
                 })
                 $scope.newform = { _id:0, title:" ", userId:""};
             });
+
             console.log($scope.forms);
         }
 

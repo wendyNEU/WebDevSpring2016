@@ -32,10 +32,10 @@
                 for(var i=0;i<forms.length;i++) {
                     if (forms[i]._id === formId) {
                         forms.splice(i,1);
+                        callback(forms);
                         break;
                     }
                 }
-                callback(forms);
                 console.log(forms);
             },
             updateFormById:function(formId, newForm, callback){

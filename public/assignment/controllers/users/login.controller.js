@@ -18,8 +18,7 @@
             UserService.findUserByUsernameAndPassword($scope.user.username,$scope.user.password,function(usr){
                 if(usr==null){ alert("login fail");}
                 else{
-                    console.log(usr);
-                    $rootScope.newUser = usr;
+                    $rootScope.newUser= usr;
                     $location.path('/profile');
                 }
 

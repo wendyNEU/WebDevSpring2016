@@ -15,7 +15,6 @@
         $scope.user.username = $rootScope.newUser.username;
         $scope.user.email = "default";
         $scope.update = function(){
-            console.log($rootScope.newUser);
             var update_user = {"_id":0,"firstname": "", "lastname": "", "username": "", "password": ""};
             update_user.firstname = $scope.user.firstname;
             update_user.lastname = $scope.user.lastname;

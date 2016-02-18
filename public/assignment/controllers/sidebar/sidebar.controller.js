@@ -6,7 +6,19 @@
         .module('FormBuilderApp')
         .controller('SidebarController', SidebarController);
 
-    function SidebarController($scope){
+    function SidebarController($scope,$rootScope){
         console.log("SidebarController");
+
+        $scope.islogin = function(){
+            return !($rootScope.newUser._id===0);
+        }
+
+        $scope.islogout = function(){
+            return $rootScope.newUser._id===0;
+        }
+
+        $scope.isAdmin = function(){
+            return $rootScope.newUser._id===0&&$rootScope.newUser.admin===0;
+        }
     }
 })();

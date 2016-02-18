@@ -1,8 +1,8 @@
 <div class="col-sm-3 col-md-2 sidebar" ng-controller="SidebarController">
     <ul class="nav nav-sidebar">
         <li><a class="active" href="#/home"><i class="fa fa-home"></i>Home</a></li>
-        <li><a href="#/profile"><i class="fa fa-shield"></i>Profile</a></li>
-        <li><a href="#/admin"><i class="fa fa-comment"></i>Admin</a></li>
-        <li><a href="#/forms"><i class="fa fa-comment"></i>Forms</a></li>
+        <li><a ng-show="islogin()" href="#/profile"><i class="fa fa-shield"></i>Profile</a></li>
+        <li><a ng-show="isAdmin()" href="#/admin"><i class="fa fa-comment"></i>Admin</a></li>
+        <li><a ng-show="islogin()" href="#/forms"><i class="fa fa-comment"></i>Forms</a></li>
     </ul>
 </div>
