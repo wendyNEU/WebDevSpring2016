@@ -38,6 +38,7 @@
                     templateUrl: './views/home/home.view.html',
                     controller: 'HeaderController'
                 })
+
         }]);
 })();
 
