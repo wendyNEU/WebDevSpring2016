@@ -15,12 +15,14 @@
         $scope.user.username = $rootScope.newUser.username;
         $scope.user.email = "default";
         $scope.update = function(){
-            var update_user = {"_id":0,"firstname": "", "lastname": "", "username": "", "password": ""};
+
+            var update_user = {"_id":0,"firstname": "", "lastname": "", "username": "", "password": "","roles":[]};
             update_user.firstname = $scope.user.firstname;
             update_user.lastname = $scope.user.lastname;
             update_user.password = $scope.user.password;
             update_user.username = $scope.user.username;
-            update_user._id = $rootScope._id;
+            update_user.roles = $rootScope.newUser.roles;
+            update_user._id = $rootScope.newUser._id;
             UserService.updateUser($rootScope.newUser._id,update_user,function(usr){
                 if(usr==null){
                     alert("login fail.")

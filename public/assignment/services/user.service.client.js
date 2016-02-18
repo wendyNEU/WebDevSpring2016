@@ -18,11 +18,11 @@
                 "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"]},
             {        "_id":567, "firstname":"Edward",           "lastname":"Norton",
                 "username":"ed",     "password":"ed",      "roles": ["student"]                }
-        ]
+        ];
         return {
             findUserByUsernameAndPassword: function (username, password, callback) {
                 var find = false;
-                for(var i=0;i<cur_users.length;i++){
+                for(var i in cur_users){
                     if (cur_users[i].username === username && cur_users[i].password === password) {
                         callback(cur_users[i]);
                         find = true;
@@ -33,7 +33,7 @@
             },
 
             findAllUsers: function (callback) {
-                for(var i=0;i<cur_users.length;i++){
+                for(var i in cur_users){
                     callback(cur_users[i]);
                 }
             },
@@ -44,7 +44,7 @@
                 callback(user);
             },
             deleteUserById: function (userId, callback) {
-                for(var i=0;i<cur_users.length;i++) {
+                for(var i in cur_users) {
                     if (userId._id ===cur_users[i]._id){
                         cur_users.splice(i,1);
                     }
@@ -52,7 +52,8 @@
                 callback(cur_users);
             },
             updateUser: function (userId, user, callback) {
-                for(var i=0;i<cur_users.length;i++){
+
+                for(var i in cur_users){
                     if(userId===cur_users[i]._id){
                         cur_users.splice(i,1,user);
                         callback(user);

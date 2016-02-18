@@ -19,7 +19,7 @@
 
         $scope.isAdmin = function(){
             if($rootScope.newUser._id===0) return false;
-            for(var i=0;i<$rootScope.newUser.roles.length;i++){
+            for(var i in $rootScope.newUser.roles){
                 if($rootScope.newUser.roles[i]==="admin") return true;
             }
             return false;
