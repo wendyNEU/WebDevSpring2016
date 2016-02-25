@@ -8,26 +8,34 @@
 
     function ProfileController($scope,$rootScope,$location,UserService){
         console.log("ProfileController");
-        $scope.user = {"firstname": "", "lastname": "", "username": "", "password": "","email":""};
-        $scope.user.firstname=$rootScope.newUser.firstname;
-        $scope.user.lastname=$rootScope.newUser.lastname;
-        $scope.user.password = $rootScope.newUser.password;
-        $scope.user.username = $rootScope.newUser.username;
-        $scope.user.email = "default";
-        $scope.update = function(){
+        $scope.user = {};
 
-            var update_user = {"_id":0,"firstname": "", "lastname": "", "username": "", "password": "","roles":[]};
+        UserService.getUserById($rootScope.newUser._id,$scope.user,function(user,cur_user){
+            user.firstname = cur_user.firstname;
+            user.lastname = cur_user.lastname;
+            user.email = cur_user.email;
+            user.username = cur_user.username;
+            user.password = cur_user.password;
+        });
+
+        $scope.update = function(){
+            var update_user = {};
             update_user.firstname = $scope.user.firstname;
             update_user.lastname = $scope.user.lastname;
             update_user.password = $scope.user.password;
             update_user.username = $scope.user.username;
-            update_user.roles = $rootScope.newUser.roles;
-            update_user._id = $rootScope.newUser._id;
-            UserService.updateUser($rootScope.newUser._id,update_user,function(usr){
-                if(usr==null){
+            update_user.email = $scope.user.email;
+            $rootScope.newUser.username = $scope.user.username;
+            $rootScope.newUser.password = $scope.user.password;
+            UserService.updateUser($rootScope.newUser._id,update_user,function(update_user,user){
+                if(user==null){
                     alert("login fail.")
                 }else{
-                    $rootScope.newUser = usr;
+                    user.firstname = update_user.firstname;
+                    user.lastname = update_user.lastname;
+                    user.username = update_user.username;
+                    user.password = update_user.password;
+                    user.email = update_user.email;
                     $location.path('/profile');
                 }
             });

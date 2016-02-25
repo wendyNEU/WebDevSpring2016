@@ -30,11 +30,7 @@
                     templateUrl: './views/users/login.view.html',
                     controller: 'LoginController'
                 })
-                .when('/nav_profile', {
-                    templateUrl: './views/users/profile.view.html',
-                    controller: 'ProfileController'
-                })
-                .when('/nav_logout', {
+                .when('/logout', {
                     templateUrl: './views/home/home.view.html',
                     controller: 'HeaderController'
                 })

@@ -10,7 +10,7 @@
         console.log("HeaderController");
 
         $scope.logout = function(){
-            $rootScope.newUser = { "_id":0, "firstname": "", "lastname": "", "username": "", "password": ""};
+            $rootScope.newUser = { "_id":0, "username": "", "password": "","roles":[]};
         },
         $scope.islogin = function(){
             return !($rootScope.newUser._id===0);

@@ -10,9 +10,15 @@
         console.log("RegisterController");
         $scope.user = { "username":"", "password":"","veripassword":"","email":""};
         $scope.register = function(){
-            var regis_user = {"firstname": "Di", "lastname": "Qiu", "username": $scope.user.username, "password": $scope.user.password};
+            var regis_user = {};
+            regis_user.username = $scope.user.username;
+            regis_user.password = $scope.user.password;
+            regis_user.email = $scope.user.email;
             UserService.createUser(regis_user,function(usr){
-                $rootScope.newUser = usr;
+                $rootScope.newUser._id = usr._id;
+                $rootScope.newUser.username = usr.username;
+                $rootScope.newUser.password = usr.password;
+                $rootScope.newUser.roles = usr.roles;
             });
             console.log($rootScope.newUser);
             console.log($scope.user);
