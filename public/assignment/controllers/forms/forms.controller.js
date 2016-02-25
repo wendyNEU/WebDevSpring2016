@@ -20,14 +20,12 @@
                 $scope.forms.push(form);
                 $scope.newform = { _id:0, title:" ", userId:""};
             });
-            console.log($scope.forms);
         }
 
         $scope.updateForm = function(){
             FormService.updateFormById($scope.newform._id,$scope.newform,function(newform){
                 $scope.newform = { _id:0, title:" ", userId:""};
             });
-            console.log($scope.forms);
         }
 
         $scope.deleteForm = function(index){
@@ -37,8 +35,6 @@
                 })
                 $scope.newform = { _id:0, title:" ", userId:""};
             });
-
-            console.log($scope.forms);
         }
 
         $scope.selectForm = function(index){

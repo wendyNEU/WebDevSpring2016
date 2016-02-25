@@ -20,8 +20,6 @@
                 $rootScope.newUser.password = usr.password;
                 $rootScope.newUser.roles = usr.roles;
             });
-            console.log($rootScope.newUser);
-            console.log($scope.user);
             $location.path('/profile');
         }
     }
