@@ -15,7 +15,7 @@
         }
 
         $scope.login = function(){
-            UserService.findUserByUsernameAndPassword($scope.user.username,$scope.user.password,function(usr){
+            UserService.findUserByCredentials($scope.user.username,$scope.user.password,function(usr){
                 if(usr==null){ alert("login fail");}
                 else{
                     $rootScope.newUser._id = usr._id;

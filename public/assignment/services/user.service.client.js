@@ -30,7 +30,7 @@
             }
         ];
         return {
-            findUserByUsernameAndPassword: function (username, password, callback) {
+            findUserByCredentials: function (username, password, callback) {
                 var find = false;
                 for (var i in cur_users) {
                     if (cur_users[i].username === username && cur_users[i].password === password) {
