@@ -634,6 +634,9 @@ section#tv{
     background-image:url(../img/body_bg.jpg);
 }
 
+section#actor_list{
+    background-image:url(../img/body_bg.jpg);
+}
 section#actor{
     background-image:url(../img/body_bg.jpg);
 }
@@ -647,6 +650,71 @@ section#movie_list{
 section#tv_list{
     background-image:url(../img/body_bg.jpg);
 }
+section#tv_detail{
+    background-image:url(../img/body_bg.jpg);
+}
+
+section#actor_detail{
+    background-image:url(../img/body_bg.jpg);
+}
+
+section#actor_detail h2{
+    text-align:center;
+    color: rgba(254, 209, 54, .9);
+    margin: 30px;
+}
+
+section#actor_detail p{
+    text-align:center;
+    color:white;
+    margin: 30px;
+}
+
+section#actor_detail ul{
+    text-align:center;
+    margin: 30px;
+}
+
+section#actor_detail button{
+    margin: 30px;
+    position: absolute;
+    left: 42%;
+}
+section#actor_detail button a{
+    color:white;
+}
+
+section#news_detail{
+    background-image:url(../img/body_bg.jpg);
+}
+
+section#news_detail h2{
+    text-align:center;
+    color: rgba(254, 209, 54, .9);
+    margin: 30px;
+}
+
+section#news_detail p{
+    text-align:center;
+    color:white;
+    margin: 30px;
+}
+
+section#news_detail ul{
+    text-align:center;
+    margin: 30px;
+}
+
+section#news_detail button{
+    margin: 30px;
+    position: absolute;
+    left: 42%;
+}
+section#news_detail button a{
+    color:white;
+}
+
+
 #movie_detail{
     background-image:url(../img/body_bg.jpg);
 }
@@ -679,6 +747,10 @@ section#tv_list{
 .mv_info .rate{
     font-size: 20px;
     color:rgba(254, 209, 54, .9);
+}
+
+input{
+    font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .subcommentimg{
