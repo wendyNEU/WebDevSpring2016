@@ -7,5 +7,6 @@
         .controller('MainController', MainController);
     function MainController($scope,$location,$rootScope){
         console.log("MainController");
+        $rootScope.curUser = { "_id":0, "username": "", "password": "","roles":[]};
     }
 })();

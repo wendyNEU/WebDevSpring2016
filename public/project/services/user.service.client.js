@@ -4,8 +4,8 @@
 
 
 (function () {
-    var FormBuilderApp = angular.module('FormBuilderApp');
-    FormBuilderApp.factory('UserService', UserService)
+    var MovieFanApp = angular.module('MovieFanApp');
+    MovieFanApp.factory('UserService', UserService)
 
     function UserService() {
         var cur_users = [

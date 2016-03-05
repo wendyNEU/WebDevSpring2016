@@ -28,17 +28,17 @@
                 <li>
                     <a class="page-scroll" href="#/actor_list">Actor</a>
                 </li>
-                <li>
+                <li ng-hide="islogin()">
                     <a class="page-scroll" href="#/register">Register</a>
                 </li>
-                <li>
+                <li ng-hide="islogin()">
                     <a class="page-scroll" href="#/login">Log In</a>
                 </li>
-                <li>
+                <li ng-show="islogin()">
                     <a class="page-scroll" href="#/profile">Profile</a>
                 </li>
-                <li>
-                    <a class="page-scroll" href="#/home">Log Out</a>
+                <li ng-show="islogin()">
+                    <a class="page-scroll" ng-click="logout()" href="#/home">Log Out</a>
                 </li>
             </ul>
             <form class="navbar-form" role="search">
