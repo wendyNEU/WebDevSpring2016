@@ -714,6 +714,15 @@ section#news_detail button a{
     color:white;
 }
 
+#mv_trailer{
+    width:350px;
+    height:260px;
+}
+
+#tv_trailer{
+    width:350px;
+    height:260px;
+}
 
 #movie_detail{
     background-image:url(../img/body_bg.jpg);

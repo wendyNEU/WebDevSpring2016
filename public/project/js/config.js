@@ -14,7 +14,7 @@
                     templateUrl: './views/news_list.html',
                     controller: 'NewsController'
                 })
-                .when('/news_detail',{
+                .when('/news_detail/:id',{
                     templateUrl:'./views/news_detail.view.html',
                     controller: 'NewsDetailController'
                 })
@@ -22,7 +22,7 @@
                     templateUrl: './views/movie_list.html',
                     controller: 'MovieController'
                 })
-                .when('/movie_detail', {
+                .when('/movie_detail/:id', {
                     templateUrl: './views/movie_detail.html',
                     controller: 'MovieDetailController'
                 })
@@ -30,7 +30,7 @@
                     templateUrl: './views/tv_list.html',
                     controller: 'TvController'
                 })
-                .when('/tv_detail', {
+                .when('/tv_detail/:id', {
                     templateUrl: './views/tv_detail.html',
                     controller: 'TvDetailController'
                 })
@@ -38,7 +38,7 @@
                     templateUrl:'./views/actor_list.html',
                     controller: 'ActorController'
                 })
-                .when('/actor_detail',{
+                .when('/actor_detail/:id',{
                     templateUrl:'./views/actor_detail.view.html',
                     controller: 'ActorDetailController'
                 })
@@ -62,7 +62,16 @@
                     redirectTo: '/home'
                 });
 
-        }]);
+        }
+    ]);
+    MovieFanApp.config(function($sceDelegateProvider) {
+        $sceDelegateProvider.resourceUrlWhitelist([
+            'self',
+            'https://www.youtube.com/**',
+            'http://image.tmdb.org/t/p/**',
+            'http://api.themoviedb.org/3'
+        ]);
+    });
 })();
 
 

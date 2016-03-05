@@ -7,17 +7,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3">
-                <a href="#tv_detail"><img class="img-responsive" src="./img/tv/1.jpg"></a>
-            </div>
-            <div class="col-lg-3">
-                <a href="#tv_detail"><img class="img-responsive" src="./img/tv/2.jpg"></a>
-            </div>
-            <div class="col-lg-3">
-                <a href="#tv_detail"><img class="img-responsive" src="./img/tv/3.jpg"></a>
-            </div>
-            <div class="col-lg-3">
-                <a href="#tv_detail"><img class="img-responsive" src="./img/tv/4.jpg"></a>
+            <div ng-repeat="tv in tvs">
+                <div class="clearfix" ng-if="$index<movies.length&&$index % 4 == 0"></div>
+                <div class="col-lg-3">
+                    <a href="#/tv_detail/{{tv.id}}"><img class="img-responsive" ng-src={{veriPosterImg(tv.posterurl)}}></a>
+                </div>
             </div>
         </div>
     </div>

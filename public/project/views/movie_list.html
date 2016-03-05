@@ -7,27 +7,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3">
-                <a href="#/movie_detail"><img class="img-responsive" src="./img/movie/1.jpg"></a>
-            </div>
-            <div class="col-lg-3">
-                <a href="#/movie_detail"><img class="img-responsive" src="./img/movie/2.jpg"></a>
-            </div>
-            <div class="col-lg-3">
-                <a href="#/movie_detail"><img class="img-responsive" src="./img/movie/3.jpg"></a>
-            </div>
-            <div class="col-lg-3">
-                <a href="#/movie_detail"><img class="img-responsive" src="./img/movie/4.jpg"></a>
+            <div ng-repeat="movie in movies">
+                <div class="clearfix" ng-if="$index<movies.length&&$index % 4 == 0"></div>
+                <div class="col-lg-3">
+                    <a href="#/movie_detail/{{movie.id}}"><img class="img-responsive" ng-src={{veriPosterImg(movie.posterurl)}}></a>
+                </div>
             </div>
         </div>
     </div>
     <div class="text-center">
         <ul class="pagination">
             <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
         </ul>
     </div>
 </section>
