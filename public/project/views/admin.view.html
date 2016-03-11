@@ -14,10 +14,6 @@
                             <tr>
                                 <th>
                                     <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
-                                    User Id
-                                </th>
-                                <th>
-                                    <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
                                     User Name
                                 </th>
                                 <th>
@@ -44,9 +40,6 @@
                             </thead>
                             <tbody class="ui-sortable">
                             <tr>
-                                <td><input ng-model="newUser._id" type="text" value="User Id"
-                                                                     class="form-control">
-                                </td>
                                 <td><input ng-model="newUser.username" type="text" value="User Name"
                                                                      class="form-control">
                                 </td>
@@ -74,7 +67,6 @@
                                 </td>
                             </tr>
                             <tr ng-repeat="user in users track by $index">
-                                <td class="col-xs-3 col-md-2" class="open-tab">{{user._id}}</td>
                                 <td class="col-xs-3 col-md-2" class="open-tab">{{user.username}}</td>
                                 <td class="col-xs-3 col-md-2" class="open-tab">{{user.password}}</td>
                                 <td class="col-xs-3 col-md-2" class="open-tab">{{user.roles}}</td>

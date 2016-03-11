@@ -15,7 +15,7 @@
         });
         $scope.addUser = function(){
             UserService.createUser($scope.newUser,function(user){
-                $scope.users.push(user);
+                //$scope.users.push(user);
             });
             $scope.newUser = {"username": "", "password": "","roles": "", "email": "","photo":""};
         }
