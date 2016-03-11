@@ -50,6 +50,10 @@
                     templateUrl: './views/login.view.html',
                     controller: 'LoginController'
                 })
+                .when('/admin',{
+                    templateUrl: './views/admin.view.html',
+                    controller: 'UserController'
+                })
                 .when('/profile', {
                     templateUrl: './views/profile.view.html',
                     controller: 'ProfileController'

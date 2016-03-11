@@ -1,0 +1,102 @@
+<section id="admin" class="row" ng-controller="UserController">
+    <div class="col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+        <h1></h1>
+        <h1></h1>
+        <div class="well" id="tabs">
+            <ul id="admin_nav" class="nav nav-tabs">
+                <li class="active"><a href="#users_management" data-toggle="tab">User Management</a></li>
+            </ul>
+            <div id="admin_content" class="tab-content">
+                <div class="tab-pane active in" id="users_management">
+                    <div class="table-responsive">
+                        <table id="users_list" class="grid table table-striped table-bordered table-sortable">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
+                                    User Id
+                                </th>
+                                <th>
+                                    <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
+                                    User Name
+                                </th>
+                                <th>
+                                    <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
+                                    Password
+                                </th>
+                                <th>
+                                    <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
+                                    Roles
+                                </th>
+                                <th>
+                                    <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
+                                    Email
+                                </th>
+                                <th>
+                                    <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
+                                    Photo
+                                </th>
+                                <th>
+                                    <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
+                                    Action
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="ui-sortable">
+                            <tr>
+                                <td><input ng-model="newUser._id" type="text" value="User Id"
+                                                                     class="form-control">
+                                </td>
+                                <td><input ng-model="newUser.username" type="text" value="User Name"
+                                                                     class="form-control">
+                                </td>
+                                <td><input ng-model="newUser.password" type="text" value="Password"
+                                                                     class="form-control">
+                                </td>
+                                <td><input ng-model="newUser.roles" type="text" value="Rule"
+                                                                     class="form-control">
+                                </td>
+                                <td><input ng-model="newUser.email" type="text" value="Email"
+                                                                     class="form-control">
+                                </td>
+                                <td><input ng-model="newUser.photo" type="text" value="Photo"
+                                                                     class="form-control">
+                                </td>
+                                <td>
+                                    <div class="row">
+                                        <div>
+                                            <button ng-click="addUser()" class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
+                                        </div>
+                                        <div>
+                                            <button ng-click="updateUser()" class="btn-xs btn-primary glyphicon glyphicon-ok"></button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="user in users">
+                                <td class="col-xs-3 col-md-2" class="open-tab">{{user._id}}</td>
+                                <td class="col-xs-3 col-md-2" class="open-tab">{{user.username}}</td>
+                                <td class="col-xs-3 col-md-2" class="open-tab">{{user.password}}</td>
+                                <td class="col-xs-3 col-md-2" class="open-tab">{{user.roles}}</td>
+                                <td class="col-xs-3 col-md-2" class="open-tab">{{user.email}}</td>
+                                <td class="col-xs-3 col-md-2" class="open-tab">{{user.photo}}</td>
+                                <td class="col-xs-3 col-md-2">
+                                    <div class="row">
+                                        <div class="col-xs-1 col-md-1">
+                                            <button ng-click="deleteUser($index)" class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
+                                        </div>
+                                        <div class="col-xs-1 col-md-1">
+                                            <button ng-click="selectUser($index)" class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

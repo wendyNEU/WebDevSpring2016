@@ -10,13 +10,13 @@
     function UserService() {
         var cur_users = [
             {
-                "_id": 123, "username": "alice", "password": "alice", "roles": ["student"], "email": "alice@gmail.com","photo":""
+                "_id": 123, "username": "alice", "password": "alice", "roles": "student", "email": "alice@gmail.com","photo":""
             },
             {
-                "_id": 234, "username": "bob", "password": "bob", "roles": ["admin"], "email": "bob@gmail.com","photo":""
+                "_id": 234, "username": "bob", "password": "bob", "roles": "admin", "email": "bob@gmail.com","photo":""
             },
             {
-                "_id": 345, "username": "charlie", "password": "charlie", "roles": ["faculty"], "email": "charlie@gmail.com","photo":""
+                "_id": 345, "username": "charlie", "password": "charlie", "roles": "student", "email": "charlie@gmail.com","photo":""
             }
         ];
         return {
@@ -33,14 +33,13 @@
             },
 
             findAllUsers: function (callback) {
-                for (var i in cur_users) {
-                    callback(cur_users[i]);
-                }
+                callback(cur_users);
             },
 
             createUser: function (user, callback) {
                 user._id = (new Date).getTime();
-                user.roles=["student"];
+                if(user.roles==="")
+                    user.roles=["student"];
                 cur_users.push(user);
                 callback(user);
             },

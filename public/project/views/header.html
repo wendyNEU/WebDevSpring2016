@@ -37,6 +37,9 @@
                 <li ng-show="islogin()">
                     <a class="page-scroll" href="#/profile">Profile</a>
                 </li>
+                <li ng-show="isAdmin()">
+                    <a class="page-scroll" href="#/admin">Admin</a>
+                </li>
                 <li ng-show="islogin()">
                     <a class="page-scroll" ng-click="logout()" href="#/home">Log Out</a>
                 </li>

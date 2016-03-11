@@ -10,14 +10,18 @@
         console.log("HeaderController");
 
         $scope.logout = function () {
-            $rootScope.curUser = {"_id": 0, "username": "", "password": "", "roles": []};
-        },
-            $scope.islogin = function () {
-                return !($rootScope.curUser._id === 0);
-            },
+            $rootScope.curUser = {"_id": 0, "username": "", "password": "", "roles": ""};
+        }
+        $scope.islogin = function () {
+            return !($rootScope.curUser._id === 0);
+        }
 
-            $scope.getUserName = function () {
-                return $rootScope.curUser.username;
-            }
+        $scope.getUserName = function () {
+            return $rootScope.curUser.username;
+        }
+        $scope.isAdmin = function(){
+            return $rootScope.curUser.roles === "admin";
+        }
+
     }
 })();
