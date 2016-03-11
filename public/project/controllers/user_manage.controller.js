@@ -16,13 +16,18 @@
         $scope.addUser = function(){
             UserService.createUser($scope.newUser,function(user){
                 $scope.users.push(user);
-                $scope.newUser = {"username": "", "password": "","roles": "", "email": "","photo":""};
             });
+            $scope.newUser = {"username": "", "password": "","roles": "", "email": "","photo":""};
         }
         $scope.updateUser = function(){
-            UserService.updateUser($scope.newUser._id,$scope.newUser,function(updateuser,olduser){
-                $scope.newUser = {"_id":0,"username": "", "password": "","roles": "", "email": "","photo":""};
+            UserService.updateUser($scope.newUser._id,$scope.newUser,function(update_user,user){
+                user.username = update_user.username;
+                user.password = update_user.password;
+                user.email = update_user.email;
+                user.roles = update_user.roles;
+                user.photo = update_user.photo;
             });
+            $scope.newUser = {"_id":0,"username": "", "password": "","roles": "", "email": "","photo":""};
         }
         $scope.deleteUser = function(index){
             $scope.users.splice(index,1);

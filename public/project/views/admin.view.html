@@ -73,7 +73,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr ng-repeat="user in users">
+                            <tr ng-repeat="user in users track by $index">
                                 <td class="col-xs-3 col-md-2" class="open-tab">{{user._id}}</td>
                                 <td class="col-xs-3 col-md-2" class="open-tab">{{user.username}}</td>
                                 <td class="col-xs-3 col-md-2" class="open-tab">{{user.password}}</td>

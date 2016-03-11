@@ -39,7 +39,7 @@
             createUser: function (user, callback) {
                 user._id = (new Date).getTime();
                 if(user.roles==="")
-                    user.roles=["student"];
+                    user.roles="student";
                 cur_users.push(user);
                 callback(user);
             },
