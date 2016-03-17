@@ -1,46 +1,105 @@
 /**
  * Created by wendy on 2/16/16.
  */
-(function(){
+(function () {
     angular
         .module('FormBuilderApp')
-        .controller('FormController', ['$scope','$rootScope','FormService',FormController]);
+        .controller('FormController', FormController);
 
-    function FormController($scope,$rootScope,FormService){
-        $scope.forms=[];
-        $scope.newform = { _id:0, title:" ", userId:""};
+    function FormController($q, FormService, UserService) {
         console.log("FormController");
 
-        FormService.findAllFormsForUser($rootScope.newUser._id,function(matchForms){
-            $scope.forms = matchForms;
-        })
+        var vm = this;
 
-        $scope.addForm = function(){
-            FormService.createFormForUser($rootScope.newUser._id,$scope.newform,function(form){
-                $scope.forms.push(form);
-                $scope.newform = { _id:0, title:" ", userId:""};
-            });
+        function init() {
+            vm.forms = [];
+            vm.newform = {title: " "};
+            findAllFormsForUser();
+            vm.findAllFormsForUser = findAllFormsForUser;
+            vm.createFormForUser = createFormForUser;
+            vm.updateForm = updateForm;
+            vm.deleteForm = deleteForm;
+            vm.selectForm = selectForm;
         }
 
-        $scope.updateForm = function(){
-            FormService.updateFormById($scope.newform._id,$scope.newform,function(newform){
-                $scope.newform = { _id:0, title:" ", userId:""};
-            });
+        init();
+
+        function findAllFormsForUser() {
+            var userId = UserService.getCurrentUser()._id;
+
+            var deferred = $q.defer();
+
+            FormService
+                .findAllFormsForUser(userId)
+                .then(function (response) {
+                    var forms = response.data;
+                    if (forms) {
+                        vm.forms = forms;
+                        deferred.resolve();
+                    } else {
+                        deferred.reject();
+                    }
+                });
+            return deferred.promise;
         }
 
-        $scope.deleteForm = function(index){
-            FormService.deleteFormById($scope.forms[index]._id,function(forms){
-                FormService.findAllFormsForUser($rootScope.newUser._id,function(forms){
-                    $scope.forms = forms;
-                })
-                $scope.newform = { _id:0, title:" ", userId:""};
-            });
+        function createFormForUser() {
+            vm.newform.userId = UserService.getCurrentUser()._id;
+            var deferred = $q.defer();
+            FormService
+                .createFormForUser(vm.newform.userId, vm.newform)
+                .then(function (response) {
+                    var form = response.data;
+                    if (form) {
+                        vm.newform = {title: " "};
+                        vm.forms.push(form);
+                        deferred.resolve();
+                    } else {
+                        alert("Create Form Fail");
+                        deferred.reject();
+                    }
+                });
+            return deferred.promise;
         }
 
-        $scope.selectForm = function(index){
-            $scope.newform._id= $scope.forms[index]._id;
-            $scope.newform.title= $scope.forms[index].title;
-            $scope.newform.userId= $scope.forms[index].userId;
+        function updateForm() {
+            var deferred = $q.defer();
+            FormService
+                .updateFormById(vm.newform._id, vm.newform)
+                .then(function (response) {
+                    var forms = response.data;
+                    if (forms) {
+                        vm.newform = {title: " "};
+                        vm.findAllFormsForUser();
+                        deferred.resolve();
+                    } else {
+                        alert("Update Form Fail");
+                        deferred.reject();
+                    }
+                });
+            return deferred.promise;
+        }
+
+        function deleteForm(index) {
+            var deferred = $q.defer();
+            FormService
+                .deleteFormById(vm.forms[index]._id)
+                .then(function (response) {
+                    var forms = response.data;
+                    if (forms) {
+                        vm.newform = {title: " "};
+                        vm.findAllFormsForUser();
+                        deferred.resolve();
+                    } else {
+                        alert("Delete Form Fail");
+                        deferred.reject();
+                    }
+                });
+            return deferred.promise;
+        }
+
+        function selectForm(index) {
+            vm.newform = vm.forms[index];
         }
     }
 })();

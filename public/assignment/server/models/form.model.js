@@ -3,24 +3,66 @@
  */
 var mock = require("./form.mock.json");
 module.exports = function() {
-    var forms = []
     var api = {
         findFormByTitle:findFormByTitle,
-        createForm: createForm
+        createForm: createForm,
+        findFormsBelongToUserById:findFormsBelongToUserById,
+        updateFormById:updateFormById,
+        findFormById: findFormById,
+        deleteFormById:deleteFormById
     };
     return api;
 
     function findFormByTitle(title) {
-        for(var f in forms) {
-            if(forms[f].title === title) {
-                return forms[f];
+        for(var f in mock) {
+            if(mock[f].title == title) {
+                return mock[f];
             }
         }
         return null;
     }
     function createForm(form) {
         form._id = "ID_" + (new Date()).getTime();
-        forms.push(form);
+        mock.push(form);
         return form;
+    }
+
+    function findFormsBelongToUserById(userId){
+        var matchForms = [];
+        for(var f in mock){
+            if(mock[f].userId==userId){
+                matchForms.push(mock[f]);
+            }
+        }
+        return matchForms;
+    }
+
+    function findFormById(formId){
+        for(var f in mock){
+            if(mock[f]._id==formId){
+                return mock[f];
+            }
+        }
+        return null
+    }
+
+    function deleteFormById(formId){
+        for(var f in mock){
+            if(mock[f]._id==formId){
+                mock.splice(f,1);
+                return mock;
+            }
+        }
+        return null;
+    }
+
+    function updateFormById(formId,form){
+        for(var f in mock){
+            if(mock[f]._id==formId){
+                mock.splice(f,1,form);
+                return mock;
+            }
+        }
+        return null;
     }
 }

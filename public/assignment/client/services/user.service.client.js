@@ -8,7 +8,6 @@
         .factory("UserService", UserService);
 
     function UserService($http, $rootScope) {
-        //$rootScope.curUser={};
         return {
             findUserById: findUserById,
             findUserByUsername:findUserByUsername,
