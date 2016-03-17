@@ -1,0 +1,65 @@
+<div class="row" ng-controller="FormController">
+    <div class="col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+        <h1>Forms</h1>
+        <h1></h1>
+        <div class="well" id="tabs">
+            <ul id="forms_fields" class="nav nav-tabs">
+                <li id="forms" class="active"><a href="#tagforms" data-toggle="tab">Forms</a></li>
+                <li id="fields" class=""><a href="#tagfields" data-toggle="tab">Fields</a></li>
+            </ul>
+            <div id="forms_fileds_content" class="tab-content">
+                <div class="tab-pane active in" id="tagforms">
+                    <div class="table-responsive">
+                        <table id="forms_list" class="grid table table-striped table-bordered table-sortable">
+                            <thead>
+                            <tr>
+                                <th>
+                                    <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
+                                    Form Name
+                                </th>
+                                <th>
+                                    <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
+                                    Action
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="ui-sortable">
+                            <tr>
+                                <td class="col-xs-3 col-md-2"><input ng-model="newform.title" type="text" value="Form Name"
+                                                                     class="form-control">
+                                </td>
+                                <td class="col-xs-3 col-md-2">
+                                    <div class="row">
+                                        <div class="col-xs-1 col-md-1">
+                                            <button ng-click="addForm()" class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
+                                        </div>
+                                        <div class="col-xs-1 col-md-1">
+                                            <button ng-click="updateForm()" class="btn-xs btn-primary glyphicon glyphicon-ok"></button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-repeat="form in forms">
+                                <td class="col-xs-3 col-md-2" class="open-tab" id="register_form"><a
+                                        href="../../../views/forms/fields.view.html">{{form.title}}</a></td>
+                                <td class="col-xs-3 col-md-2">
+                                    <div class="row">
+                                        <div class="col-xs-1 col-md-1">
+                                            <button ng-click="deleteForm($index)" class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
+                                        </div>
+                                        <div class="col-xs-1 col-md-1">
+                                            <button ng-click="selectForm($index)" class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="tab-pane" id="tagfields"></div>
+            </div>
+        </div>
+    </div>
+</div>
