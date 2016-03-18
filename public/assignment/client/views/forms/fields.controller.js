@@ -12,12 +12,21 @@
         var vm = this;
 
         function init() {
+            vm.textfield = {"_id": null, "label": "", "type": "TEXT", "placeholder": ""};
+            vm.textareafield = {"_id": null, "label": "", "type": "TEXTAREA", "placeholder": ""};
+            vm.emailfield = {"_id": null, "label": "", "type": "EMAIL", "placeholder": ""};
+            vm.datefield = {"_id": null, "label": "", "type": "DATE"};
+            vm.dropdown = {"_id": null, "label": "", "type": "OPTIONS", "options": ""};
+            vm.checkboxfield = {"_id": null, "label": "", "type": "CHECKBOXES", "options": ""};
+            vm.radios = {"_id": null, "label": "", "type": "RADIOS", "options": ""}
+
             vm.curField = null;
             vm.addField = addField;
             vm.findAllFieldsByFormId = findAllFieldsByFormId;
             vm.deleteField=deleteField;
             vm.setCurrentField = setCurrentField;
             vm.getCurrentField = getCurrentField;
+            vm.editField = editField;
             vm.fieldTypes = [{"type":"TEXT","text":"Single Line Text Field",},{"type":"TEXTAREA","text":"Multi Line Text Field"},{"type":"DATE","text":"Date Field"},{"type":"OPTIONS","text":"Dropdown Field"},{"type":"CHECKBOXES","text":"Checkboxes Field"},{"type":"RADIOS","text":"Radio Buttons Field"},{"type":"EMAIL","text":"Email Text Fields"}];
             vm.fieldType = vm.fieldTypes[0].type;
             findAllFieldsByFormId();
@@ -46,7 +55,6 @@
         }
 
         function addField(){
-            console.log(vm.fieldType);
             var field = {};
             if(vm.fieldType=='TEXT'){
                 field = {"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"};
@@ -112,10 +120,104 @@
 
         function setCurrentField(field){
             vm.curField = field;
+            if(vm.curField.type=='TEXT'){
+                vm.textfield.label = vm.curField.label;
+                vm.textfield.placeholder = vm.curField.placeholder;
+            }else if(vm.curField.type=='TEXTAREA'){
+                vm.textareafield.label = vm.curField.label;
+                vm.textareafield.placeholder = vm.curField.placeholder;
+            }else if(vm.curField.type=='DATE'){
+                vm.datefield.label = vm.curField.label;
+            }else if(vm.curField.type=='OPTIONS'){
+                vm.dropdown.label = vm.curField.label;
+                vm.dropdown.options = "";
+                for(var i in vm.curField.options){
+                    vm.dropdown.options += vm.curField.options[i].label +":"+vm.curField.options[i].value+"\n";
+                }
+            }else if(vm.curField.type=='CHECKBOXES'){
+                vm.checkboxfield.label = vm.curField.label;
+                vm.checkboxfield.options = "";
+                for(var i in vm.curField.options){
+                    vm.checkboxfield.options += vm.curField.options[i].label +":"+vm.curField.options[i].value+"\n";
+                }
+            }else if(vm.curField.type=='RADIOS'){
+                vm.radios.label = vm.curField.label;
+                vm.radios.options = "";
+                for(var i in vm.curField.options){
+                    vm.radios.options += vm.curField.options[i].label +":"+vm.curField.options[i].value+"\n";
+                }
+            }else{
+                vm.emailfield = vm.curField;
+            }
         }
 
         function getCurrentField(){
             return vm.curField;
+        }
+
+        function editField(){
+            if(vm.curField.type=='TEXT'){
+                vm.curField.label = vm.textfield.label;
+                vm.curField.placeholder = vm.textfield.placeholder;
+            }else if(vm.curField.type=='TEXTAREA'){
+                vm.curField.label = vm.textareafield.label;
+                vm.curField.placeholder = vm.textareafield.placeholder;
+            }else if(vm.curField.type=='DATE'){
+                vm.curField.label = vm.datefield.label;
+            }else if(vm.curField.type=='OPTIONS'){
+                vm.curField.label = vm.dropdown.label;
+                vm.curField.options=[];
+                var options = vm.dropdown.options.split("\n");
+                for(var i=0;i<options.length;i++){
+                    var line = options[i].split(":");
+                    if(options[i]!==''&&line.length==2) {
+                        var option = {"label": line[0], "value": line[1]};
+                        vm.curField.options.push(option);
+                    }
+                }
+            }else if(vm.curField.type=='CHECKBOXES'){
+                vm.curField.label = vm.checkboxfield.label;
+                vm.curField.options=[];
+                var options1 = vm.checkboxfield.options.split("\n");
+                for(var i=0;i<options1.length;i++){
+                    var line = options1[i].split(":");
+                    if(options1[i]!==''&&line.length==2) {
+                        var option1 = {"label": line[0], "value": line[1]};
+                        vm.curField.options.push(option1);
+                    }
+                }
+            }else if(vm.curField.type=='RADIOS'){
+                vm.curField.label = vm.radios.label;
+                vm.curField.options=[];
+                var options2 = vm.radios.options.split("\n");
+                for(var i=0;i<options2.length;i++){
+                    var line = options2[i].split(":");
+                    if(options2[i]!==''&&line.length==2) {
+                        var option2 = {"label": line[0], "value": line[1]};
+                        vm.curField.options.push(option2);
+                    }
+                }
+            }else{
+                vm.curField = vm.emailfield;
+            }
+
+            var deferred = $q.defer();
+
+            FieldService
+                .updateField($routeParams.formId, vm.curField._id,vm.curField)
+                .then(function (response) {
+                    var fields = response.data;
+                    if (fields) {
+                        console.log("return");
+                        vm.fields = fields;
+                        console.log(vm.fields);
+                        deferred.resolve();
+                    } else {
+                        deferred.reject();
+                    }
+                });
+            vm.curField = null;
+            return deferred.promise;
         }
     }
 })();

@@ -28,7 +28,7 @@ module.exports = function(app, formModel) {
         res.json(fields);
     }
 
-    function updateFieldByFormFieldId(){
+    function updateFieldByFormFieldId(req,res){
         var field = formModel.updateFieldByFormFieldId(req.params.formId, req.params.fieldId, req.body);
         res.json(field);
     }
