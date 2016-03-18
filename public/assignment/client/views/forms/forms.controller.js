@@ -6,12 +6,14 @@
         .module('FormBuilderApp')
         .controller('FormController', FormController);
 
-    function FormController($q, $route,FormService, UserService) {
+    function FormController($q, $route,$location,FormService, UserService) {
         console.log("FormController");
 
         var vm = this;
 
         function init() {
+            vm.$location = $location;
+            vm.$route = $route;
             vm.forms = [];
             vm.newform = {title: " "};
             findAllFormsForUser();

@@ -6,14 +6,16 @@
         .module('FormBuilderApp')
         .controller('FieldController', FieldController);
 
-    function FieldController($q, $routeParams,FieldService) {
+    function FieldController($q, $route,$routeParams,FieldService) {
         console.log("Fieldontroller");
 
         var vm = this;
 
+
         function init() {
             vm.modalfield = { "label": "", "content": ""};
             vm.curField = null;
+            vm.$route = $route;
             vm.addField = addField;
             vm.findAllFieldsByFormId = findAllFieldsByFormId;
             vm.deleteField=deleteField;

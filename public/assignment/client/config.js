@@ -32,12 +32,14 @@
             .when('/forms', {
                 templateUrl: 'views/forms/forms.view.html',
                 controller: 'FormController',
-                controllerAs:'model'
+                controllerAs:'model',
+                activetab:'forms'
             })
             .when('/form/:formId/fields',{
                 templateUrl: 'views/forms/fields.view.html',
                 controller: 'FieldController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                activetab:'fields'
             })
             .when('/register', {
                 templateUrl: 'views/register/register.view.html',

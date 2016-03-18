@@ -1,139 +1,206 @@
-<div class="table-responsive" ng-controller="FieldController">
-    <table id="fields_list" class="grid table table-striped table-bordered table-sortable">
-        <tbody class="ui-sortable" jga-sortable>
-        <tr ng-repeat="field in model.fields">
-            <td>
-                <div ng-switch="field.type">
-                    <div ng-switch-when="TEXT">
-                        <label class="form-control-label">{{field.label}}:</label>
-                        <input type="text" placeholder="{{field.placeholder}}" class="form-control">
-                    </div>
-                    <div ng-switch-when="TEXTAREA">
-                        <label class="form-control-label">{{field.label}}:</label>
-                        <textarea type="text" placeholder="{{field.placeholder}}" class="form-control"></textarea>
-                    </div>
-                    <div ng-switch-when="EMAIL">
-                        <label class="form-control-label">{{field.label}}:</label>
-                        <input type="email" placeholder="{{field.placeholder}}" class="form-control">
-                    </div>
-                    <div ng-switch-when="DATE">
-                        <label class="form-control-label">{{field.label}}:</label>
-                        <input type="date" class="form-control">
-                    </div>
-                    <div ng-switch-when="OPTIONS">
-                        <label class="form-control-label">{{field.label}}:</label>
-                        <div class="dropdown">
-                            <button class="btn-xs btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                {{field.label}}:<span
-                                    class="caret"></span></button>
-                            <ul class="dropdown-menu" role="menu">
-                                <div ng-repeat="option in field.options">
-                                    <li value="{{option.value}}"><a href="#">{{option.label}}</a></li>
-                                </div>
-                            </ul>
+<div class="row" ng-controller="FieldController">
+    <div class="col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
+        <h1>Fields</h1>
+        <h1></h1>
+        <div class="well" id="tabs">
+            <ul id="forms_fields" class="nav nav-tabs">
+                <li ng-class="{active: $route.current.activetab == 'forms'}"><a href="#forms">Forms</a></li>
+                <li ng-class="{active: $route.current.activetab == 'fields'}"><a href="#fields">Fields</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane" id="forms">
+                        <div class="table-responsive">
+                            <table id="forms_list" class="grid table table-striped table-bordered table-sortable">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
+                                        Form Name
+                                    </th>
+                                    <th>
+                                        <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
+                                        Action
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody class="ui-sortable">
+                                <tr>
+                                    <td class="col-xs-3 col-md-2"><input ng-model="model.newform.title" type="text" value="Form Name"
+                                                                         class="form-control">
+                                    </td>
+                                    <td class="col-xs-3 col-md-2">
+                                        <div class="row">
+                                            <div class="col-xs-1 col-md-1">
+                                                <button ng-click="model.createFormForUser()" class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
+                                            </div>
+                                            <div class="col-xs-1 col-md-1">
+                                                <button ng-click="model.updateForm()" class="btn-xs btn-primary glyphicon glyphicon-ok"></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="form in model.forms">
+                                    <td class="col-xs-3 col-md-2" class="open-tab" id="register_form"><a href='#/form/{{form._id}}/fields'>{{form.title}}</a></td>
+                                    <td class="col-xs-3 col-md-2">
+                                        <div class="row">
+                                            <div class="col-xs-1 col-md-1">
+                                                <button ng-click="model.deleteForm($index)" class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
+                                            </div>
+                                            <div class="col-xs-1 col-md-1">
+                                                <button ng-click="model.selectForm($index)" class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-                    <div ng-switch-when="CHECKBOXES">
-                        <label class="form-control-label">{{field.label}}:</label>
-                        <div ng-repeat="option in field.options">
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="{{option.value}}">{{option.label}}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div ng-switch-when="RADIOS">
-                        <label class="form-control-label">{{field.label}}</label>
-                        <br>
-                        <form action="" ng-repeat="option in field.options">
-                            <input type="radio" name="{{field.label}}" value="{{option.value}}">{{option.label}}<br>
-                        </form>
-                    </div>
-                    <div ng-switch-default>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="row">
-                    <div class="col-xs-1 col-md-1">
-                        <button class="btn-xs btn-primary glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editmodal" ng-click="model.setCurrentField(field)"></button>
-                    </div>
-                    <div class="col-xs-1 col-md-1">
-                        <button class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
-                    </div>
-                    <div class="col-xs-1 col-md-1">
-                        <button class="btn-xs btn-primary glyphicon glyphicon-remove" ng-click="model.deleteField(field._id)"></button>
-                    </div>
-                    <div class="col-xs-1 col-md-1">
-                        <button class="btn-xs btn-primary glyphicon glyphicon-align-justify"></button>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <hr>
-        </tbody>
 
-        <tbody>
-        <tr>
-            <td>
-                <label for="selectfield">Add New Field:</label>
-                <br>
-                <select id="selectfield" ng-model="model.fieldType">
-                    <option ng-repeat="fieldtype in model.fieldTypes" value="{{fieldtype.type}}"
-                            ng-selected="model.fieldType==fieldtype.type">
-                        {{fieldtype.text}}
-                    </option>
-                </select>
-            </td>
-            <td>
-                <div class="row">
-                    <div class="col-xs-1 col-xs-offset-1 col-md-1 col-md-offset-1">
-                        <button ng-click="model.addField()" class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
                     </div>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <!-- Modal -->
-    <div id="editmodal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">{{model.curField.type}}</h4>
             </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-offset-1 col-sm-4">
-                            <div class="form">
-                                <label>Label</label>
-                                <input type="text" ng-model="model.modalfield.label" class="form-control input-sm chat-input"
-                                       placeholder="label"/>
-                                <br>
-                                <label ng-hide="model.curField.type=='DATE'">Placeholder/Options</label>
-                                </br>
+            <div class="tab-content">
+                <div class="tab-pane active in" id="fields">
+                        <div class="table-responsive">
+                            <table id="fields_list" class="grid table table-striped table-bordered table-sortable">
+                                <tbody class="ui-sortable" jga-sortable>
+                                <tr ng-repeat="field in model.fields">
+                                    <td>
+                                        <div ng-switch="field.type">
+                                            <div ng-switch-when="TEXT">
+                                                <label class="form-control-label">{{field.label}}:</label>
+                                                <input type="text" placeholder="{{field.placeholder}}" class="form-control">
+                                            </div>
+                                            <div ng-switch-when="TEXTAREA">
+                                                <label class="form-control-label">{{field.label}}:</label>
+                                                <textarea type="text" placeholder="{{field.placeholder}}" class="form-control"></textarea>
+                                            </div>
+                                            <div ng-switch-when="EMAIL">
+                                                <label class="form-control-label">{{field.label}}:</label>
+                                                <input type="email" placeholder="{{field.placeholder}}" class="form-control">
+                                            </div>
+                                            <div ng-switch-when="DATE">
+                                                <label class="form-control-label">{{field.label}}:</label>
+                                                <input type="date" class="form-control">
+                                            </div>
+                                            <div ng-switch-when="OPTIONS">
+                                                <label class="form-control-label">{{field.label}}:</label>
+                                                <div class="dropdown">
+                                                    <button class="btn-xs btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                                        {{field.label}}:<span
+                                                            class="caret"></span></button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <div ng-repeat="option in field.options">
+                                                            <li value="{{option.value}}"><a href="#">{{option.label}}</a></li>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div ng-switch-when="CHECKBOXES">
+                                                <label class="form-control-label">{{field.label}}:</label>
+                                                <div ng-repeat="option in field.options">
+                                                    <div class="checkbox">
+                                                        <label><input type="checkbox" value="{{option.value}}">{{option.label}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div ng-switch-when="RADIOS">
+                                                <label class="form-control-label">{{field.label}}</label>
+                                                <br>
+                                                <form action="" ng-repeat="option in field.options">
+                                                    <input type="radio" name="{{field.label}}" value="{{option.value}}">{{option.label}}<br>
+                                                </form>
+                                            </div>
+                                            <div ng-switch-default>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-xs-1 col-md-1">
+                                                <button class="btn-xs btn-primary glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editmodal" ng-click="model.setCurrentField(field)"></button>
+                                            </div>
+                                            <div class="col-xs-1 col-md-1">
+                                                <button class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
+                                            </div>
+                                            <div class="col-xs-1 col-md-1">
+                                                <button class="btn-xs btn-primary glyphicon glyphicon-remove" ng-click="model.deleteField(field._id)"></button>
+                                            </div>
+                                            <div class="col-xs-1 col-md-1">
+                                                <button class="btn-xs btn-primary glyphicon glyphicon-align-justify"></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <hr>
+                                </tbody>
+
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <label for="selectfield">Add New Field:</label>
+                                        <br>
+                                        <select id="selectfield" ng-model="model.fieldType">
+                                            <option ng-repeat="fieldtype in model.fieldTypes" value="{{fieldtype.type}}"
+                                                    ng-selected="model.fieldType==fieldtype.type">
+                                                {{fieldtype.text}}
+                                            </option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-xs-1 col-xs-offset-1 col-md-1 col-md-offset-1">
+                                                <button ng-click="model.addField()" class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <!-- Modal -->
+                            <div id="editmodal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">{{model.curField.type}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-sm-offset-1 col-sm-4">
+                                                        <div class="form">
+                                                            <label>Label</label>
+                                                            <input type="text" ng-model="model.modalfield.label" class="form-control input-sm chat-input"
+                                                                   placeholder="label"/>
+                                                            <br>
+                                                            <label ng-hide="model.curField.type=='DATE'">Placeholder/Options</label>
+                                                            </br>
                                 <textarea ng-hide="model.curField.type=='DATE'" row=2 type="text" ng-model="model.modalfield.content" class="form-control input-sm chat-input"
-                                       placeholder="placeholder"/>
-                                </br>
-                                <div class="wrapper">
+                                          placeholder="placeholder"/>
+                                                            </br>
+                                                            <div class="wrapper">
             <span class="group-btn">
                 <button data-dismiss="modal" class="btn btn-primary btn-md">Cancel</button>
                 <button data-dismiss="modal" ng-click="model.editField()" class="btn btn-primary btn-md">OK</button>
             </span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-</div>
 </div>
