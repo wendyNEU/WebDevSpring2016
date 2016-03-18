@@ -22,6 +22,7 @@
             vm.setCurrentField = setCurrentField;
             vm.getCurrentField = getCurrentField;
             vm.editField = editField;
+            vm.getModalTitle = getModalTitle;
             vm.fieldTypes = [{"type":"TEXT","text":"Single Line Text Field",},{"type":"TEXTAREA","text":"Multi Line Text Field"},{"type":"DATE","text":"Date Field"},{"type":"OPTIONS","text":"Dropdown Field"},{"type":"CHECKBOXES","text":"Checkboxes Field"},{"type":"RADIOS","text":"Radio Buttons Field"},{"type":"EMAIL","text":"Email Text Fields"}];
             vm.fieldType = vm.fieldTypes[0].type;
             vm.updateFields = updateFields;
@@ -174,6 +175,16 @@
             return deferred.promise;
         }
 
+        function getModalTitle(){
+            if(vm.curField==null) return "";
+            for(var i in vm.fieldTypes){
+                if(vm.curField.type == vm.fieldTypes[i].type){
+                    return vm.fieldTypes[i].text;
+                }
+            }
+            return "";
+        }
+
         function updateFields(fields) {
             var formId = $routeParams.formId;
 
@@ -183,5 +194,6 @@
                     vm.fields = response.data;
                 });
         }
+
     }
 })();
