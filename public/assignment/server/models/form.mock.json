@@ -48,6 +48,44 @@
         "label": "Email",
         "type": "EMAIL",
         "placeholder": "Email"
+      },
+      {
+        "_id": "1236547",
+        "label": "New Checkboxes",
+        "type": "CHECKBOXES",
+        "options": [
+          {
+            "label": "Option A",
+            "value": "OPTION_A"
+          },
+          {
+            "label": "Option B",
+            "value": "OPTION_B"
+          },
+          {
+            "label": "Option C",
+            "value": "OPTION_C"
+          }
+        ]
+      },
+      {
+        "_id": "89076",
+        "label": "New Radio Buttons",
+        "type": "RADIOS",
+        "options": [
+          {
+            "label": "Option X",
+            "value": "OPTION_X"
+          },
+          {
+            "label": "Option Y",
+            "value": "OPTION_Y"
+          },
+          {
+            "label": "Option Z",
+            "value": "OPTION_Z"
+          }
+        ]
       }
     ]
   },

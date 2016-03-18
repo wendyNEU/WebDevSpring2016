@@ -6,7 +6,7 @@
         .module('FormBuilderApp')
         .controller('FormController', FormController);
 
-    function FormController($q, FormService, UserService) {
+    function FormController($q, $route,FormService, UserService) {
         console.log("FormController");
 
         var vm = this;

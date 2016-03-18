@@ -1,0 +1,383 @@
+<div class="table-responsive" ng-controller="FieldController">
+    <table id="fields_list" class="grid table table-striped table-bordered table-sortable">
+        <tbody class="ui-sortable" ng-repeat="field in model.fields">
+        <tr>
+            <td>
+                <div ng-switch="field.type">
+                    <div ng-switch-when="TEXT">
+                        <label class="form-control-label">{{field.label}}:</label>
+                        <input type="text" placeholder="{{field.placeholder}}" class="form-control">
+                    </div>
+                    <div ng-switch-when="TEXTAREA">
+                        <label class="form-control-label">{{field.label}}:</label>
+                        <textarea type="text" placeholder="{{field.placeholder}}" class="form-control"></textarea>
+                    </div>
+                    <div ng-switch-when="EMAIL">
+                        <label class="form-control-label">{{field.label}}:</label>
+                        <input type="email" placeholder="{{field.placeholder}}" class="form-control">
+                    </div>
+                    <div ng-switch-when="DATE">
+                        <label class="form-control-label">{{field.label}}:</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div ng-switch-when="OPTIONS">
+                        <label class="form-control-label">{{field.label}}:</label>
+                        <div class="dropdown">
+                            <button class="btn-xs btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                {{field.label}}:<span
+                                    class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu">
+                                <div ng-repeat="option in field.options">
+                                    <li value="{{option.value}}"><a href="#">{{option.label}}</a></li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div ng-switch-when="CHECKBOXES">
+                        <label class="form-control-label">{{field.label}}:</label>
+                        <div ng-repeat="option in field.options">
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="{{option.value}}">{{option.label}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-switch-when="RADIOS">
+                        <label class="form-control-label">{{field.label}}</label>
+                        <br>
+                        <form action="" ng-repeat="option in field.options">
+                            <input type="radio" name="{{field.label}}" value="{{option.value}}">{{option.label}}<br>
+                        </form>
+                    </div>
+                    <div ng-switch-default>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="row">
+                    <div class="col-xs-1 col-md-1">
+                        <button class="btn-xs btn-primary glyphicon glyphicon-pencil" data-toggle="modal" data-target="#{{field.type}}" ng-click="model.setCurrentField(field)"></button>
+                    </div>
+                    <div class="col-xs-1 col-md-1">
+                        <button class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
+                    </div>
+                    <div class="col-xs-1 col-md-1">
+                        <button class="btn-xs btn-primary glyphicon glyphicon-remove" ng-click="model.deleteField(field._id)"></button>
+                    </div>
+                    <div class="col-xs-1 col-md-1">
+                        <button class="btn-xs btn-primary glyphicon glyphicon-align-justify"></button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <hr>
+        </tbody>
+        <tbody>
+        <tr>
+            <td>
+                <label for="selectfield">Add New Field:</label>
+                <br>
+                <select id="selectfield" ng-model="model.fieldType">
+                    <option ng-repeat="fieldtype in model.fieldTypes" value="{{fieldtype.type}}"
+                            ng-selected="model.fieldType==fieldtype.type">
+                        {{fieldtype.text}}
+                    </option>
+                </select>
+            </td>
+            <td>
+                <div class="row">
+                    <div class="col-xs-1 col-xs-offset-1 col-md-1 col-md-offset-1">
+                        <button ng-click="model.addField()" class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div id="TEXT" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Single Line Field</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-sm-4">
+                            <div class="form">
+                                <label>Label</label>
+                                <input type="text" id="sltlabel" class="form-control input-sm chat-input"
+                                       placeholder="label"/>
+                                <br>
+                                <label>Placeholder</label>
+                                </br>
+                                <input type="text" id="sltplaceholder" class="form-control input-sm chat-input"
+                                       placeholder="placeholder"/>
+                                </br>
+                                <div class="wrapper">
+            <span class="group-btn">
+                <a href="#" class="btn btn-primary btn-md">Cancel<i class="fa fa-sign-in"></i></a>
+                <a href="#" class="btn btn-primary btn-md">OK<i class="fa fa-sign-in"></i></a>
+            </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="EMAIL" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Email Field</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-sm-4">
+                            <div class="form">
+                                <label>Label</label>
+                                <input type="text" id="emaillabel" class="form-control input-sm chat-input"
+                                       placeholder="label"/>
+                                <br>
+                                <label>Placeholder</label>
+                                </br>
+                                <input type="text" id="emailplaceholder" class="form-control input-sm chat-input"
+                                       placeholder="placeholder"/>
+                                </br>
+                                <div class="wrapper">
+            <span class="group-btn">
+                <button data-dismiss="modal" class="btn btn-primary btn-md">Cancel</button>
+                <button data-dismiss="modal" class="btn btn-primary btn-md">OK</button>
+            </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div id="TEXTAREA" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Multiple Line Field</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-sm-4">
+                            <div class="form">
+                                <label>Label</label>
+                                <input type="text" id="mltlabel" class="form-control input-sm chat-input"
+                                       placeholder="label"/>
+                                <br>
+                                <label>Placeholder</label>
+                                </br>
+                                <input type="text" id="mltplaceholder" class="form-control input-sm chat-input"
+                                       placeholder="placeholder"/>
+                                </br>
+                                <div class="wrapper">
+            <span class="group-btn">
+                <a href="#" class="btn btn-primary btn-md">Cancel<i class="fa fa-sign-in"></i></a>
+                <a href="#" class="btn btn-primary btn-md">OK<i class="fa fa-sign-in"></i></a>
+            </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="DATE" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Date Field</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-sm-4">
+                            <div class="form">
+                                <label>Label</label>
+                                <input type="text" id="datelabel" class="form-control input-sm chat-input"
+                                       placeholder="label"/>
+                                <br>
+                                <div class="wrapper">
+            <span class="group-btn">
+                <a href="#" class="btn btn-primary btn-md">Cancel<i class="fa fa-sign-in"></i></a>
+                <a href="#" class="btn btn-primary btn-md">OK<i class="fa fa-sign-in"></i></a>
+            </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="OPTIONS" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Dropdown Field</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-sm-4">
+                            <div class="form">
+                                <label>Label</label>
+                                <input type="text" id="dropdownlabel" class="form-control input-sm chat-input"
+                                       placeholder="label"/>
+                                <br>
+                                <label>Options</label>
+                                <textarea type="text" id="dropdownOptions" class="form-control input-sm chat-input"
+                                          placeholder="Options" rows="4"></textarea>
+                                <br>
+                                <div class="wrapper">
+            <span class="group-btn">
+                <a href="#" class="btn btn-primary btn-md">Cancel<i class="fa fa-sign-in"></i></a>
+                <a href="#" class="btn btn-primary btn-md">OK<i class="fa fa-sign-in"></i></a>
+            </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="CHECKBOXES" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Checkbox Field</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-sm-4">
+                            <div class="form">
+                                <label>Label</label>
+                                <input type="text" id="checkboxlabel" class="form-control input-sm chat-input"
+                                       placeholder="label"/>
+                                <br>
+                                <label>Options</label>
+                                <textarea type="text" id="checkboxOptions" class="form-control input-sm chat-input"
+                                          placeholder="Options" rows="4"></textarea>
+                                <br>
+                                <div class="wrapper">
+            <span class="group-btn">
+                <a href="#" class="btn btn-primary btn-md">Cancel<i class="fa fa-sign-in"></i></a>
+                <a href="#" class="btn btn-primary btn-md">OK<i class="fa fa-sign-in"></i></a>
+            </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="RADIOS" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Radio Button Field</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-sm-4">
+                            <div class="form">
+                                <label>Label</label>
+                                <input type="text" id="radiobuttonlabel" class="form-control input-sm chat-input"
+                                       placeholder="label"/>
+                                <br>
+                                <label>Options</label>
+                                <textarea type="text" id="radiobuttonOptions" class="form-control input-sm chat-input"
+                                          placeholder="Options" rows="4"></textarea>
+                                <br>
+                                <div class="wrapper">
+            <span class="group-btn">
+                <a href="#" class="btn btn-primary btn-md">Cancel<i class="fa fa-sign-in"></i></a>
+                <a href="#" class="btn btn-primary btn-md">OK<i class="fa fa-sign-in"></i></a>
+            </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
