@@ -2,6 +2,7 @@
  * Created by wendy on 3/15/16.
  */
 var mock = require("./form.mock.json");
+var Guid = require('../js/guid.js');
 module.exports = function() {
     var api = {
         findFormByTitle:findFormByTitle,
@@ -14,7 +15,8 @@ module.exports = function() {
         getFieldByFormFieldId:getFieldByFormFieldId,
         deleteFieldByFormFieldId:deleteFieldByFormFieldId,
         createFieldByFormFieldId:createFieldByFormFieldId,
-        updateFieldByFormFieldId:updateFieldByFormFieldId
+        updateFieldByFormFieldId:updateFieldByFormFieldId,
+        updateFieldsByFormId: updateFieldsByFormId
     };
     return api;
 
@@ -27,7 +29,8 @@ module.exports = function() {
         return null;
     }
     function createForm(form) {
-        form._id = "ID_" + (new Date()).getTime();
+        form._id = Guid.create();//"ID_" + (new Date()).getTime();
+        form.fields=[];
         mock.push(form);
         return form;
     }
@@ -106,7 +109,7 @@ module.exports = function() {
     function createFieldByFormFieldId(formId, field){
         for(var f in mock){
             if(mock[f]._id==formId){
-                field._id = "ID_" + (new Date()).getTime();
+                field._id = Guid.create();//"ID_" + (new Date()).getTime();
                 mock[f].fields.push(field);
                 return mock[f].fields;
             }
@@ -123,6 +126,16 @@ module.exports = function() {
                         return mock[f].fields;
                     }
                 }
+            }
+        }
+        return null;
+    }
+
+    function updateFieldsByFormId(formId, fields) {
+        for(var f in mock){
+            if(mock[f]._id==formId){
+                mock[f].fields = fields;
+                return mock[f].fields;
             }
         }
         return null;

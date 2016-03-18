@@ -1,7 +1,7 @@
 <div class="table-responsive" ng-controller="FieldController">
     <table id="fields_list" class="grid table table-striped table-bordered table-sortable">
-        <tbody class="ui-sortable" ng-repeat="field in model.fields">
-        <tr>
+        <tbody class="ui-sortable" jga-sortable>
+        <tr ng-repeat="field in model.fields">
             <td>
                 <div ng-switch="field.type">
                     <div ng-switch-when="TEXT">
@@ -55,7 +55,7 @@
             <td>
                 <div class="row">
                     <div class="col-xs-1 col-md-1">
-                        <button class="btn-xs btn-primary glyphicon glyphicon-pencil" data-toggle="modal" data-target="#{{field.type}}" ng-click="model.setCurrentField(field)"></button>
+                        <button class="btn-xs btn-primary glyphicon glyphicon-pencil" data-toggle="modal" data-target="#editmodal" ng-click="model.setCurrentField(field)"></button>
                     </div>
                     <div class="col-xs-1 col-md-1">
                         <button class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
@@ -96,13 +96,13 @@
     </table>
 
     <!-- Modal -->
-    <div id="TEXT" class="modal fade" role="dialog">
+    <div id="editmodal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Single Line Field</h4>
+                <h4 class="modal-title">{{model.curField.type}}</h4>
             </div>
             <div class="modal-body">
                 <div class="container">
@@ -110,12 +110,12 @@
                         <div class="col-sm-offset-1 col-sm-4">
                             <div class="form">
                                 <label>Label</label>
-                                <input type="text" ng-model="model.textfield.label" class="form-control input-sm chat-input"
+                                <input type="text" ng-model="model.modalfield.label" class="form-control input-sm chat-input"
                                        placeholder="label"/>
                                 <br>
-                                <label>Placeholder</label>
+                                <label ng-hide="model.curField.type=='DATE'">Placeholder/Options</label>
                                 </br>
-                                <input type="text" ng-model="model.textfield.placeholder" class="form-control input-sm chat-input"
+                                <textarea ng-hide="model.curField.type=='DATE'" row=2 type="text" ng-model="model.modalfield.content" class="form-control input-sm chat-input"
                                        placeholder="placeholder"/>
                                 </br>
                                 <div class="wrapper">
@@ -136,248 +136,4 @@
         </div>
     </div>
 </div>
-
-    <!-- Modal -->
-    <div id="EMAIL" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Email Field</h4>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-offset-1 col-sm-4">
-                            <div class="form">
-                                <label>Label</label>
-                                <input type="text" ng-model="model.emailfield.label" class="form-control input-sm chat-input"
-                                       placeholder="label"/>
-                                <br>
-                                <label>Placeholder</label>
-                                </br>
-                                <input type="text" ng-model="model.emailfield.placeholder" class="form-control input-sm chat-input"
-                                       placeholder="placeholder"/>
-                                </br>
-                                <div class="wrapper">
-            <span class="group-btn">
-                <button data-dismiss="modal" class="btn btn-primary btn-md">Cancel</button>
-                <button data-dismiss="modal" ng-click="model.editField()" class="btn btn-primary btn-md">OK</button>
-            </span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-    </div>
-
-    <!-- Modal -->
-    <div id="TEXTAREA" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Multiple Line Field</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-offset-1 col-sm-4">
-                                <div class="form">
-                                    <label>Label</label>
-                                    <input type="text" ng-model="model.textareafield.label"  class="form-control input-sm chat-input"
-                                           placeholder="label"/>
-                                    <br>
-                                    <label>Placeholder</label>
-                                    </br>
-                                    <input type="text" ng-model="model.textareafield.placeholder" id="mltplaceholder" class="form-control input-sm chat-input"
-                                           placeholder="placeholder"/>
-                                    </br>
-                                    <div class="wrapper">
-            <span class="group-btn">
-                <button data-dismiss="modal" class="btn btn-primary btn-md">Cancel</button>
-                <button data-dismiss="modal" ng-click="model.editField()" class="btn btn-primary btn-md">OK</button>
-            </span>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div id="DATE" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Date Field</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-offset-1 col-sm-4">
-                                <div class="form">
-                                    <label>Label</label>
-                                    <input type="text" ng-model="model.datefield.label"  class="form-control input-sm chat-input"
-                                           placeholder="label"/>
-                                    <br>
-                                    <div class="wrapper">
-            <span class="group-btn">
-                <button data-dismiss="modal" class="btn btn-primary btn-md">Cancel</button>
-                <button data-dismiss="modal" ng-click="model.editField()" class="btn btn-primary btn-md">OK</button>
-            </span>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div id="OPTIONS" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Dropdown Field</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-offset-1 col-sm-4">
-                                <div class="form">
-                                    <label>Label</label>
-                                    <input type="text" ng-model="model.dropdown.label" class="form-control input-sm chat-input"
-                                           placeholder="label"/>
-                                    <br>
-                                    <label>Options</label>
-                                <textarea type="text" ng-model="model.dropdown.options" class="form-control input-sm chat-input"
-                                          placeholder="Options" rows="4"></textarea>
-                                    <br>
-                                    <div class="wrapper">
-            <span class="group-btn">
-                <button data-dismiss="modal" class="btn btn-primary btn-md">Cancel</button>
-                <button data-dismiss="modal" ng-click="model.editField()" class="btn btn-primary btn-md">OK</button>
-            </span>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div id="CHECKBOXES" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Checkbox Field</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-offset-1 col-sm-4">
-                                <div class="form">
-                                    <label>Label</label>
-                                    <input type="text" ng-model="model.checkboxfield.label" class="form-control input-sm chat-input"
-                                           placeholder="label"/>
-                                    <br>
-                                    <label>Options</label>
-                                <textarea type="text" ng-model="model.checkboxfield.options" class="form-control input-sm chat-input"
-                                          placeholder="Options" rows="4"></textarea>
-                                    <br>
-                                    <div class="wrapper">
-            <span class="group-btn">
-                <button data-dismiss="modal" class="btn btn-primary btn-md">Cancel</button>
-                <button data-dismiss="modal" ng-click="model.editField()" class="btn btn-primary btn-md">OK</button>
-            </span>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div id="RADIOS" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Radio Button Field</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-offset-1 col-sm-4">
-                                <div class="form">
-                                    <label>Label</label>
-                                    <input type="text" ng-model="model.radios.label" class="form-control input-sm chat-input"
-                                           placeholder="label"/>
-                                    <br>
-                                    <label>Options</label>
-                                <textarea type="text" ng-model="model.radios.options" class="form-control input-sm chat-input"
-                                          placeholder="Options" rows="4"></textarea>
-                                    <br>
-                                    <div class="wrapper">
-            <span class="group-btn">
-                <button data-dismiss="modal" class="btn btn-primary btn-md">Cancel</button>
-                <button data-dismiss="modal" ng-click="model.editField()" class="btn btn-primary btn-md">OK</button>
-            </span>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>

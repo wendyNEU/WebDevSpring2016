@@ -12,14 +12,7 @@
         var vm = this;
 
         function init() {
-            vm.textfield = {"_id": null, "label": "", "type": "TEXT", "placeholder": ""};
-            vm.textareafield = {"_id": null, "label": "", "type": "TEXTAREA", "placeholder": ""};
-            vm.emailfield = {"_id": null, "label": "", "type": "EMAIL", "placeholder": ""};
-            vm.datefield = {"_id": null, "label": "", "type": "DATE"};
-            vm.dropdown = {"_id": null, "label": "", "type": "OPTIONS", "options": ""};
-            vm.checkboxfield = {"_id": null, "label": "", "type": "CHECKBOXES", "options": ""};
-            vm.radios = {"_id": null, "label": "", "type": "RADIOS", "options": ""}
-
+            vm.modalfield = { "label": "", "content": ""};
             vm.curField = null;
             vm.addField = addField;
             vm.findAllFieldsByFormId = findAllFieldsByFormId;
@@ -29,6 +22,7 @@
             vm.editField = editField;
             vm.fieldTypes = [{"type":"TEXT","text":"Single Line Text Field",},{"type":"TEXTAREA","text":"Multi Line Text Field"},{"type":"DATE","text":"Date Field"},{"type":"OPTIONS","text":"Dropdown Field"},{"type":"CHECKBOXES","text":"Checkboxes Field"},{"type":"RADIOS","text":"Radio Buttons Field"},{"type":"EMAIL","text":"Email Text Fields"}];
             vm.fieldType = vm.fieldTypes[0].type;
+            vm.updateFields = updateFields;
             findAllFieldsByFormId();
         }
 
@@ -109,7 +103,6 @@
                     var fields = response.data;
                     if (fields) {
                         vm.fields = fields;
-                        console.log(vm.fields);
                         deferred.resolve();
                     } else {
                         deferred.reject();
@@ -120,34 +113,17 @@
 
         function setCurrentField(field){
             vm.curField = field;
-            if(vm.curField.type=='TEXT'){
-                vm.textfield.label = vm.curField.label;
-                vm.textfield.placeholder = vm.curField.placeholder;
-            }else if(vm.curField.type=='TEXTAREA'){
-                vm.textareafield.label = vm.curField.label;
-                vm.textareafield.placeholder = vm.curField.placeholder;
+            if(vm.curField.type=='TEXT'||vm.curField.type=='TEXTAREA'||vm.curField.type=='EMAIL'){
+                vm.modalfield.label = vm.curField.label;
+                vm.modalfield.content = vm.curField.placeholder;
             }else if(vm.curField.type=='DATE'){
-                vm.datefield.label = vm.curField.label;
-            }else if(vm.curField.type=='OPTIONS'){
-                vm.dropdown.label = vm.curField.label;
-                vm.dropdown.options = "";
+                vm.modalfield.label = vm.curField.label;
+            }else if(vm.curField.type=='OPTIONS'||vm.curField.type=='CHECKBOXES'||vm.curField.type=='RADIOS'){
+                vm.modalfield.label = vm.curField.label;
+                vm.modalfield.content = "";
                 for(var i in vm.curField.options){
-                    vm.dropdown.options += vm.curField.options[i].label +":"+vm.curField.options[i].value+"\n";
+                    vm.modalfield.content += vm.curField.options[i].label +":"+vm.curField.options[i].value+"\n";
                 }
-            }else if(vm.curField.type=='CHECKBOXES'){
-                vm.checkboxfield.label = vm.curField.label;
-                vm.checkboxfield.options = "";
-                for(var i in vm.curField.options){
-                    vm.checkboxfield.options += vm.curField.options[i].label +":"+vm.curField.options[i].value+"\n";
-                }
-            }else if(vm.curField.type=='RADIOS'){
-                vm.radios.label = vm.curField.label;
-                vm.radios.options = "";
-                for(var i in vm.curField.options){
-                    vm.radios.options += vm.curField.options[i].label +":"+vm.curField.options[i].value+"\n";
-                }
-            }else{
-                vm.emailfield = vm.curField;
             }
         }
 
@@ -156,18 +132,15 @@
         }
 
         function editField(){
-            if(vm.curField.type=='TEXT'){
-                vm.curField.label = vm.textfield.label;
-                vm.curField.placeholder = vm.textfield.placeholder;
-            }else if(vm.curField.type=='TEXTAREA'){
-                vm.curField.label = vm.textareafield.label;
-                vm.curField.placeholder = vm.textareafield.placeholder;
+            if(vm.curField.type=='TEXT'||vm.curField.type=='TEXTAREA'||vm.curField.type=='EMAIL'){
+                vm.curField.label=vm.modalfield.label;
+                vm.curField.placeholder=vm.modalfield.content;
             }else if(vm.curField.type=='DATE'){
-                vm.curField.label = vm.datefield.label;
-            }else if(vm.curField.type=='OPTIONS'){
-                vm.curField.label = vm.dropdown.label;
+                vm.curField.label=vm.modalfield.label;
+            }else if(vm.curField.type=='OPTIONS'||vm.curField.type=='CHECKBOXES'||vm.curField.type=='RADIOS'){
+                vm.curField.label = vm.modalfield.label;
                 vm.curField.options=[];
-                var options = vm.dropdown.options.split("\n");
+                var options = vm.modalfield.content.split("\n");
                 for(var i=0;i<options.length;i++){
                     var line = options[i].split(":");
                     if(options[i]!==''&&line.length==2) {
@@ -175,30 +148,9 @@
                         vm.curField.options.push(option);
                     }
                 }
-            }else if(vm.curField.type=='CHECKBOXES'){
-                vm.curField.label = vm.checkboxfield.label;
-                vm.curField.options=[];
-                var options1 = vm.checkboxfield.options.split("\n");
-                for(var i=0;i<options1.length;i++){
-                    var line = options1[i].split(":");
-                    if(options1[i]!==''&&line.length==2) {
-                        var option1 = {"label": line[0], "value": line[1]};
-                        vm.curField.options.push(option1);
-                    }
-                }
-            }else if(vm.curField.type=='RADIOS'){
-                vm.curField.label = vm.radios.label;
-                vm.curField.options=[];
-                var options2 = vm.radios.options.split("\n");
-                for(var i=0;i<options2.length;i++){
-                    var line = options2[i].split(":");
-                    if(options2[i]!==''&&line.length==2) {
-                        var option2 = {"label": line[0], "value": line[1]};
-                        vm.curField.options.push(option2);
-                    }
-                }
             }else{
-                vm.curField = vm.emailfield;
+                alert("update fail:input format error");
+                return;
             }
 
             var deferred = $q.defer();
@@ -218,6 +170,16 @@
                 });
             vm.curField = null;
             return deferred.promise;
+        }
+
+        function updateFields(fields) {
+            var formId = $routeParams.formId;
+
+            FieldService
+                .updateFields(formId, fields)
+                .then(function(response){
+                    vm.fields = response.data;
+                });
         }
     }
 })();

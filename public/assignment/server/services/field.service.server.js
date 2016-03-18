@@ -7,6 +7,7 @@ module.exports = function(app, formModel) {
     app.delete("/api/assignment/form/:formId/field/:fieldId",deleteFieldByFormFieldId);
     app.post("/api/assignment/form/:formId/field",createFieldByFormFieldId);
     app.put("/api/assignment/form/:formId/field/:fieldId",updateFieldByFormFieldId);
+    app.put("/api/assignment/form/:formId/field",updateFieldsByFormId);
 
     function getFieldsByFormId(req,res){
         var fields = formModel.getFieldsByFormId(req.params.formId);
@@ -31,5 +32,10 @@ module.exports = function(app, formModel) {
     function updateFieldByFormFieldId(req,res){
         var field = formModel.updateFieldByFormFieldId(req.params.formId, req.params.fieldId, req.body);
         res.json(field);
+    }
+
+    function updateFieldsByFormId(req, res) {
+        var fields = formModel.updateFieldsByFormId(req.params.formId, req.body);
+        res.json(fields);
     }
 }
