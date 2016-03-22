@@ -11,7 +11,6 @@
 
         var vm = this;
 
-
         function init() {
             vm.modalfield = { "label": "", "content": ""};
             vm.curField = null;
