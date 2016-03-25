@@ -6,7 +6,7 @@
         .module('MovieFanApp')
         .controller('ActorDetailController', ActorDetailController);
 
-    function ActorDetailController($scope,$rootScope,$routeParams,ActorService){
+    function ActorDetailController($scope,$routeParams,ActorService){
         console.log("ActorDetailController");
         var image_base_url = 'http://image.tmdb.org/t/p';
         var poster_size='/w300';

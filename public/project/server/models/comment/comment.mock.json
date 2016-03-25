@@ -1,56 +1,89 @@
 [
   {
-    "_id": 123,
+    "_id": 12345,
     "type":"movie",
-    "tviso_id":2234,
+    "tviso_id":209112,
     "comments": [
       {
         "_id": 13123,
         "text": "comment1",
         "user_id": 123,
+        "username":"alice",
+        "date":"2011-04-11T11:51:00",
         "subcomments": [
           {
             "_id": 34234,
             "text": "subcomment1",
-            "user_id": 345
+            "user_id": 234,
+            "username":"bob",
+            "date":"2012-09-27T09:51:00"
+          },
+          {
+            "_id": 89067,
+            "text": "subcomment2",
+            "user_id": 123,
+            "username":"alice",
+            "date":"2014-09-11T12:56:00"
+          },
+          {
+            "_id": 34237,
+            "text": "subcomment3",
+            "user_id": 345,
+            "username":"charlie",
+            "date":"2014-11-19T03:51:00"
+          }
+        ]
+      },
+      {
+        "_id": 67854,
+        "text": "comment2",
+        "user_id": 456,
+        "username":"dan",
+        "date":"2011-07-12T18:55:00",
+        "subcomments": [
+          {
+            "_id": 87405,
+            "text": "subcomment1",
+            "user_id": 234,
+            "username":"bob",
+            "date":"2012-07-13T12:23:00"
+          },
+          {
+            "_id": 90345,
+            "text": "subcomment2",
+            "user_id": 123,
+            "username":"alice",
+            "date":"2012-08-16T19:03:00"
+          },
+          {
+            "_id": 23854,
+            "text": "subcomment3",
+            "user_id": 345,
+            "username":"charlie",
+            "date":"2013-08-16T19:03:00"
           }
         ]
       }
     ]
   },
   {
-    "_id": 123,
-    "type":"tv",
-    "tviso_id":2234,
+    "_id": 67890,
+    "type":"movie",
+    "tviso_id":244786,
     "comments": [
       {
-        "_id": 13123,
-        "text": "comment1",
+        "_id": 23415,
+        "text": "comment3",
         "user_id": 123,
+        "username":"alice",
+        "date":"2014-08-16T19:03:00",
         "subcomments": [
           {
-            "_id": 34234,
-            "text": "subcomment1",
-            "user_id": 345
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "_id": 123,
-    "type":"actor",
-    "tviso_id":2234,
-    "comments": [
-      {
-        "_id": 13123,
-        "text": "comment1",
-        "user_id": 123,
-        "subcomments": [
-          {
-            "_id": 34234,
-            "text": "subcomment1",
-            "user_id": 345
+            "_id": 98680,
+            "text": "subcomment3",
+            "user_id": 345,
+            "username":"charlie",
+            "date":"2014-08-17T19:03:00"
           }
         ]
       }

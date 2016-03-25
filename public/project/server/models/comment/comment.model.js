@@ -15,8 +15,7 @@ module.exports = function() {
 
     function findCommentSetByTvisoId(tvisoId,type){
         for(var i in mock){
-            if(mock[i].tvisoId==tvisoId&&mock[i].type==type){
-                mock[i].push(comment);
+            if(mock[i].tviso_id==tvisoId&&mock[i].type==type){
                 return mock[i];
             }
         }
@@ -24,33 +23,32 @@ module.exports = function() {
     }
 
     function createCommentsSet(tvisoId, type){
-        return {"_id":Guid.create(),"type":type,"tviso_id":tvisoId,comments:[]};
+        return {"_id":Guid.create().value,"type":type,"tviso_id":tvisoId,comments:[]};
     }
 
     function createCommentByTvisoId(tvisoId,type,comment){
-        comment._id = Guid.create();
+        comment._id = Guid.create().value;
         comment.subcomments = [];
         for(var i in mock){
-            if(mock[i].tvisoId==tvisoId&&mock[i].type==type){
-                mock[i].push(comment);
+            if(mock[i].tviso_id==tvisoId&&mock[i].type==type){
+                mock[i].comments.push(comment);
                 return mock[i];
             }
         }
         var tvisoCommentSet = createCommentsSet(tvisoId,type);
-        comment._id = Guid.create();
         tvisoCommentSet.comments.push(comment);
         mock.push(tvisoCommentSet);
-        return mock[mock.length-1];
+        return tvisoCommentSet;
     }
 
     function createSubCommentByCommentId(tvisoId,type,comment_id,subcomment){
-        subcomment._id = Guid.create();
+        subcomment._id = Guid.create().value;
         for(var i in mock){
-            if(mock[i].tvisoId==tvisoId&&mock[i].type==type){
+            if(mock[i].tviso_id==tvisoId&&mock[i].type==type){
                 for(var j in mock[i].comments){
                     if(mock[i].comments[j]._id==comment_id){
-                        mock[i].comments[j].push(subcomment);
-                        return mock[i];
+                        mock[i].comments[j].subcomments.push(subcomment);
+                        return mock[i].comments[j].subcomments;
                     }
                 }
             }
@@ -60,11 +58,11 @@ module.exports = function() {
 
     function deleteCommentByTvisoId(tvisoId,type,comment_id){
         for(var i in mock){
-            if(mock[i].tvisoId==tvisoId&&mock[i].type==type){
+            if(mock[i].tviso_id==tvisoId&&mock[i].type==type){
                 for(var j in mock[i].comments){
                     if(mock[i].comments[j]._id==comment_id){
                         mock[i].comments.splice(j,1);
-                        return mock[i];
+                        return mock[i].comments;
                     }
                 }
                 return null;
@@ -75,13 +73,13 @@ module.exports = function() {
 
     function deleteSubCommentByCommentId(tvisoId,type,comment_id,subcomment_id){
         for(var i in mock){
-            if(mock[i].tvisoId==tvisoId&&mock[i].type==type){
+            if(mock[i].tviso_id==tvisoId&&mock[i].type==type){
                 for(var j in mock[i].comments){
                     if(mock[i].comments[j]._id==comment_id){
                         for(var k in mock[i].comments[j].subcomments){
-                            if(mock[i].comments[j].subcomments[k]==subcomment_id){
+                            if(mock[i].comments[j].subcomments[k]._id==subcomment_id){
                                 mock[i].comments[j].subcomments.splice(k,1);
-                                return mock[i];
+                                return mock[i].comments;
                             }
                         }
                         return null;

@@ -13,7 +13,7 @@
             createComment:createComment,
             createSubComment:createSubComment,
             deleteComment:deleteComment,
-            deleteSubcomment:deleteSubcomment
+            deleteSubComment:deleteSubComment
         };
         return api;
 
@@ -22,20 +22,18 @@
         }
 
         function createComment(type,tviso_id,comment){
-            comment.user_id = $rootScope.curUser._id;
             return $http.post("/api/project/comment/"+type+"/"+tviso_id,comment);
         }
 
         function createSubComment(type,tviso_id,comment_id,subcomment){
-            subcomment.user_id = $rootScope.curUser._id;
             return $http.post("/api/project/comment/"+type+"/"+tviso_id+"/comment/"+comment_id,subcomment);
         }
 
         function deleteComment(type,tviso_id,comment_id){
-            return $http.delete("/api/project/comment/"+type+"/"+tviso_id+"/comment/"+comment_id,comment);
+            return $http.delete("/api/project/comment/"+type+"/"+tviso_id+"/comment/"+comment_id);
         }
 
-        function deleteSubcomment(type,tviso_id,comment_id,subcomment_id){
+        function deleteSubComment(type,tviso_id,comment_id,subcomment_id){
             return $http.delete("/api/project/comment/"+type+"/"+tviso_id+"/comment/"+comment_id+"/subcomment/"+subcomment_id);
         }
     }
