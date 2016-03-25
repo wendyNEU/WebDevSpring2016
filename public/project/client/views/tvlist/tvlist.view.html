@@ -1,0 +1,253 @@
+<section id="tv_list" ng-controller="TvController">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" ng-class="{active: model.$route.current.activetab == 'popular'}"><a href="#/tv_list/popular" role="tab" data-toggle="tab">Popular</a></li>
+                <li role="presentation" ng-class="{active: model.$route.current.activetab == 'toprate'}"><a href="#/tv_list/toprate" role="tab" data-toggle="tab">Top Rate</a></li>
+                <li role="presentation" ng-class="{active: model.$route.current.activetab == 'onair'}"><a href="#/tv_list/onair" role="tab" data-toggle="tab">On The Air</a></li>
+                <li role="presentation" ng-class="{active: model.$route.current.activetab == 'airtoday'}"><a href="#/tv_list/airtoday" role="tab" data-toggle="tab">Airing Today</a></li>
+                <li role="presentation" ng-class="{active: model.$route.current.activetab == 'search'}"><a href="#/tv_list/search/*" role="tab" data-toggle="tab">Search</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane" ng-class="{active: model.$route.current.activetab == 'popular'}" id="popular">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h2 class="section-heading"></h2>
+                                <h3 class="section-subheading text-muted"></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="listpage" ng-repeat="tv in model.populartv">
+                                    <li class="listpage-inverted">
+                                        <div class="listpage-image">
+                                            <a href="#/tv_detail/{{tv.id}}"><img class="img-responsive" ng-src="{{model.veriPosterImg(tv.posterurl)}}" alt=""></a>
+                                        </div>
+                                        <div class="listpage-panel">
+                                            <div class="listpage-heading">
+                                                <h4><a href="#/movie_detail/{{tv.id}}" class="picframe-link" data-toggle="modal">{{tv.name}}</a></h4>
+                                                <p>{{tv.first_air_date}}</p>
+                                                <ul class="list-inline social-buttons">
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="listpage-body">
+                                                <p class="text-muted">{{tv.overview}}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <ul class="pagination">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" ng-class="{active: model.$route.current.activetab == 'toprate'}" id="toprate">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h2 class="section-heading"></h2>
+                                <h3 class="section-subheading text-muted"></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="listpage" ng-repeat="tv in model.topratetv">
+                                    <li class="listpage-inverted">
+                                        <div class="listpage-image">
+                                            <a href="#/tv_detail/{{tv.id}}"><img class="img-responsive" ng-src="{{model.veriPosterImg(tv.posterurl)}}" alt=""></a>
+                                        </div>
+                                        <div class="listpage-panel">
+                                            <div class="listpage-heading">
+                                                <h4><a href="#/movie_detail/{{tv.id}}" class="picframe-link" data-toggle="modal">{{tv.name}}</a></h4>
+                                                <p>{{tv.first_air_date}}</p>
+                                                <ul class="list-inline social-buttons">
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="listpage-body">
+                                                <p class="text-muted">{{tv.overview}}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <ul class="pagination">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" ng-class="{active: model.$route.current.activetab == 'onair'}" id="onair">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h2 class="section-heading"></h2>
+                                <h3 class="section-subheading text-muted"></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="listpage" ng-repeat="tv in model.onairtv">
+                                    <li class="listpage-inverted">
+                                        <div class="listpage-image">
+                                            <a href="#/tv_detail/{{tv.id}}"><img class="img-responsive" ng-src="{{model.veriPosterImg(tv.posterurl)}}" alt=""></a>
+                                        </div>
+                                        <div class="listpage-panel">
+                                            <div class="listpage-heading">
+                                                <h4><a href="#/movie_detail/{{tv.id}}" class="picframe-link" data-toggle="modal">{{tv.name}}</a></h4>
+                                                <p>{{tv.first_air_date}}</p>
+                                                <ul class="list-inline social-buttons">
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="listpage-body">
+                                                <p class="text-muted">{{tv.overview}}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <ul class="pagination">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" ng-class="{active: model.$route.current.activetab == 'airtoday'}" id="airtoday">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h2 class="section-heading"></h2>
+                                <h3 class="section-subheading text-muted"></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="listpage" ng-repeat="tv in model.airtodaytv">
+                                    <li class="listpage-inverted">
+                                        <div class="listpage-image">
+                                            <a href="#/tv_detail/{{tv.id}}"><img class="img-responsive" ng-src="{{model.veriPosterImg(tv.posterurl)}}" alt=""></a>
+                                        </div>
+                                        <div class="listpage-panel">
+                                            <div class="listpage-heading">
+                                                <h4><a href="#/movie_detail/{{tv.id}}" class="picframe-link" data-toggle="modal">{{tv.name}}</a></h4>
+                                                <p>{{tv.first_air_date}}</p>
+                                                <ul class="list-inline social-buttons">
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="listpage-body">
+                                                <p class="text-muted">{{tv.overview}}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <ul class="pagination">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" ng-class="{active: model.$route.current.activetab == 'search'}" id="search">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h2 class="section-heading"></h2>
+                                <h3 class="section-subheading text-muted"></h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <ul class="listpage" ng-repeat="tv in model.searchtv">
+                                    <li class="listpage-inverted">
+                                        <div class="listpage-image">
+                                            <a href="#/tv_detail/{{tv.id}}"><img class="img-responsive" ng-src="{{model.veriPosterImg(tv.posterurl)}}" alt=""></a>
+                                        </div>
+                                        <div class="listpage-panel">
+                                            <div class="listpage-heading">
+                                                <h4><a href="#/movie_detail/{{tv.id}}" class="picframe-link" data-toggle="modal">{{tv.name}}</a></h4>
+                                                <p>{{tv.first_air_date}}</p>
+                                                <ul class="list-inline social-buttons">
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                                    </li>
+                                                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="listpage-body">
+                                                <p class="text-muted">{{tv.overview}}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <ul class="pagination">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

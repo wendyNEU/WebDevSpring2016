@@ -1,0 +1,116 @@
+<div id="movie_detail" ng-controller="MovieDetailController">
+    <section id="movie_info">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <img class="movie_detail_frame img-responsive" ng-src="{{model.veriPosterImg(model.movie.posterurl)}}">
+                </div>
+                <div class="mv_info col-lg-6">
+                    <h3 class="section-heading">{{model.movie.title}}</h3>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#trailer">Trailer
+                    </button>
+                    <h4 class="section-heading">{{model.movie.release_date}}</h4>
+                    <p class="section-heading">Actors: Olivia Munn, Jennifer Lawrence, Michael Fassbender</p>
+                    <p>{{model.movie.overview}}</p>
+                    <div class="rate">Rating:&nbsp;&nbsp;
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                        <span>IMDb &nbsp;<b>/ {{model.movie.vote_average}}</b></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="movie_comment">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="well">
+                        <h4>Leave Comment:</h4>
+                        <form role="form">
+                            <div class="form-group">
+                                <textarea class="form-control coment-textarea" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1 col-lg-offset-2">
+                    <div class="thumbnail">
+                        <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span> <a
+                                class="addComToCom">Add Comment</a>
+                        </div>
+                        <div class="panel-body">
+                            Panel content
+                        </div>
+                    </div>
+                    <div class="well">
+                        <h4>Add Comment:</h4>
+                        <form role="form">
+                            <div class="form-group">
+                                <textarea class="form-control coment-textarea" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="subcommentimg thumbnail">
+                                <img class="img-responsive user-photo"
+                                     src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                            </div>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+                                </div>
+                                <div class="panel-body">
+                                    Panel content
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Modal -->
+    <div id="trailer" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div id="myCarousel" class="carousel slide">
+                        <ol class="carousel-indicators" ng-repeat="video in model.movie.video">
+                            <li data-target="#myCarousel" data-slide-to="{{$index}}" class="active"></li>
+                        </ol>
+                        <div class="carousel-inner" ng-repeat="video in model.movie.video">
+                            <div class="item active">
+                                <div class="thumbnail">
+                                    <div class="video-container">
+                                        <iframe width="870" height="550" ng-src="{{video.youtubeurl}}"
+                                                frameborder="0" allowfullscreen=""></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

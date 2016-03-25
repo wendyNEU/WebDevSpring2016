@@ -11,5 +11,6 @@
     <orderEntry type="library" name="angular-route" level="application" />
     <orderEntry type="library" name="jquery-2.1.4" level="application" />
     <orderEntry type="library" name="jquery.easing" level="application" />
+    <orderEntry type="library" name="jquery-ui" level="application" />
   </component>
 </module>

@@ -2,7 +2,7 @@
  * Created by wendy on 3/15/16.
  */
 var mock = require("./form.mock.json");
-var Guid = require('../js/guid.js');
+var Guid = require('../../../../js/guid.js');
 module.exports = function() {
     var api = {
         findFormByTitle:findFormByTitle,
