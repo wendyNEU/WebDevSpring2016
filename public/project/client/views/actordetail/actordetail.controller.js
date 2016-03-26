@@ -28,6 +28,9 @@
             vm.activeCommentWell = activeCommentWell;
             vm.isCommentWellActive = isCommentWellActive;
             vm.islogin = islogin;
+            vm.loadLike = loadLike;
+            vm.like = like;
+            vm.unlike = unlike;
             vm.getActorById($routeParams.id);
         }
 
@@ -43,6 +46,7 @@
                         vm.actor.profile_path = vm.image_base_url + vm.poster_size + vm.actor.profile_path;
 
                     vm.getCommentSet();
+                    vm.loadLike();
                 }
             });
         }
@@ -153,5 +157,81 @@
                 return imageurl;
             }
         }
+
+        function loadLike(){
+            UserService.getProfile().then(function(resp){
+                if (resp === undefined) {
+                    alert("Get Current User Fail");
+                } else if (resp.length === 0) {
+                    alert("Get Current User Fail");
+                } else {
+                    var user = resp.data;
+                    console.log(resp.data);
+                    vm.likeitem = false;
+                    for(var i in user.like){
+                        if(user.like[i].tviso_id==vm.actor.id&&user.like[i].type=='actor'){
+                            vm.likeitem = true;
+                            break;
+                        }
+                    }
+                }
+            });
+        }
+
+        function like(){
+            UserService.getProfile().then(function(resp){
+                if (resp === undefined) {
+                    alert("Get Current User Fail");
+                } else if (resp.length === 0) {
+                    alert("Get Current User Fail");
+                } else {
+                    var user = resp.data;
+                    UserService.like(user._id,'actor',vm.actor.id).then(function(resp){
+                        if (resp === undefined) {
+                            alert("Like Movie Fail");
+                        } else if (resp.length === 0) {
+                            alert("Like Movie Fail");
+                        } else {
+                            vm.likeitem=false;
+                            for(var i in resp.data){
+                                if(resp.data[i].tviso_id==vm.actor.id&&resp.data[i].type=="actor"){
+                                    vm.likeitem = true;
+                                }
+                            }
+                            console.log(resp.data);
+                        }
+                    });
+                }
+            });
+
+        }
+
+        function unlike(){
+            UserService.getProfile().then(function(resp){
+                if (resp === undefined) {
+                    alert("Get Current User Fail");
+                } else if (resp.length === 0) {
+                    alert("Get Current User Fail");
+                } else {
+                    var user = resp.data;
+                    UserService.unlike(user._id,'actor',vm.actor.id).then(function(resp){
+                        if (resp === undefined) {
+                            alert("UnLike Movie Fail");
+                        } else if (resp.length === 0) {
+                            alert("UnLike Movie Fail");
+                        } else {
+                            vm.likeitem=false;
+                            for(var i in resp.data){
+                                if(resp.data[i].tviso_id==vm.actor.id&&resp.data[i].type=="actor"){
+                                    vm.likeitem = true;
+                                }
+                            }
+                            console.log(resp.data);
+                        }
+                    });
+                }
+            });
+        }
+
     }
 })();

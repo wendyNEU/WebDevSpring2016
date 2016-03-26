@@ -4,6 +4,8 @@
             <div class="col-lg-8 col-lg-offset-2">
                 <!-- Project Details Go Here -->
                 <h2>{{model.actor.name}}</h2>
+                <br>
+                <button class="btn btn-circle-sm btn-primary" ng-show="!model.likeitem&&model.islogin()" ng-click="model.like()"><span class="glyphicon glyphicon-thumbs-up"></span> </button><button class="btn btn-circle-sm btn-primary" ng-show="model.likeitem&&model.islogin()" ng-click="model.unlike()"><span class="glyphicon glyphicon-thumbs-down"></span> </button>
                 <p class="item-intro text-muted"></p>
                 <img class="img-responsive img-centered" ng-src="{{model.veriPosterImg(model.actor.profile_path)}}" alt="">
                 <h4>{{model.actor.place_of_birth}}</h4>
