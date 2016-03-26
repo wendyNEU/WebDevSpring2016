@@ -20,7 +20,7 @@
             islogin:islogin,
             isAdmin:isAdmin,
             like: like,
-            unklike:unlike,
+            unlike:unlike,
             //more functions
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
@@ -63,29 +63,11 @@
         }
 
         function like(userId,type,tviso_id){
-            if(type=='movie'){
-                return $http.post("/api/project/user/"+userId+"/movie",{"tviso_id":tviso_id});
-            }else if(type=='tv'){
-                return $http.post("/api/project/user/"+userId+"/tv",{"tviso_id":tviso_id});
-            }else if(type=='actor'){
-                return $http.post("/api/project/user/"+userId+"/actor",{"tviso_id":tviso_id});
-            }else{
-                alert("type is uninvalid");
-                return null;
-            }
+            return $http.post("/api/project/user/"+userId,{"tviso_id":tviso_id,"type":type});
         }
 
         function unlike(userId,type,tviso_id){
-            if(type=='movie'){
-                return $http.delete("/api/project/user/"+userId+"/movie/"+tviso_id);
-            }else if(type=='tv'){
-                return $http.delete("/api/project/user/"+userId+"/tv/"+tviso_id);
-            }else if(type=='actor'){
-                return $http.delete("/api/project/user/"+userId+"/actor/"+tviso_id);
-            }else{
-                alert("type is uninvalid");
-                return null;
-            }
+            return $http.delete("/api/project/user/"+userId+"/"+type+"/"+tviso_id);
         }
 
         function setCurrentUser(user) {

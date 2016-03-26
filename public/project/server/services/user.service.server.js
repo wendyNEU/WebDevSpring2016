@@ -11,13 +11,9 @@ module.exports = function (app, model) {
     app.delete("/api/project/user/:id", deleteUserById);
 
     //like movie, tv and actor
-    app.post("/api/project/user/:user_id/movie",likeMovie);
-    app.post("/api/project/user/:user_id/tv",likeTV);
-    app.post("/api/project/user/:user_id/actor",likeActor);
+    app.post("/api/project/user/:user_id",like);
     //unlike movie, tv and actor
-    app.delete("/api/project/user/:user_id/movie/:movie_id",UnlikeMovie);
-    app.delete("/api/project/user/:user_id/tv/:tv_id",UnlikeTV);
-    app.delete("/api/project/user/:user_id/actor/:actor_id",UnlikeActor);
+    app.delete("/api/project/user/:user_id/:mtype/:tviso_id",unlike);
 
     app.get("/api/project/loggedin", loggedin);
     app.post("/api/project/logout", logout);
@@ -75,28 +71,14 @@ module.exports = function (app, model) {
         res.json(users);
     }
 
-    function likeMovie(req, res){
-        var user = model.like(req.params.user_id, req.body,"movie");
+    function like(req, res){
+        var user = model.like(req.params.user_id, req.body);
         res.json(user);
     }
-    function likeTV(req, res){
-        var user = model.like(req.params.user_id, req.body,"tv");
+
+    function unlike(req, res){
+        var user = model.unlike(req.params.user_id, req.params.tviso_id,req.params.mtype);
         res.json(user);
     }
-    function likeActor(req, res){
-        var user = model.like(req.params.user_id, req.body,"actor");
-        res.json(user);
-    }
-    function UnlikeMovie(req, res){
-        var user = model.unlike(req.params.user_id, req.params.movie_id, "movie");
-        res.json(user);
-    }
-    function UnlikeTV(req, res){
-        var user = model.unlike(req.params.user_id, req.params.tv_id, "tv");
-        res.json(user);
-    }
-    function UnlikeActor(req, res){
-        var user = model.unlike(req.params.user_id, req.params.actor_id, "actor");
-        res.json(user);
-    }
+
 };

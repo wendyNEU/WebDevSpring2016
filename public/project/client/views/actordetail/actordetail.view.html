@@ -1,27 +1,29 @@
-<section class="row" id="actor_detail" ng-controller="ActorDetailController">
-    <div class="col-lg-8 col-lg-offset-2">
-        <div class="modal-body">
-            <!-- Project Details Go Here -->
-            <h2>{{actor.name}}</h2>
-            <p class="item-intro text-muted"></p>
-            <img class="img-responsive img-centered" ng-src="{{veriPosterImg(actor.profile_path)}}" alt="">
-            <h4>{{actor.place_of_birth}}</h4>
-            <p>{{actor.birthday}}</p>
-            <p>{{actor.biography}}</p>
-            <ul class="list-inline social-buttons">
-                <li><a href="#"><i class="fa fa-twitter"></i></a>
-                </li>
-                <li><a href="#"><i class="fa fa-facebook"></i></a>
-                </li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                </li>
-            </ul>
-            <button type="button" class="btn btn-primary">
-                <a href="#/actor_list">Close</a>
-            </button>
+<section id="actor_detail" ng-controller="ActorController">
+    <section>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <!-- Project Details Go Here -->
+                <h2>{{model.actor.name}}</h2>
+                <p class="item-intro text-muted"></p>
+                <img class="img-responsive img-centered" ng-src="{{model.veriPosterImg(model.actor.profile_path)}}" alt="">
+                <h4>{{model.actor.place_of_birth}}</h4>
+                <p>{{model.actor.birthday}}</p>
+                <p>{{model.actor.biography}}</p>
+                <ul class="list-inline social-buttons">
+                    <li><a href="#"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+                <button type="button" class="btn btn-primary">
+                    <a href="#/actor_list/popular">Close</a>
+                </button>
+            </div>
         </div>
-    </div>
-    <section id="tv_comment">
+    </section>
+    <section>
         <div class="container">
             <div class="row" ng-show="model.islogin()">
                 <div class="col-lg-8 col-lg-offset-2">
@@ -29,7 +31,8 @@
                         <h4>Leave Comment:</h4>
                         <form role="form">
                             <div class="form-group">
-                                <textarea class="form-control coment-textarea" rows="3" ng-model="model.commenttext"></textarea>
+                                <textarea class="form-control coment-textarea" rows="3"
+                                          ng-model="model.commenttext"></textarea>
                             </div>
                             <button ng-click="model.addComment()" type="submit" class="btn btn-primary">Submit</button>
                         </form>
@@ -45,8 +48,11 @@
                 <div class="col-lg-7">
                     <div class="panel">
                         <div class="panel-heading">
-                            <strong>{{comment.username}}</strong> <span class="text-muted">Post on {{comment.date}}</span>    <a
-                                class="addComToCom" ng-click="model.activeCommentWell($index)">Add Comment</a>    <a ng-show="model.authPower(comment.user_id)" ng-click="model.deleteComment(comment._id)">Delete Comment</a>
+                            <strong>{{comment.username}}</strong> <span
+                                class="text-muted">Post on {{comment.date}}</span> <a
+                                class="addComToCom" ng-click="model.activeCommentWell($index)">Add Comment</a> <a
+                                ng-show="model.authPower(comment.user_id)" ng-click="model.deleteComment(comment._id)">Delete
+                            Comment</a>
                         </div>
                         <div class="panel-body">
                             {{comment.text}}
@@ -56,9 +62,12 @@
                         <h4>Add Comment:</h4>
                         <form role="form">
                             <div class="form-group">
-                                <textarea ng-model="model.subcommenttext" class="form-control coment-textarea" rows="3"></textarea>
+                                <textarea ng-model="model.subcommenttext" class="form-control coment-textarea"
+                                          rows="3"></textarea>
                             </div>
-                            <button ng-click="model.addSubComment($index)" type="submit" class="btn btn-primary">Submit</button>
+                            <button ng-click="model.addSubComment($index)" type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
                         </form>
                     </div>
                     <div class="row" ng-repeat="subcomment in comment.subcomments">
@@ -71,7 +80,9 @@
                         <div class="col-lg-10">
                             <div class="panel">
                                 <div class="panel-heading">
-                                    <strong>{{subcomment.username}}</strong>    <span class="text-muted">{{subcomment.date}}</span>    <a ng-show="model.authPower(subcomment.user_id)" ng-click="model.deleteSubComment(comment._id,subcomment._id)">Delete Comment</a>
+                                    <strong>{{subcomment.username}}</strong> <span class="text-muted">{{subcomment.date}}</span>
+                                    <a ng-show="model.authPower(subcomment.user_id)"
+                                       ng-click="model.deleteSubComment(comment._id,subcomment._id)">Delete Comment</a>
                                 </div>
                                 <div class="panel-body">
                                     {{subcomment.text}}
@@ -84,3 +95,5 @@
         </div>
     </section>
 </section>
+
+

@@ -8,9 +8,9 @@
     "email": "alice@gmail.com",
     "rules": "student",
     "photo": "",
-    "like_movie": [],
-    "like_tv": [],
-    "like_actor": []
+    "like": [
+      {"tviso_id":"","type":"movie"}
+    ]
   },
   {
     "_id": 234,
@@ -21,9 +21,9 @@
     "email": "bob@gmail.com",
     "rules": "admin",
     "photo": "",
-    "like_movie": [],
-    "like_tv": [],
-    "like_actor": []
+    "like": [
+      {"tviso_id":"","type":"tv"}
+    ]
   },
   {
     "_id": 345,
@@ -34,9 +34,7 @@
     "email": "charlie@gmail.com",
     "rules": "student",
     "photo": "",
-    "like_movie": [],
-    "like_tv": [],
-    "like_actor": []
+    "like": []
   },
   {
     "_id": 456,
@@ -47,9 +45,7 @@
     "email": "dan@gmail.com",
     "rules": "student",
     "photo": "",
-    "like_movie": [],
-    "like_tv": [],
-    "like_actor": []
+    "like": []
   },
   {
     "_id": 567,
@@ -60,8 +56,6 @@
     "email": "ed@gmail.com",
     "rules": "student",
     "photo": "",
-    "like_movie": [],
-    "like_tv": [],
-    "like_actor": []
+    "like": []
   }
 ]

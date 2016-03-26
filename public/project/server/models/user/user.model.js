@@ -69,62 +69,35 @@ module.exports = function() {
         return null;
     }
 
-    function like(userId, tvisojson, type){
+    function like(userId, tvisojson){
+        console.log(userId);
+        console.log(tvisojson);
         for(var u in mock){
             if(mock[u]._id==userId){
-                if(type=="movie"){
-                    for(var i in mock[u].like_movie){
-                        if(mock[u].like_movie[i].tviso_id==tvisojson.tviso_id){
-                            return mock[u];
-                        }
+                for(var i in mock[u].like){
+                    if(mock[u].like[i].tviso_id==tvisojson.tviso_id&&mock[u].like[i].type ==tvisojson.type){
+                        return mock[u].like;
                     }
-                    mock[u].like_movie.push(tvisojson);
-                }else if(type=="tv"){
-                    for(var i in mock[u].like_tv){
-                        if(mock[u].like_tv[i].tviso_id==tvisojson.tviso_id){
-                            return mock[u];
-                        }
-                    }
-                    mock[u].like_tv.push(tvisojson);
-                }else if(type=="actor"){
-                    for(var i in mock[u].like_actor){
-                        if(mock[u].like_actor[i].tviso_id==tvisojson.tviso_id){
-                            return mock[u];
-                        }
-                    }
-                    mock[u].like_actor.push(tvisojson);
-                }else{
-                    return null;
                 }
-                return mock[u];
+                mock[u].like.push(tvisojson);
+                console.log(mock[u]);
+                return mock[u].like;
             }
         }
         return null;
     }
 
-    function unlike(userId, Id, type){
+    function unlike(userId, tviso_id, type){
+        console.log(userId);
+        console.log(tviso_id);
+        console.log(type);
         for(var u in mock){
             if(mock[u]._id==userId){
-                if(type=="movie"){
-                    for(var i in mock[u].like_movie){
-                        if(mock[u].like_movie[i].movie_id==Id){
-                            mock[u].like_movie.splice(i,1);
-                            return mock[u];
-                        }
-                    }
-                }else if(type=="tv"){
-                    for(var i in mock[u].like_tv){
-                        if(mock[u].like_tv[i].tv_id==Id){
-                            mock[u].like_tv.splice(i,1);
-                            return mock[u];
-                        }
-                    }
-                }else if(type=="actor"){
-                    for(var i in mock[u].like_actor){
-                        if(mock[u].like_actor[i].actor_id==Id){
-                            mock[u].like_actor.splice(i,1);
-                            return mock[u];
-                        }
+                for(var i in mock[u].like){
+                    if(mock[u].like[i].tviso_id==tviso_id&&mock[u].like[i].type==type){
+                        mock[u].like.splice(i,1);
+                        console.log(mock[u]);
+                        return mock[u].like;
                     }
                 }
                 break;

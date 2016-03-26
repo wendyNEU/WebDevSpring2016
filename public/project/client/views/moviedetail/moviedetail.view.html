@@ -6,7 +6,7 @@
                     <img class="movie_detail_frame img-responsive" ng-src="{{model.veriPosterImg(model.movie.posterurl)}}">
                 </div>
                 <div class="mv_info col-lg-6">
-                    <h3 class="section-heading">{{model.movie.title}}</h3>
+                    <h3 class="section-heading">{{model.movie.title}}</h3><button class="btn btn-circle-sm btn-primary" ng-show="!model.likeitem&&model.islogin()" ng-click="model.like()"><span class="glyphicon glyphicon-thumbs-up"></span> </button><button class="btn btn-circle-sm btn-primary" ng-show="model.likeitem&&model.islogin()" ng-click="model.unlike()"><span class="glyphicon glyphicon-thumbs-down"></span> </button>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#trailer">Trailer
                     </button>
                     <h4 class="section-heading">{{model.movie.release_date}}</h4>
