@@ -1,7 +1,7 @@
 /**
  * Created by wendy on 3/15/16.
  */
-module.exports = function(app, formModel) {
+module.exports = function(app,userModel,formModel) {
 
     app.get("/api/assignment/user/:userId/form",findFormsBelongToUserById);
     app.get("/api/assignment/form/:formId",findFormById);
