@@ -2,7 +2,7 @@
  * Created by wendy on 3/15/16.
  */
 
-module.exports = function (app,userModel,formModel) {
+module.exports = function (app, userModel, formModel) {
 
     app.post("/api/assignment/user", createUser);
     app.get("/api/assignment/user", findUser);
@@ -15,10 +15,15 @@ module.exports = function (app,userModel,formModel) {
 
     function findUserByCredentials(req, res) {
         var credentials = req.body;
-        console.log(credentials);
-        var user = userModel.findUserByCredentials(credentials);
-        //req.session.curUser = user;
-        res.json(user);
+        userModel.findUserByCredentials(credentials)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function loggedin(req, res) {
@@ -27,44 +32,92 @@ module.exports = function (app,userModel,formModel) {
     }
 
     function logout(req, res) {
-       //req.session.destroy();
+        //req.session.destroy();
         res.send(200);
     }
 
     function createUser(req, res) {
         var user = req.body;
-        user = userModel.createUser(user);
-        //req.session.curUser = user;
-        res.json(user);
+        userModel.createUser(user)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function findUser(req, res) {
         var username = req.param('username');
         var password = req.param('password');
         if (username === undefined || username === null) {
-            var users = userModel.findAllUsers();
-            res.json(users);
+            userModel.findAllUsers()
+                .then(
+                    function (doc) {
+                        res.json(doc);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
         } else if (password === undefined || password === null) {
-            var user1 = userModel.findUserByUsername(username);
-            res.json(user1);
+            userModel.findUserByUsername(username)
+                .then(
+                    function (doc) {
+                        res.json(doc);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
         } else {
-            var user2 = userModel.findUserByCredentials({username: username, password: password});
-            res.json(user2);
+            userModel.findUserByCredentials({username: username, password: password})
+                .then(
+                    function (doc) {
+                        res.json(doc);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
         }
     }
 
     function findUserById(req, res) {
-        var user = userModel.findUserById(req.params.id);
-        res.json(user);
+        userModel.findUserById(req.params.id)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function updateUserById(req, res) {
-        var user = userModel.updateUserById(req.params.id, req.body);
-        res.json(user);
+        userModel.updateUserById(req.params.id, req.body)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 
     function deleteUserById(req, res) {
-        var users = userModel.deleteUserById(req.params.id);
-        res.json(users);
+        userModel.deleteUserById(req.params.id)
+            .then(
+                function (doc) {
+                    res.json(doc);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 };

@@ -81,7 +81,7 @@
         }
 
         function isAdmin(){
-            if(islogin()&&$rootScope.curUser.rules=="admin"){
+            if(islogin()&&$rootScope.curUser.rules!=undefined&&$rootScope.curUser.rules.indexOf("admin")!=-1){
                 return true;
             }else{
                 return false;

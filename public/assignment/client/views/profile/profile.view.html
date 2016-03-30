@@ -8,33 +8,64 @@
             <div class="form-group">
                 <label for="profileusername" class="col-sm-3 control-label">User Name:</label>
                 <div class="col-sm-9">
-                    <input ng-model="model.user.username" type="text" class="form-control" id="profileusername" placeholder="Username">
+                    <input ng-model="model.user.username" type="text" class="form-control" id="profileusername"
+                           placeholder="Username">
                 </div>
             </div>
             <div class="form-group">
                 <label for="profilepassword" class="col-sm-3 control-label">Password:</label>
                 <div class="col-sm-9">
-                    <input ng-model="model.user.password" type="password" class="form-control" id="profilepassword" placeholder="Password">
+                    <input ng-model="model.user.password" type="password" class="form-control" id="profilepassword"
+                           placeholder="Password">
                 </div>
             </div>
             <div class="form-group">
                 <label for="profilefirstname" class="col-sm-3 control-label">First Name:</label>
                 <div class="col-sm-9">
-                    <input ng-model="model.user.firstName" type="text" class="form-control" id="profilefirstname" placeholder="First Name">
+                    <input ng-model="model.user.firstName" type="text" class="form-control" id="profilefirstname"
+                           placeholder="First Name">
                 </div>
             </div>
             <div class="form-group">
                 <label for="profilelastname" class="col-sm-3 control-label">Last Name:</label>
                 <div class="col-sm-9">
-                    <input ng-model="model.user.lastName" type="text" class="form-control" id="profilelastname" placeholder="Last Name">
+                    <input ng-model="model.user.lastName" type="text" class="form-control" id="profilelastname"
+                           placeholder="Last Name">
                 </div>
             </div>
             <div class="form-group">
-                <label for="profileemail" class="col-sm-3 control-label">Email:</label>
-                <div class="col-sm-9">
-                    <input ng-model="model.user.email" type="email" class="form-control" id="profileemail" placeholder="Email">
+                <label for="profileemail" class="col-sm-3 control-label">Emails:</label>
+                <div class="col-sm-6">
+                    <input ng-model="model.email" type="email" class="form-control" id="profileemail"
+                           placeholder="Email">
+                </div>
+                <button class="col-sm-3 btn btn-default btn-info" style="width: 193px;" ng-click="model.addEmail()">Add
+                    Email
+                </button>
+                <br>
+                <div class="col-sm-9 col-sm-offset-3">
+                    <ul class="list-group" ng-repeat="email in model.user.emails">
+                        <li class="list-group-item">{{model.user.emails[$index]}}<button class="pull-right btn btn-xs btn-warning" ng-click="model.deleteEmail($index)"><span class="glyphicon glyphicon-trash"></span></button></li>
+                    </ul>
                 </div>
             </div>
+            <div class="form-group">
+                <label for="profilephone" class="col-sm-3 control-label">Phones:</label>
+                <div class="col-sm-6">
+                    <input ng-model="model.phone" type="text" class="form-control" id="profilephone"
+                           placeholder="Phones">
+                </div>
+                <button class="col-sm-3 btn btn-default btn-info" style="width: 193px;" ng-click="model.addPhone()">Add
+                    Phone
+                </button>
+                <br>
+                <div class="col-sm-9 col-sm-offset-3">
+                    <ul class="list-group" ng-repeat="phone in model.user.phones">
+                        <li class="list-group-item">{{model.user.phones[$index]}}<button class="pull-right btn btn-xs btn-warning" ng-click="model.deletePhone($index)"><span class="glyphicon glyphicon-trash"></span></button></li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="form-group">
                 <div class="col-sm-9 col-sm-offset-3">
                     <button ng-click="model.update()" type="button" class="col-sm-12 btn btn-default btn-info">Update

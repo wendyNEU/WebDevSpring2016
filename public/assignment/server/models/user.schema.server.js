@@ -6,10 +6,11 @@ module.exports = function (mongoose) {
     var UserSchema = mongoose.Schema({
         username: String,
         password: String,
-        firstName: String,
-        lastName: String,
+        firstName: {type:String,default:""},
+        lastName: {type:String,default:""},
         emails: [String],
-        phones: [String]
+        phones: [String],
+        rules: {type:[String],default:["student"]}
     }, {collection: "project.user"});
     return UserSchema;
 };

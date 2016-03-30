@@ -14,6 +14,8 @@
         function init() {
             vm.$location = $location;
             vm.logout = logout;
+            vm.isLogin = isLogin;
+            vm.getUserName = getUserName;
         }
 
         init();
@@ -21,6 +23,18 @@
         function logout() {
             UserService.logout();
             $location.url("/home");
+        }
+
+        function isLogin(){
+            return UserService.islogin();
+        }
+        function getUserName(){
+            var curUser = UserService.getCurrentUser();
+            if(curUser==undefined||curUser==null||curUser.username==undefined){
+                return '';
+            }else{
+                return curUser.username;
+            }
         }
     }
 })();

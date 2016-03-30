@@ -11,6 +11,15 @@
         var vm = this;
 
         function init() {
+            vm.update = update;
+            vm.addEmail = addEmail;
+            vm.deleteEmail = deleteEmail;
+            vm.addPhone = addPhone;
+            vm.deletePhone = deletePhone;
+            vm.user = { "username":"", "password":"","firstName":"","lastName":"","emails":[],"phones":[]};
+            vm.email = "";
+            vm.phone = "";
+
             var deferred = $q.defer();
 
             UserService
@@ -26,7 +35,7 @@
                         $location.url("/home");
                     }
                 });
-            vm.update = update;
+
         }
         init();
 
@@ -46,6 +55,24 @@
                     }
                 });
             return deferred.promise;
+        }
+
+        function addEmail(){
+            vm.user.emails.push(vm.email);
+            vm.email = "";
+        }
+
+        function deleteEmail(index){
+            vm.user.emails.splice(index,1);
+        }
+
+        function addPhone(){
+            vm.user.phones.push(vm.phone);
+            vm.phone="";
+        }
+
+        function deletePhone(index){
+            vm.user.phones.splice(index,1);
         }
 
     }

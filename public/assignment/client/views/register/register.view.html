@@ -8,13 +8,15 @@
             <div class="form-group">
                 <label for="username" class="col-sm-3 control-label">User Name:</label>
                 <div class="col-sm-9">
-                    <input ng-model="model.user.username" type="text" class="form-control" id="username" placeholder="Username">
+                    <input ng-model="model.user.username" type="text" class="form-control" id="username"
+                           placeholder="Username">
                 </div>
             </div>
             <div class="form-group">
                 <label for="password" class="col-sm-3 control-label">Password:</label>
                 <div class="col-sm-9">
-                    <input ng-model="model.user.password" type="password" class="form-control" id="password" placeholder="Password">
+                    <input ng-model="model.user.password" type="password" class="form-control" id="password"
+                           placeholder="Password">
                 </div>
             </div>
             <div class="form-group">
@@ -25,9 +27,41 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="email" class="col-sm-3 control-label">Email:</label>
-                <div class="col-sm-9">
-                    <input ng-model="model.user.email" type="email" class="form-control" id="email" placeholder="Email">
+                <label for="email" class="col-sm-3 control-label">Emails:</label>
+                <div class="col-sm-6">
+                    <input ng-model="model.email" type="email" class="form-control" id="email" placeholder="Email">
+                </div>
+                <button class="col-sm-3 btn btn-default btn-info" style="width: 193px;" ng-click="model.addEmail()">Add
+                    Email
+                </button>
+                <br>
+                <div class="col-sm-9 col-sm-offset-3">
+                    <ul class="list-group" ng-repeat="email in model.user.emails">
+                        <li class="list-group-item">{{model.user.emails[$index]}}
+                            <button class="pull-right btn btn-xs btn-warning" ng-click="model.deleteEmail($index)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="col-sm-3 control-label">Phones:</label>
+                <div class="col-sm-6">
+                    <input ng-model="model.phone" type="text" class="form-control" id="phone" placeholder="Phones">
+                </div>
+                <button class="col-sm-3 btn btn-default btn-info" style="width: 193px;" ng-click="model.addPhone()">Add
+                    Phone
+                </button>
+                <br>
+                <div class="col-sm-9 col-sm-offset-3">
+                    <ul class="list-group" ng-repeat="phone in model.user.phones">
+                        <li class="list-group-item">{{model.user.phones[$index]}}
+                            <button class="pull-right btn btn-xs btn-warning" ng-click="model.deletePhone($index)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="form-group">
