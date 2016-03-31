@@ -90,7 +90,7 @@ module.exports = function(mongoose, db) {
     function deleteFormById(formId){
         var deferred = q.defer();
         FormModel.remove(
-            {_id: new mongodb.ObjectId(formId)},
+            {_id:formId},
             function (err, doc) {
                 if (err) {
                     deferred.reject(err);
@@ -104,7 +104,7 @@ module.exports = function(mongoose, db) {
     function updateFormById(formId,form){
         var deferred = q.defer();
         FormModel.update(
-            {"_id": mongodb.ObjectId(formId)},
+            {"_id": formId},
             form,
             function (err, doc) {
                 if (err) {

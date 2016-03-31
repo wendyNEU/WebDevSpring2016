@@ -95,7 +95,7 @@ module.exports = function (mongoose, db) {
     function updateUserById(userId, user) {
         var deferred = q.defer();
         UserModel.update(
-            {"_id": mongodb.ObjectId(userId)},
+            {"_id": userId},
             user,
             function (err, doc) {
                 if (err) {
@@ -110,7 +110,7 @@ module.exports = function (mongoose, db) {
     function deleteUserById(userId) {
         var deferred = q.defer();
         UserModel.remove(
-            {_id: new mongodb.ObjectId(userId)},
+            {_id: userId},
             function (err, doc) {
                 if (err) {
                     deferred.reject(err);
