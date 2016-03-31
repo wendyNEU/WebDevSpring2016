@@ -46,10 +46,10 @@
         }
 
         function createFormForUser() {
-            vm.newform.userId = UserService.getCurrentUser()._id;
+            var userId = UserService.getCurrentUser()._id;
             var deferred = $q.defer();
             FormService
-                .createFormForUser(vm.newform.userId, vm.newform)
+                .createFormForUser(userId, vm.newform)
                 .then(function (response) {
                     var form = response.data;
                     if (form) {
@@ -84,11 +84,9 @@
 
         function deleteForm(index) {
             var deferred = $q.defer();
-            FormService
-                .deleteFormById(vm.forms[index]._id)
+            FormService.deleteFormById(vm.forms[index]._id)
                 .then(function (response) {
-                    var forms = response.data;
-                    if (forms) {
+                    if (response.status==200) {
                         vm.newform = {title: " "};
                         vm.findAllFormsForUser();
                         deferred.resolve();

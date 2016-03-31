@@ -8,10 +8,10 @@ module.exports = function (mongoose) {
         type: {
             type: String,
             default: "TEXT",
-            enum: ["TEXT", "EMAIL", "PASSWORD", "OPTIONS", "DATE", "RADIOS", "CHECKBOXES"]
+            enum: ["TEXT", "EMAIL", "TEXTAREA","PASSWORD", "OPTIONS", "DATE", "RADIOS", "CHECKBOXES"]
         },
         placeholder: String,
-        options: [{label: String, value: String}]
-    }, {collection: "project.field"});
+        options: {type:[{label: String, value: String}],default:[]}
+    }, {collection: "field"});
     return FieldSchema;
 };

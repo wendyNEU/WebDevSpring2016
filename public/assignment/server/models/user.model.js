@@ -110,7 +110,7 @@ module.exports = function (mongoose, db) {
 
     function deleteUserById(userId) {
         var deferred = q.defer();
-        UserModel.findOneAndDelete(
+        UserModel.remove(
             {_id: new mongodb.ObjectId(userId)},
             function (err, doc) {
                 if (err) {

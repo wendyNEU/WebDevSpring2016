@@ -16,7 +16,7 @@
         };
 
         function createFormForUser(userId, form) {
-            return $http.post("/api/assignment/user/"+userId+"/form",form);
+            return $http.post("/api/assignment/form/"+userId,form);
         }
 
         function findAllFormsForUser(userId) {

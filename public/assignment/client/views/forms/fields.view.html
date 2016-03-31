@@ -78,6 +78,10 @@
                                                 <label class="form-control-label">{{field.label}}:</label>
                                                 <input type="email" placeholder="{{field.placeholder}}" class="form-control">
                                             </div>
+                                            <div ng-switch-when="PASSWORD">
+                                                <label class="form-control-label">{{field.label}}:</label>
+                                                <input type="password" placeholder="{{field.placeholder}}" class="form-control">
+                                            </div>
                                             <div ng-switch-when="DATE">
                                                 <label class="form-control-label">{{field.label}}:</label>
                                                 <input type="date" class="form-control">
