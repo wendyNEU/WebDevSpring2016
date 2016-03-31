@@ -103,10 +103,9 @@ module.exports = function(mongoose, db) {
 
     function updateFormById(formId,form){
         var deferred = q.defer();
-        FormModel.findOneAndUpdate(
+        FormModel.update(
             {"_id": mongodb.ObjectId(formId)},
-            {$set: form},
-            { new: true },
+            form,
             function (err, doc) {
                 if (err) {
                     deferred.reject(err);

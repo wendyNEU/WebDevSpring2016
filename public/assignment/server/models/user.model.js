@@ -94,10 +94,9 @@ module.exports = function (mongoose, db) {
 
     function updateUserById(userId, user) {
         var deferred = q.defer();
-        UserModel.findOneAndUpdate(
+        UserModel.update(
             {"_id": mongodb.ObjectId(userId)},
-            {$set: user},
-            { new: true },
+            user,
             function (err, doc) {
                 if (err) {
                     deferred.reject(err);

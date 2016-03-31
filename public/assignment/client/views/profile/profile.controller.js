@@ -11,6 +11,7 @@
         var vm = this;
 
         function init() {
+            vm.loadCurUser = loadCurUser;
             vm.update = update;
             vm.addEmail = addEmail;
             vm.deleteEmail = deleteEmail;
@@ -19,9 +20,12 @@
             vm.user = { "username":"", "password":"","firstName":"","lastName":"","emails":[],"phones":[]};
             vm.email = "";
             vm.phone = "";
+            vm.loadCurUser();
+        }
+        init();
 
+        function loadCurUser(){
             var deferred = $q.defer();
-
             UserService
                 .getProfile()
                 .then(function(response) {
@@ -35,19 +39,16 @@
                         $location.url("/home");
                     }
                 });
-
         }
-        init();
 
         function update(){
             var deferred = $q.defer();
             UserService
                 .updateUser(vm.user._id,vm.user)
                 .then(function(response) {
-                    var curUser = response.data;
-                    if(curUser) {
-                        UserService.setCurrentUser(curUser);
-                        vm.user = curUser;
+                    console.log(response.data);
+                    if(response.data.ok==1) {
+                        vm.loadCurUser();
                         deferred.resolve();
                     } else {
                         alert("Update Profile Failed");
