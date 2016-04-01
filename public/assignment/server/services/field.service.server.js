@@ -3,7 +3,6 @@
  */
 module.exports = function(app,userModel,formModel) {
     app.get("/api/assignment/form/:formId/field",getFieldsByFormId);
-    app.get("/api/assignment/form/:formId/field/:fieldId",getFieldByFormFieldId);
     app.delete("/api/assignment/form/:formId/field/:fieldId",deleteFieldByFormFieldId);
     app.post("/api/assignment/form/:formId/field",createFieldByFormFieldId);
     app.put("/api/assignment/form/:formId/field/:fieldId",updateFieldByFormFieldId);
@@ -34,6 +33,8 @@ module.exports = function(app,userModel,formModel) {
     }
 
     function deleteFieldByFormFieldId(req,res){
+        console.log("server service");
+        console.log(req.params.fieldId);
         formModel.deleteFieldByFormFieldId(req.params.formId, req.params.fieldId)
         .then(
                 function (doc) {

@@ -106,7 +106,6 @@
                 .then(function (response) {
                     var fields = response.data;
                     if (fields) {
-                        console.log(fields);
                         vm.fields = fields;
                         deferred.resolve();
                     } else {
@@ -122,9 +121,8 @@
             FieldService
                 .deleteFieldFromForm($routeParams.formId, fieldId)
                 .then(function (response) {
-                    var fields = response.data;
-                    if (fields) {
-                        vm.fields = fields;
+                    if (response.status==200) {
+                        vm.findAllFieldsByFormId();
                         deferred.resolve();
                     } else {
                         deferred.reject();

@@ -155,6 +155,7 @@ module.exports = function(mongoose, db) {
 
     function deleteFieldByFormFieldId(formId,fieldId){
         var deferred = q.defer();
+        console.log(fieldId);
         FormModel.findById(
             formId,
             function (err, form) {

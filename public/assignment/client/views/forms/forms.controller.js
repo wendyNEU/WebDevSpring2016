@@ -87,6 +87,7 @@
 
         function deleteForm(index) {
             var deferred = $q.defer();
+            console.log(vm.forms[index]._id);
             FormService.deleteFormById(vm.forms[index]._id)
                 .then(function (response) {
                     if (response.status==200) {
