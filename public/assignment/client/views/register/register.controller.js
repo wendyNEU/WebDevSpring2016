@@ -23,7 +23,6 @@
         init();
 
         function register(){
-            console.log(vm.user);
             UserService.createUser(vm.user)
                 .then(function(response){
                     var currentUser = response.data;

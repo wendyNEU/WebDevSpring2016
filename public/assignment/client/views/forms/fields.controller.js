@@ -50,7 +50,6 @@
                     var fields = response.data;
                     if (fields) {
                         vm.fields = fields;
-                        console.log(vm.fields);
                         deferred.resolve();
                     } else {
                         deferred.reject();

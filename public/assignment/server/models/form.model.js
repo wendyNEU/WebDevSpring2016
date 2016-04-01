@@ -63,8 +63,6 @@ module.exports = function(mongoose, db) {
                 if (err) {
                     deferred.reject(err);
                 } else {
-                    console.log("findFormsBelongToUserById");
-                    console.log(doc);
                     deferred.resolve(doc);
                 }
             });
@@ -79,8 +77,6 @@ module.exports = function(mongoose, db) {
                 if (err) {
                     deferred.reject(err);
                 } else {
-                    console.log("findFormById");
-                    console.log(doc);
                     deferred.resolve(doc);
                 }
             });
@@ -124,8 +120,6 @@ module.exports = function(mongoose, db) {
                 if (err) {
                     deferred.reject(err);
                 } else {
-                    console.log("getFieldsByFormId");
-                    console.log(doc);
                     deferred.resolve(doc.fields);
                 }
             });
@@ -145,8 +139,6 @@ module.exports = function(mongoose, db) {
                 if (err) {
                     deferred.reject(err);
                 } else {
-                    console.log("getFieldByFormFieldId");
-                    console.log(doc);
                     deferred.resolve(doc);
                 }
             });
@@ -155,18 +147,15 @@ module.exports = function(mongoose, db) {
 
     function deleteFieldByFormFieldId(formId,fieldId){
         var deferred = q.defer();
-        console.log(fieldId);
         FormModel.findById(
             formId,
             function (err, form) {
                 if (err) {
                     deferred.reject(err);
                 } else {
-                    console.log("deleteFieldByFormFieldId");
                     form.fields.id(fieldId).remove();
                     form.save(function (err) {
                         if (!err){
-                            console.log(form.fields);
                             deferred.resolve(form.fields);
                         }else{
                             deferred.reject(err);
@@ -185,11 +174,9 @@ module.exports = function(mongoose, db) {
                 if (err) {
                     deferred.reject(err);
                 } else {
-                    console.log("createFieldByFormFieldId");
                     form.fields.push(field);
                     form.save(function (err) {
                         if (!err){
-                            console.log(form.fields);
                             deferred.resolve(form.fields);
                         }else{
                             deferred.reject(err);
@@ -208,7 +195,6 @@ module.exports = function(mongoose, db) {
                 if (err) {
                     deferred.reject(err);
                 } else {
-                    console.log("updateFieldByFormFieldId");
                     for(var i=0;i<form.fields.length;i++){
                         if(form.fields[i]._id==fieldId){
                             form.fields.splice(i,1,field);
@@ -217,7 +203,6 @@ module.exports = function(mongoose, db) {
                     }
                     form.save(function (err) {
                         if (!err){
-                            console.log(form.fields);
                             deferred.resolve(form.fields);
                         }else{
                             deferred.reject(err);
@@ -239,7 +224,6 @@ module.exports = function(mongoose, db) {
                     form.fields = fields;
                     form.save(function (err) {
                         if (!err){
-                            console.log(form.fields);
                             deferred.resolve(form.fields);
                         }else{
                             deferred.reject(err);

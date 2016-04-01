@@ -33,8 +33,6 @@ module.exports = function(app,userModel,formModel) {
     }
 
     function deleteFieldByFormFieldId(req,res){
-        console.log("server service");
-        console.log(req.params.fieldId);
         formModel.deleteFieldByFormFieldId(req.params.formId, req.params.fieldId)
         .then(
                 function (doc) {

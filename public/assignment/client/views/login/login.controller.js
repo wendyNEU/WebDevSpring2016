@@ -21,7 +21,6 @@
             if (!vm.user) return;
             UserService.findUserByCredentials(vm.user.username, vm.user.password)
                 .then(function (response) {
-                    console.log(response.data);
                     if (response.data == null) {
                         alert("login fail");
                     }
