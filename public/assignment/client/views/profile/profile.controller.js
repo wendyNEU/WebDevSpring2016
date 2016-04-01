@@ -43,8 +43,13 @@
 
         function update(){
             var deferred = $q.defer();
+            var updateUser = jQuery.extend({}, vm.user);
+            if(updateUser.hasOwnProperty('_id')){
+                delete updateUser._id;
+            }
+            console.log(updateUser);
             UserService
-                .updateUser(vm.user._id,vm.user)
+                .updateUser(vm.user._id,updateUser)
                 .then(function(response) {
                     console.log(response.data);
                     if(response.data.ok==1) {

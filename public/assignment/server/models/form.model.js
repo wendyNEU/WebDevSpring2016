@@ -105,7 +105,7 @@ module.exports = function(mongoose, db) {
         var deferred = q.defer();
         FormModel.update(
             {"_id": formId},
-            form,
+            {"$set":form},
             function (err, doc) {
                 if (err) {
                     deferred.reject(err);
