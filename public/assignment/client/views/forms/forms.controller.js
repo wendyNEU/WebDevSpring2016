@@ -66,11 +66,14 @@
 
         function updateForm() {
             var deferred = $q.defer();
+            var updateForm = jQuery.extend({}, vm.newform);
+            if(updateForm.hasOwnProperty('_id')){
+                delete updateForm._id;
+            }
             FormService
-                .updateFormById(vm.newform._id, vm.newform)
+                .updateFormById(vm.newform._id, updateForm)
                 .then(function (response) {
-                    var forms = response.data;
-                    if (forms) {
+                    if(response.data.ok==1){
                         vm.newform = {title: " "};
                         vm.findAllFormsForUser();
                         deferred.resolve();

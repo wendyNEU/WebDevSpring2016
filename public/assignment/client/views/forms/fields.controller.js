@@ -34,7 +34,7 @@
             }, {"type": "CHECKBOXES", "text": "Checkboxes Field"}];
             vm.fieldType = vm.fieldTypes[0].type;
             vm.updateFields = updateFields;
-            findAllFieldsByFormId();
+            vm.findAllFieldsByFormId();
         }
 
         init();
@@ -176,15 +176,16 @@
             }
 
             var deferred = $q.defer();
+            var updateField = jQuery.extend({}, vm.curField);
+            if(updateField.hasOwnProperty('_id')){
+                delete updateField._id;
+            }
 
             FieldService
-                .updateField($routeParams.formId, vm.curField._id, vm.curField)
+                .updateField($routeParams.formId, vm.curField._id, updateField)
                 .then(function (response) {
-                    var fields = response.data;
-                    if (fields) {
-                        console.log("return");
-                        vm.fields = fields;
-                        console.log(vm.fields);
+                    if(response.data.ok==1){
+                        vm.findAllFieldsByFormId();
                         deferred.resolve();
                     } else {
                         deferred.reject();
