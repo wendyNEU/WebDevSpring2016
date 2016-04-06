@@ -6,7 +6,11 @@
                     <img class="movie_detail_frame img-responsive" ng-src="{{model.veriPosterImg(model.movie.posterurl)}}">
                 </div>
                 <div class="mv_info col-lg-6">
-                    <h3 class="section-heading">{{model.movie.title}}</h3><button class="btn btn-circle-sm btn-primary" ng-show="!model.likeitem&&model.islogin()" ng-click="model.like()"><span class="glyphicon glyphicon-thumbs-up"></span> </button><button class="btn btn-circle-sm btn-primary" ng-show="model.likeitem&&model.islogin()" ng-click="model.unlike()"><span class="glyphicon glyphicon-thumbs-down"></span> </button>
+                    <h3 class="section-heading">{{model.movie.title}}</h3>
+                    <button class="btn btn-circle-sm btn-primary" ng-show="!model.likeitem&&model.islogin()"
+                            ng-click="model.like()"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+                    <button class="btn btn-circle-sm btn-primary" ng-show="model.likeitem&&model.islogin()"
+                            ng-click="model.unlike()"><span class="glyphicon glyphicon-thumbs-down"></span></button>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#trailer">Trailer
                     </button>
                     <h4 class="section-heading">{{model.movie.release_date}}</h4>
@@ -32,7 +36,8 @@
                         <h4>Leave Comment:</h4>
                         <form role="form">
                             <div class="form-group">
-                                <textarea class="form-control coment-textarea" rows="3" ng-model="model.commenttext"></textarea>
+                                <textarea class="form-control coment-textarea" rows="3"
+                                          ng-model="model.commenttext"></textarea>
                             </div>
                             <button ng-click="model.addComment()" type="submit" class="btn btn-primary">Submit</button>
                         </form>
@@ -48,8 +53,11 @@
                 <div class="col-lg-7">
                     <div class="panel">
                         <div class="panel-heading">
-                            <strong>{{comment.username}}</strong> <span class="text-muted">Post on {{comment.date}}</span>    <a
-                                class="addComToCom" ng-click="model.activeCommentWell($index)">Add Comment</a>    <a ng-show="model.authPower(comment.user_id)" ng-click="model.deleteComment(comment._id)">Delete Comment</a>
+                            <strong>{{comment.username}}</strong> <span
+                                class="text-muted">Post on {{comment.date}}</span> <a
+                                class="addComToCom" ng-click="model.activeCommentWell($index)">Add Comment</a> <a
+                                ng-show="model.authPower(comment.user_id)" ng-click="model.deleteComment(comment._id)">Delete
+                            Comment</a>
                         </div>
                         <div class="panel-body">
                             {{comment.text}}
@@ -59,9 +67,12 @@
                         <h4>Add Comment:</h4>
                         <form role="form">
                             <div class="form-group">
-                                <textarea ng-model="model.subcommenttext" class="form-control coment-textarea" rows="3"></textarea>
+                                <textarea ng-model="model.subcommenttext" class="form-control coment-textarea"
+                                          rows="3"></textarea>
                             </div>
-                            <button ng-click="model.addSubComment($index)" type="submit" class="btn btn-primary">Submit</button>
+                            <button ng-click="model.addSubComment($index)" type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
                         </form>
                     </div>
                     <div class="row" ng-repeat="subcomment in comment.subcomments">
@@ -74,7 +85,9 @@
                         <div class="col-lg-10">
                             <div class="panel">
                                 <div class="panel-heading">
-                                    <strong>{{subcomment.username}}</strong>    <span class="text-muted">{{subcomment.date}}</span>    <a ng-show="model.authPower(subcomment.user_id)" ng-click="model.deleteSubComment(comment._id,subcomment._id)">Delete Comment</a>
+                                    <strong>{{subcomment.username}}</strong> <span class="text-muted">{{subcomment.date}}</span>
+                                    <a ng-show="model.authPower(subcomment.user_id)"
+                                       ng-click="model.deleteSubComment(comment._id,subcomment._id)">Delete Comment</a>
                                 </div>
                                 <div class="panel-body">
                                     {{subcomment.text}}
@@ -91,6 +104,11 @@
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
+                <div class="modal-header">
+                    <button data-dismiss="modal" class="close" type="button">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:white"></span>
+                    </button>
+                </div>
                 <div class="modal-body">
                     <div id="myCarousel" class="carousel slide">
                         <ol class="carousel-indicators" ng-repeat="video in model.movie.video">
