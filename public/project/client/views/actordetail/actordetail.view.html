@@ -8,10 +8,10 @@
 
         <div class="content">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <figure class="movie-poster"><img ng-src="{{model.veriPosterImg(model.actor.profile_path)}}"></figure>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <h2 class="movie-title">{{model.actor.name}}</h2>
                     <div class="movie-summary">
                         <p>{{model.actor.biography}}</p>
@@ -19,7 +19,14 @@
 
                     <ul class="movie-meta">
                         <li>
-                            <button class="btn btn-circle-sm btn-primary" ng-show="!model.likeitem&&model.islogin()" ng-click="model.like()"><span class="glyphicon glyphicon-thumbs-up"></span> </button><button class="btn btn-circle-sm btn-primary" ng-show="model.likeitem&&model.islogin()" ng-click="model.unlike()"><span class="glyphicon glyphicon-thumbs-down"></span> </button>
+                            <button class="btn btn-circle-sm btn-info" ng-show="!model.likeitem&&model.islogin()"
+                                    ng-click="model.like()"><span class="glyphicon glyphicon-thumbs-up"></span>
+                                <span class="label-icon">Like</span>
+                            </button>
+                            <button class="btn btn-circle-sm btn-info" ng-show="model.likeitem&&model.islogin()"
+                                    ng-click="model.unlike()"><span class="glyphicon glyphicon-thumbs-down"></span>
+                                <span class="label-icon">Unlike</span>
+                            </button>
                         </li>
                         <li><strong>Gender: </strong>{{model.actor.gender}}</li>
                         <li><strong>Place Of Birth: </strong> {{model.actor.place_of_birth}} </li>
@@ -40,7 +47,7 @@
                                 <textarea class="form-control coment-textarea" rows="3"
                                           ng-model="model.commenttext"></textarea>
                                 </div>
-                                <button ng-click="model.addComment()" type="submit" class="btn btn-primary">Submit</button>
+                                <button ng-click="model.addComment()" type="submit" class="btn btn-info">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -71,7 +78,7 @@
                                 <textarea ng-model="model.subcommenttext" class="form-control coment-textarea"
                                           rows="3"></textarea>
                                 </div>
-                                <button ng-click="model.addSubComment($index)" type="submit" class="btn btn-primary">
+                                <button ng-click="model.addSubComment($index)" type="submit" class="btn btn-info">
                                     Submit
                                 </button>
                             </form>

@@ -254,7 +254,7 @@
         }
         function arrayToString(arr){
             var str = "";
-            for(var i = 0;i<arr.length;i++){
+            for(var i in arr){
                 str = str+arr[i].name+" | ";
             }
             return str.substring(0,str.length-2);
