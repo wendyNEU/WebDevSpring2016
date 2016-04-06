@@ -1,79 +1,43 @@
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-fixed-top" ng-controller="HeaderController as model">
+<header class="site-header" ng-controller="HeaderController as model">
     <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand page-scroll" href="#page-top">Movie Fans</a>
+        <a href="index.html" id="branding">
+            <img src="images/logo.png" alt="" class="logo">
+            <div class="logo-copy">
+                <h1 class="site-title">Movie Fans</h1>
+                <small class="site-description">Entertainment Club</small>
+            </div>
+        </a> <!-- #branding -->
 
-            <form class="navbar-form navbar-search" role="search">
-                <div class="input-group">
-                    <input type="text" class="form-control" ng-model="model.keyword">
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-search"></span>
-                            <span class="label-icon">Search</span>
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu pull-right" role="menu">
-                            <li>
-                                <a href="#/movie_list/search/{{model.keyword}}">
-                                    <span class="glyphicon glyphicon-facetime-video"></span>
-                                    <span class="label-icon">Search By Movie</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#/tv_list/search/{{model.keyword}}">
-                                    <span class="glyphicon glyphicon-blackboard"></span>
-                                    <span class="label-icon">Search By TV</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#/actor_list/search/{{model.keyword}}">
-                                    <span class="glyphicon glyphicon-user"></span>
-                                    <span class="label-icon">Search By Actor</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li ng-class="{'active': model.isMovieLink()}">
-                    <a class="page-scroll" href="#/movie_list/popular">Movie</a>
+        <div class="main-navigation">
+            <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+            <ul class="menu">
+                <li class="menu-item" ng-class="{'active': model.isMovieLink()}">
+                    <a class="page-scroll" href="#/movie_list">Movie</a>
                 </li>
-                <li ng-class="{'active': model.isTvLink()}">
-                    <a class="page-scroll" href="#/tv_list/popular">TV</a>
+                <li class="menu-item" ng-class="{'active': model.isTvLink()}">
+                    <a class="page-scroll" href="#/tv_list">TV</a>
                 </li>
-                <li ng-class="{'active': model.isActorLink()}">
-                    <a class="page-scroll" href="#/actor_list/popular">Actor</a>
+                <li class="menu-item" ng-class="{'active': model.isActorLink()}">
+                    <a class="page-scroll" href="#/actor_list">Actor</a>
                 </li>
-                <li ng-class="{'active': model.$location.url() == '/register'}" ng-hide="model.islogin()">
+                <li class="menu-item" ng-class="{'active': model.$location.url() == '/register'}" ng-hide="model.islogin()">
                     <a class="page-scroll" href="#/register">Register</a>
                 </li>
-                <li ng-class="{'active': model.$location.url() == '/login'}" ng-hide="model.islogin()">
+                <li class="menu-item" ng-class="{'active': model.$location.url() == '/login'}" ng-hide="model.islogin()">
                     <a class="page-scroll" href="#/login">Log In</a>
                 </li>
-                <li ng-class="{'active': model.$location.url() == '/profile'}" ng-show="model.islogin()">
+                <li class="menu-item" ng-class="{'active': model.$location.url() == '/profile'}" ng-show="model.islogin()">
                     <a class="page-scroll" href="#/profile">{{curUser.username}}</a>
                 </li>
-                <li ng-class="{'active': model.$location.url() == '/admin'}" ng-show="model.isAdmin()">
+                <li class="menu-item" ng-class="{'active': model.$location.url() == '/admin'}" ng-show="model.isAdmin()">
                     <a class="page-scroll" href="#/admin">Admin</a>
                 </li>
-                <li ng-class="{'active': model.$location.url() == '/logout'}" ng-show="model.islogin()">
+                <li class="menu-item" ng-class="{'active': model.$location.url() == '/logout'}" ng-show="model.islogin()">
                     <a class="page-scroll" ng-click="model.logout()" href="#/logout">Log Out</a>
                 </li>
-            </ul>
-        </div>
+            </ul> <!-- .menu -->
+
+        </div> <!-- .main-navigation -->
+        <div class="mobile-navigation"></div>
     </div>
-</nav>
+</header>

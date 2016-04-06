@@ -17,6 +17,7 @@
         function init(){
             vm.image_base_url = 'http://image.tmdb.org/t/p';
             vm.poster_size='/w500';
+            vm.profile_size ='/w300'
             vm.currentActiveComment = -1;
             vm.commenttext = '';
             vm.subcommenttext ='';
@@ -34,6 +35,8 @@
             vm.loadLike = loadLike;
             vm.like = like;
             vm.unlike = unlike;
+            vm.arrayToString = arrayToString;
+            vm.genProfilePath = genProfilePath;
             vm.getTvById($routeParams.id);
         }
 
@@ -44,6 +47,7 @@
                 if (resp === undefined) {
                     alert("Item you are trying to search could not be found");
                 } else {
+                    console.log(resp);
                     vm.tv = resp;
                     if(!(vm.tv.poster_path===undefined||vm.tv.poster_path===''))
                         vm.tv.posterurl = vm.image_base_url + vm.poster_size + vm.tv.poster_path;
@@ -165,7 +169,7 @@
 
         function veriPosterImg(imageurl){
             if(imageurl==undefined||imageurl===null){
-                return './img/noposter.png';
+                return './images/noposter.png';
             }else{
                 return imageurl;
             }
@@ -244,6 +248,16 @@
                     });
                 }
             });
+        }
+        function genProfilePath(path){
+            return vm.image_base_url + vm.profile_size + path;
+        }
+        function arrayToString(arr){
+            var str = "";
+            for(var i = 0;i<arr.length;i++){
+                str = str+arr[i].name+" | ";
+            }
+            return str.substring(0,str.length-2);
         }
 
     }

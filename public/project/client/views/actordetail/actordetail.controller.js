@@ -31,6 +31,7 @@
             vm.loadLike = loadLike;
             vm.like = like;
             vm.unlike = unlike;
+            vm.arrayToString = arrayToString;
             vm.getActorById($routeParams.id);
         }
 
@@ -44,7 +45,7 @@
                     vm.actor = resp;
                     if(!(vm.actor.profile_path===undefined||vm.actor.profile_path===''))
                         vm.actor.profile_path = vm.image_base_url + vm.poster_size + vm.actor.profile_path;
-
+                    console.log(vm.actor);
                     vm.getCommentSet();
                     vm.loadLike();
                 }
@@ -152,7 +153,7 @@
 
         function veriPosterImg(imageurl){
             if(imageurl==undefined||imageurl===null){
-                return './img/actor/Nophoto.jpg';
+                return './images/Nophoto.jpg';
             }else{
                 return imageurl;
             }
@@ -231,6 +232,14 @@
                     });
                 }
             });
+        }
+
+        function arrayToString(arr){
+            var str = "";
+            for(var i = 0;i<arr.length;i++){
+                str = str+arr[i]+" | ";
+            }
+            return str.substring(0,str.length-2);
         }
 
     }

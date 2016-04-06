@@ -58,7 +58,6 @@
         }
 
         function updateUser(userId, user) {
-            console.log(user);
             return $http.put("/api/project/user/"+userId,user);
         }
 

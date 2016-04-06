@@ -1,79 +1,55 @@
-<section id="actor_list" ng-controller="ActorController">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" ng-class="{active: model.$route.current.activetab == 'popular'}"><a href="#/actor_list/popular" role="tab" data-toggle="tab">Popular</a></li>
-                <li role="presentation" ng-class="{active: model.$route.current.activetab == 'search'}"><a href="#/actor_list/search/*" role="tab" data-toggle="tab">Search</a></li>
-            </ul>
-
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane" ng-class="{active: model.$route.current.activetab == 'popular'}" id="popular">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <h2 class="section-heading"></h2>
-                                <h3 class="section-subheading text-muted"></h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div ng-repeat="actor in model.popularperson">
-                                <div class="clearfix" ng-if="$index<actors.length&&$index % 4 == 0"></div>
-                                <div class="col-sm-3">
-                                    <div class="actor">
-                                        <a href="#/actor_detail/{{actor.id}}">
-                                        <img ng-src="{{model.veriPosterImg(actor.profile_path)}}" class="img-responsive img-circle" alt="">
-                                        </a>
-                                        <h4 class="sub-header" align="center" style="color:rgba(254, 209, 54, .9);">{{actor.name}}</h4>
-                                        <p class="text-muted"></p>
-                                        <ul class="list-inline social-buttons">
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<div class="container" ng-controller="ActorController">
+    <div class="page">
+        <div class="breadcrumbs">
+            <a href="#/home">Home</a>
+            <span>Actor Review</span>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="filters">
+                    <select ng-model="model.selectedfilter" ng-change="model.changefilter(model.selectedfilter)"
+                            data-ng-options="filter as filter.label for filter in model.Filters">
+                    </select>
                 </div>
-                <div role="tabpanel" class="tab-pane" ng-class="{active: model.$route.current.activetab == 'search'}" id="search">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <h2 class="section-heading"></h2>
-                                <h3 class="section-subheading text-muted"></h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div ng-repeat="actor in model.searchperson">
-                                <div class="clearfix" ng-if="$index<actors.length&&$index % 4 == 0"></div>
-                                <div class="col-sm-3">
-                                    <div class="actor">
-                                        <a href="#/actor_detail/{{actor.id}}">
-                                        <img ng-src="{{model.veriPosterImg(actor.profile_path)}}" class="img-responsive img-circle" alt="">
-                                        </a>
-                                        <h4 class="sub-header" align="center" style="color:rgba(254, 209, 54, .9);">{{actor.name}}</h4>
-                                        <p class="text-muted"></p>
-                                        <ul class="list-inline social-buttons">
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                                            </li>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+            </div>
+            <div class="col-lg-6">
+                <form style="text-align: right">
+                    <input ng-model="model.keyword" placeholder="search movie">
+                    <button type="button" class="btn" ng-click="model.searchActor(model.keyword,1)">
+                        <span class="glyphicon glyphicon-search"></span>
+                        <span class="label-icon">Search</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div ng-repeat="actor in model.actorlist">
+                <div class="clearfix" ng-if="$index<actors.length&&$index % 4 == 0"></div>
+                <div class="col-md-3">
+                    <div class="team">
+                        <a href="#/actor_detail/{{actor.id}}">
+                        <figure class="team-image"><img ng-src="{{model.veriPosterImg(actor.profile_path)}}"></figure>
+                        </a>
+                        <h2 class="team-name">{{actor.name}}</h2>
+                        <div class="social-links">
+                            <a href="" class="facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="" class="twitter"><i class="fa fa-twitter"></i></a>
+                            <a href="" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                            <a href="" class="pinterest"><i class="fa fa-pinterest"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div> <!-- .movie-list -->
+
+    <div class="pagination">
+        <a href="#" class="page-number prev"><i class="fa fa-angle-left"></i></a>
+        <span class="page-number current">1</span>
+        <a href="#" class="page-number">2</a>
+        <a href="#" class="page-number">3</a>
+        <a href="#" class="page-number">4</a>
+        <a href="#" class="page-number">5</a>
+        <a href="#" class="page-number next"><i class="fa fa-angle-right"></i></a>
     </div>
-</section>
+</div>

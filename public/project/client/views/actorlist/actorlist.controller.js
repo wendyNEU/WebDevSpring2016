@@ -15,9 +15,22 @@
             vm.$route = $route;
             vm.image_base_url = 'http://image.tmdb.org/t/p';
             vm.poster_size = '/w185';
+            vm.keyword = "";
+            vm.Filters = [
+                {"value":"popular","label":"Popular"},
+                {"value":"search","label":"Search"}
+            ];
+            vm.selectedfilter = vm.Filters[0];
+            vm.actorlist = [];
+            vm.getPopular = getPopular;
             vm.veriPosterImg = veriPosterImg;
             vm.searchActor = searchActor;
+            vm.changefilter = changefilter;
+            vm.getPopular();
+        }
+        init();
 
+        function getPopular(){
             ActorService.findPopularPerson(1)
                 .then(function (resp) {
                     if (resp === undefined) {
@@ -25,20 +38,15 @@
                     } else if (resp.length === 0) {
                         alert("Item you are trying to search could not be found");
                     } else {
-                        vm.popularperson = resp.results;
+                        vm.actorlist = resp.results;
 
                         for (i = 0; i < resp.results.length; i++) {
-                            if (vm.popularperson[i].profile_path != null && vm.popularperson[i].profile_path !== '')
-                                vm.popularperson[i].profile_path = vm.image_base_url + vm.poster_size + vm.popularperson[i].profile_path;
+                            if (vm.actorlist[i].profile_path != null && vm.actorlist[i].profile_path !== '')
+                                vm.actorlist[i].profile_path = vm.image_base_url + vm.poster_size + vm.actorlist[i].profile_path;
                         }
                     }
                 });
-            if($routeParams.keyword!==undefined){
-                vm.searchActor($routeParams.keyword,1);
-            }
-
         }
-        init();
 
         function searchActor(title, page) {
             ActorService.searchPersonByName(title, page)
@@ -49,11 +57,12 @@
                         alert("Item you are trying to search could not be found");
                         $location.path("/home");
                     } else {
-                        vm.searchperson = resp.results;
-                        console.log(vm.searchperson);
-                        for (i = 0; i < resp.results.length; i++) {
-                            if (vm.searchperson[i].profile_path != null && vm.searchperson[i].profile_path !== '')
-                                vm.searchperson[i].profile_path = vm.image_base_url + vm.poster_size + vm.searchperson[i].profile_path;
+                        vm.selectedfilter = vm.Filters[1];
+                        vm.keyword = "";
+                        vm.actorlist = resp.results;
+                        for (var i = 0; i < resp.results.length; i++) {
+                            if (vm.actorlist[i].profile_path != null && vm.actorlist[i].profile_path !== '')
+                                vm.actorlist[i].profile_path = vm.image_base_url + vm.poster_size + vm.actorlist[i].profile_path;
                         }
                     }
                 });
@@ -61,9 +70,17 @@
 
         function veriPosterImg(imageurl) {
             if (imageurl == undefined || imageurl === null) {
-                return './img/actor/Nophoto.jpg';
+                return './images/Nophoto.jpg';
             } else {
                 return imageurl;
+            }
+        }
+
+        function changefilter(filtervalue){
+            if(filtervalue.value=='popular'){
+                vm.getPopular();
+            }else{
+                vm.searchMovie(vm.keyword,1);
             }
         }
     }

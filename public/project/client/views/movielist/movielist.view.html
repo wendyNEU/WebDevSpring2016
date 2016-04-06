@@ -1,255 +1,45 @@
-<section id="movie_list" ng-controller="MovieController">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" ng-class="{active: model.$route.current.activetab == 'popular'}"><a href="#/movie_list/popular" role="tab" data-toggle="tab">Popular</a></li>
-                <li role="presentation" ng-class="{active: model.$route.current.activetab == 'toprate'}"><a href="#/movie_list/toprate" role="tab" data-toggle="tab">Top Rate</a></li>
-                <li role="presentation" ng-class="{active: model.$route.current.activetab == 'nowplaying'}"><a href="#/movie_list/nowplaying" role="tab" data-toggle="tab">Now Playing</a></li>
-                <li role="presentation" ng-class="{active: model.$route.current.activetab == 'upcoming'}"><a href="#/movie_list/upcoming" role="tab" data-toggle="tab">Upcoming</a></li>
-                <li role="presentation" ng-class="{active: model.$route.current.activetab == 'search'}"><a href="#/movie_list/search/*" role="tab" data-toggle="tab">Search</a></li>
-            </ul>
-
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane" ng-class="{active: model.$route.current.activetab == 'popular'}" id="popular">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <h2 class="section-heading"></h2>
-                                <h3 class="section-subheading text-muted"></h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <ul class="listpage" ng-repeat="movie in model.popularmovie">
-                                    <li class="listpage-inverted">
-                                        <div class="listpage-image">
-                                            <a href="#/movie_detail/{{movie.id}}"><img class="img-responsive" ng-src="{{model.veriPosterImg(movie.posterurl)}}" alt=""></a>
-                                        </div>
-                                        <div class="listpage-panel">
-                                            <div class="listpage-heading">
-                                                <h4><a href="#/movie_detail/{{movie.id}}" class="picframe-link" data-toggle="modal">{{movie.title}}</a></h4>
-                                                <p>{{movie.release_date}}</p>
-                                                <ul class="list-inline social-buttons">
-                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="listpage-body">
-                                                <p class="text-muted">{{movie.overview}}</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <ul class="pagination">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                    </div>
+<div class="container" ng-controller="MovieController">
+    <div class="page">
+        <div class="breadcrumbs">
+            <a href="#/home">Home</a>
+            <span>Movie Review</span>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="filters">
+                    <select ng-model="model.selectedfilter" ng-change="model.changefilter(model.selectedfilter)"
+                            data-ng-options="filter as filter.label for filter in model.Filters">
+                    </select>
                 </div>
-                <div role="tabpanel" class="tab-pane" ng-class="{active: model.$route.current.activetab == 'toprate'}" id="toprate">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <h2 class="section-heading"></h2>
-                                <h3 class="section-subheading text-muted"></h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <ul class="listpage" ng-repeat="movie in model.topratemovie">
-                                    <li class="listpage-inverted">
-                                        <div class="listpage-image">
-                                            <a href="#/movie_detail/{{movie.id}}"><img class="img-responsive" ng-src="{{model.veriPosterImg(movie.posterurl)}}" alt=""></a>
-                                        </div>
-                                        <div class="listpage-panel">
-                                            <div class="listpage-heading">
-                                                <h4><a href="#/movie_detail/{{movie.id}}" class="picframe-link" data-toggle="modal">{{movie.title}}</a></h4>
-                                                <p>{{movie.release_date}}</p>
-                                                <ul class="list-inline social-buttons">
-                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="listpage-body">
-                                                <p class="text-muted">{{movie.overview}}</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <ul class="pagination">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div role="tabpanel" class="tab-pane" ng-class="{active: model.$route.current.activetab == 'nowplaying'}" id="nowplaying">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <h2 class="section-heading"></h2>
-                                <h3 class="section-subheading text-muted"></h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <ul class="listpage" ng-repeat="movie in model.nowmovie">
-                                    <li class="listpage-inverted">
-                                        <div class="listpage-image">
-                                            <a href="#/movie_detail/{{movie.id}}"><img class="img-responsive" ng-src="{{model.veriPosterImg(movie.posterurl)}}" alt=""></a>
-                                        </div>
-                                        <div class="listpage-panel">
-                                            <div class="listpage-heading">
-                                                <h4><a href="#/movie_detail/{{movie.id}}" class="picframe-link" data-toggle="modal">{{movie.title}}</a></h4>
-                                                <p>{{movie.release_date}}</p>
-                                                <ul class="list-inline social-buttons">
-                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="listpage-body">
-                                                <p class="text-muted">{{movie.overview}}</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <ul class="pagination">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div role="tabpanel" class="tab-pane" ng-class="{active: model.$route.current.activetab == 'upcoming'}" id="upcoming">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <h2 class="section-heading"></h2>
-                                <h3 class="section-subheading text-muted"></h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <ul class="listpage" ng-repeat="movie in model.upcomingmovie">
-                                    <li class="listpage-inverted">
-                                        <div class="listpage-image">
-                                            <a href="#/movie_detail/{{movie.id}}"><img class="img-responsive" ng-src="{{model.veriPosterImg(movie.posterurl)}}" alt=""></a>
-                                        </div>
-                                        <div class="listpage-panel">
-                                            <div class="listpage-heading">
-                                                <h4><a href="#/movie_detail/{{movie.id}}" class="picframe-link" data-toggle="modal">{{movie.title}}</a></h4>
-                                                <p>{{movie.release_date}}</p>
-                                                <ul class="list-inline social-buttons">
-                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="listpage-body">
-                                                <p class="text-muted">{{movie.overview}}</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <ul class="pagination">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div role="tabpanel" class="tab-pane" ng-class="{active: model.$route.current.activetab == 'search'}" id="search">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 text-center">
-                                <h2 class="section-heading"></h2>
-                                <h3 class="section-subheading text-muted"></h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <ul class="listpage" ng-repeat="movie in model.searchmovie">
-                                    <li class="listpage-inverted">
-                                        <div class="listpage-image">
-                                            <a href="#/movie_detail/{{movie.id}}"><img class="img-responsive" ng-src="{{model.veriPosterImg(movie.posterurl)}}" alt=""></a>
-                                        </div>
-                                        <div class="listpage-panel">
-                                            <div class="listpage-heading">
-                                                <h4><a href="#/movie_detail/{{movie.id}}" class="picframe-link" data-toggle="modal">{{movie.title}}</a></h4>
-                                                <p>{{movie.release_date}}</p>
-                                                <ul class="list-inline social-buttons">
-                                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="listpage-body">
-                                                <p class="text-muted">{{movie.overview}}</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <ul class="pagination">
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                    </div>
-                </div>
-
+            </div>
+            <div class="col-lg-6">
+                <form style="text-align: right">
+                    <input ng-model="model.keyword" placeholder="search movie">
+                    <button type="button" class="btn" ng-click="model.searchMovie(model.keyword,1)">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </form>
             </div>
         </div>
+        <div class="movie-list" ng-repeat="movie in model.movielist">
+            <div class="movie">
+                <a href="#/movie_detail/{{movie.id}}">
+                    <figure class="movie-poster"><img ng-src="{{model.veriPosterImg(movie.posterurl)}}">
+                    </figure>
+                </a>
+                <div class="movie-title"><a href="#/movie_detail/{{movie.id}}">{{movie.title}}</a></div>
+            </div>
+        </div>
+    </div> <!-- .movie-list -->
+
+    <div class="pagination">
+        <a href="#" class="page-number prev"><i class="fa fa-angle-left"></i></a>
+        <span class="page-number current">1</span>
+        <a href="#" class="page-number">2</a>
+        <a href="#" class="page-number">3</a>
+        <a href="#" class="page-number">4</a>
+        <a href="#" class="page-number">5</a>
+        <a href="#" class="page-number next"><i class="fa fa-angle-right"></i></a>
     </div>
-</section>
+</div>
 

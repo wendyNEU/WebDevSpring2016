@@ -20,6 +20,7 @@
             vm.poster_size='/w500';
             vm.commenttext = '';
             vm.subcommenttext ='';
+            vm.currentvideo = 0;
             vm.getMovieById = getMovieById;
             vm.veriPosterImg = veriPosterImg;
             vm.getCommentSet = getCommentSet;
@@ -35,6 +36,7 @@
             vm.unlike= unlike;
             vm.getMovieById($routeParams.id);
             vm.loadLike = loadLike;
+            vm.arrayToString = arrayToString;
         }
 
         init();
@@ -44,7 +46,9 @@
                 if (resp === undefined) {
                     alert("Item you are trying to search could not be found");
                 } else {
+
                     vm.movie = resp;
+                    console.log(vm.movie);
                     if(!(vm.movie.poster_path===undefined||vm.movie.poster_path===''))
                         vm.movie.posterurl = vm.image_base_url + vm.poster_size + vm.movie.poster_path;
 
@@ -60,6 +64,7 @@
                     });
                     vm.getCommentSet();
                     vm.loadLike();
+
                 }
             });
         }
@@ -166,7 +171,7 @@
 
         function veriPosterImg(imageurl){
             if(imageurl==undefined||imageurl===null){
-                return './img/noposter.png';
+                return './images/noposter.png';
             }else{
                 return imageurl;
             }
@@ -245,6 +250,14 @@
                     });
                 }
             });
+        }
+
+        function arrayToString(arr){
+            var str = "";
+            for(var i = 0;i<arr.length;i++){
+                str = str+arr[i].name+" | ";
+            }
+            return str.substring(0,str.length-2);
         }
 
     }

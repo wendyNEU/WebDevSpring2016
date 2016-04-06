@@ -1,97 +1,43 @@
 /**
- * Created by wendy on 3/4/16.
+ * Created by wendy on 4/3/16.
  */
 (function () {
     var MovieFanApp = angular.module('MovieFanApp');
     MovieFanApp.config(['$routeProvider',
-        function ($routeProvider,$rootParams) {
+        function ($routeProvider) {
             $routeProvider
                 .when('/home', {
                     templateUrl: './views/home/home.view.html',
                     controller: 'HomeController',
                     controllerAs: 'model'
                 })
-                .when('/movie_list/popular', {
+                .when('/movie_list', {
                     templateUrl: './views/movielist/movielist.view.html',
                     controller: 'MovieController',
                     controllerAs: 'model',
                     activetab:'popular'
-                })
-                .when('/movie_list/toprate', {
-                    templateUrl: './views/movielist/movielist.view.html',
-                    controller: 'MovieController',
-                    controllerAs: 'model',
-                    activetab:'toprate'
-                })
-                .when('/movie_list/nowplaying', {
-                    templateUrl: './views/movielist/movielist.view.html',
-                    controller: 'MovieController',
-                    controllerAs: 'model',
-                    activetab:'nowplaying'
-                })
-                .when('/movie_list/upcoming', {
-                    templateUrl: './views/movielist/movielist.view.html',
-                    controller: 'MovieController',
-                    controllerAs: 'model',
-                    activetab:'upcoming'
-                })
-                .when('/movie_list/search/:keyword', {
-                    templateUrl: './views/movielist/movielist.view.html',
-                    controller: 'MovieController',
-                    controllerAs: 'model',
-                    activetab:'search'
                 })
                 .when('/movie_detail/:id', {
                     templateUrl: './views/moviedetail/moviedetail.view.html',
                     controller: 'MovieDetailController',
                     controllerAs: 'model'
                 })
-                .when('/tv_list/popular', {
+                .when('/tv_list', {
                     templateUrl: './views/tvlist/tvlist.view.html',
                     controller: 'TvController',
                     controllerAs: 'model',
                     activetab:'popular'
-                })
-                .when('/tv_list/toprate', {
-                    templateUrl: './views/tvlist/tvlist.view.html',
-                    controller: 'TvController',
-                    controllerAs: 'model',
-                    activetab:'toprate'
-                })
-                .when('/tv_list/onair', {
-                    templateUrl: './views/tvlist/tvlist.view.html',
-                    controller: 'TvController',
-                    controllerAs: 'model',
-                    activetab:'onair'
-                })
-                .when('/tv_list/airtoday', {
-                    templateUrl: './views/tvlist/tvlist.view.html',
-                    controller: 'TvController',
-                    controllerAs: 'model',
-                    activetab:'airtoday'
-                })
-                .when('/tv_list/search/:keyword', {
-                    templateUrl: './views/tvlist/tvlist.view.html',
-                    controller: 'TvController',
-                    controllerAs: 'model',
-                    activetab:'search'
                 })
                 .when('/tv_detail/:id', {
                     templateUrl: './views/tvdetail/tvdetail.view.html',
                     controller: 'TvDetailController',
                     controllerAs: 'model'
                 })
-                .when('/actor_list/popular',{
+                .when('/actor_list',{
                     templateUrl:'./views/actorlist/actorlist.view.html',
                     controller: 'ActorController',
                     controllerAs: 'model',
                     activetab:'popular'
-                })
-                .when('/actor_list/search/:keyword',{
-                    templateUrl:'./views/actorlist/actorlist.view.html',
-                    controller: 'ActorController',
-                    controllerAs: 'model',
-                    activetab:'search'
                 })
                 .when('/actor_detail/:id',{
                     templateUrl:'./views/actordetail/actordetail.view.html',
@@ -138,5 +84,6 @@
         ]);
     });
 })();
+
 
 

@@ -6,97 +6,110 @@
         .module('MovieFanApp')
         .controller('MovieController', MovieController);
 
-    function MovieController(MovieService,$route,$routeParams){
+    function MovieController(MovieService,$route,$location){
         console.log("MovieController");
 
         var vm = this;
 
         function init() {
             vm.$route = $route;
+            vm.$location = $location;
             vm.image_base_url = 'http://image.tmdb.org/t/p';
             vm.poster_size='/w500';
+            vm.keyword = "";
             vm.veriPosterImg = veriPosterImg;
+            vm.getPopular = getPopular;
+            vm.getTopRate = getTopRate;
+            vm.getNowPlaying = getNowPlaying;
+            vm.getUpcoming = getUpcoming;
             vm.searchMovie = searchMovie;
+            vm.changefilter = changefilter;
+            vm.Filters = [
+                {"value":"popular","label":"Popular"},
+                {"value":"toprate","label":"Top Rate"},
+                {"value":"nowplaying","label":"Now Playing"},
+                {"value":"upcoming","label":"Upcoming"},
+                {"value":"search","label":"Search"}
+            ];
+            vm.selectedfilter = vm.Filters[0];
+            vm.movielist = [];
+            vm.getPopular();
+        }
+        init();
 
+        function getPopular(){
             MovieService.findPopularMovie(1)
                 .then(function(resp) {
                     if (resp === undefined) {
                         alert("Item you are trying to search could not be found");
-                    } else if (resp.length === 0) {
-                        alert("Item you are trying to search could not be found");
                     } else {
-                        vm.popularmovie = resp.results;
+                        vm.movielist = resp.results;
                         for (i = 0; i < resp.results.length; i++) {
-                            if (vm.popularmovie[i].poster_path != null && vm.popularmovie[i].poster_path !== '')
-                                vm.popularmovie[i].posterurl = vm.image_base_url + vm.poster_size + vm.popularmovie[i].poster_path;
+                            if (vm.movielist[i].poster_path != null && vm.movielist[i].poster_path !== '')
+                                vm.movielist[i].posterurl = vm.image_base_url + vm.poster_size + vm.movielist[i].poster_path;
                         }
                     }
                 });
+        }
 
+        function getTopRate(){
             MovieService.findTopRateMovie(1)
                 .then(function(resp) {
                     if (resp === undefined) {
                         alert("Item you are trying to search could not be found");
-                    } else if (resp.length === 0) {
-                        alert("Item you are trying to search could not be found");
                     } else {
-                        vm.topratemovie = resp.results;
+                        vm.movielist = resp.results;
                         for (i = 0; i < resp.results.length; i++) {
-                            if (vm.topratemovie[i].poster_path != null && vm.topratemovie[i].poster_path !== '')
-                                vm.topratemovie[i].posterurl = vm.image_base_url + vm.poster_size + vm.topratemovie[i].poster_path;
+                            if (vm.movielist[i].poster_path != null && vm.movielist[i].poster_path !== '')
+                                vm.movielist[i].posterurl = vm.image_base_url + vm.poster_size + vm.movielist[i].poster_path;
                         }
                     }
                 });
+        }
+
+        function getNowPlaying(){
             MovieService.findMovieNowPlaying(1)
                 .then(function(resp) {
                     if (resp === undefined) {
                         alert("Item you are trying to search could not be found");
-                    } else if (resp.length === 0) {
-                        alert("Item you are trying to search could not be found");
                     } else {
-                        vm.nowmovie = resp.results;
+                        vm.movielist = resp.results;
                         for (i = 0; i < resp.results.length; i++) {
-                            if (vm.nowmovie[i].poster_path != null && vm.nowmovie[i].poster_path !== '')
-                                vm.nowmovie[i].posterurl = vm.image_base_url + vm.poster_size + vm.nowmovie[i].poster_path;
+                            if (vm.movielist[i].poster_path != null && vm.movielist[i].poster_path !== '')
+                                vm.movielist[i].posterurl = vm.image_base_url + vm.poster_size + vm.movielist[i].poster_path;
                         }
                     }
                 });
+        }
+
+        function getUpcoming() {
             MovieService.findMovieUpcoming(1)
                 .then(function(resp) {
                     if (resp === undefined) {
                         alert("Item you are trying to search could not be found");
-                    } else if (resp.length === 0) {
-                        alert("Item you are trying to search could not be found");
-                        $location.path("/home");
                     } else {
-                        vm.upcomingmovie = resp.results;
+                        vm.movielist = resp.results;
                         for (i = 0; i < resp.results.length; i++) {
-                            if (vm.upcomingmovie[i].poster_path != null && vm.upcomingmovie[i].poster_path !== '')
-                                vm.upcomingmovie[i].posterurl = vm.image_base_url + vm.poster_size + vm.upcomingmovie[i].poster_path;
+                            if (vm.movielist[i].poster_path != null && vm.movielist[i].poster_path !== '')
+                                vm.movielist[i].posterurl = vm.image_base_url + vm.poster_size + vm.movielist[i].poster_path;
                         }
                     }
                 });
-
-            if($routeParams.keyword!==undefined){
-                vm.searchMovie($routeParams.keyword,1);
-            }
-
         }
-        init();
+
 
         function searchMovie(title,page){
             MovieService.searchMoviesByTitle(title,page)
                 .then(function(resp) {
                     if (resp === undefined) {
                         alert("Item you are trying to search could not be found");
-                    } else if (resp.length === 0) {
-                        alert("Item you are trying to search could not be found");
-                        $location.path("/home");
                     } else {
-                        vm.searchmovie = resp.results;
+                        vm.selectedfilter = vm.Filters[4];
+                        vm.keyword="";
+                        vm.movielist = resp.results;
                         for (i = 0; i < resp.results.length; i++) {
-                            if (vm.searchmovie[i].poster_path != null && vm.searchmovie[i].poster_path !== '')
-                                vm.searchmovie[i].posterurl = vm.image_base_url + vm.poster_size + vm.searchmovie[i].poster_path;
+                            if (vm.movielist[i].poster_path != null && vm.movielist[i].poster_path !== '')
+                                vm.movielist[i].posterurl = vm.image_base_url + vm.poster_size + vm.movielist[i].poster_path;
                         }
                     }
                 });
@@ -104,10 +117,25 @@
 
         function veriPosterImg(imageurl){
             if(imageurl==undefined||imageurl===null){
-                return './img/noposter.png';
+                return './images/noposter.png';
             }else{
                 return imageurl;
             }
         }
+
+        function changefilter(filtervalue){
+            if(filtervalue.value=='popular'){
+                vm.getPopular();
+            }else if(filtervalue.value=='toprate'){
+                vm.getTopRate();
+            }else if(filtervalue.value=='nowplaying'){
+                vm.getNowPlaying();
+            }else if(filtervalue.value=='upcoming'){
+                vm.getUpcoming();
+            }else{
+                vm.searchMovie(vm.keyword,1);
+            }
+        }
+
     }
 })();
