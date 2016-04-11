@@ -13,11 +13,13 @@
             getAllTvs : getAllTvs,
             getTvById : getTvById,
             getTvVideoById : getTvVideoById,
+            getTvSeason:getTvSeason,
             searchTVByTitle: searchTVByTitle,
             findPopularTV:findPopularTV,
             findTopRateTV:findTopRateTV,
             findTvOnAir:findTvOnAir,
             findTvOnAirToday:findTvOnAirToday
+
         };
         return api;
 
@@ -113,6 +115,21 @@
             var deferred = $q.defer();
             var service = '/tv/';
             var url = base + service + id + '/videos?api_key=' + apiKey;
+            $http({method: 'GET', url: url}).
+            success(function (response) {
+                deferred.resolve(response);
+            }).
+            error(function (response) {
+                deferred.resolve(response);
+            });
+            return deferred.promise;
+        }
+
+        function getTvSeason(id,season_number){
+            var deferred = $q.defer();
+            var service = '/tv/';
+            var url = base + service + id + '/season/'+season_number+'?api_key=' + apiKey;
+            console.log(url);
             $http({method: 'GET', url: url}).
             success(function (response) {
                 deferred.resolve(response);

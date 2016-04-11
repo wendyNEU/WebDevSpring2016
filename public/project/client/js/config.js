@@ -33,6 +33,11 @@
                     controller: 'TvDetailController',
                     controllerAs: 'model'
                 })
+                .when('/tv_season/:id/:tvname/season/:season_number',{
+                    templateUrl: './views/tvseason/tvseason.view.html',
+                    controller: 'TvSeasonController',
+                    controllerAs:'model'
+                })
                 .when('/actor_list',{
                     templateUrl:'./views/actorlist/actorlist.view.html',
                     controller: 'ActorController',

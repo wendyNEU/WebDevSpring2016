@@ -1,16 +1,18 @@
 /**
+ * Created by wendy on 4/6/16.
+ */
+/**
  * Created by wendy on 3/4/16.
  */
 (function(){
     angular
         .module('MovieFanApp')
-        .controller('TvDetailController',TvDetailController);
+        .controller('TvSeasonController',TvSeasonController);
 
     var youtubeVideoLinkBase = "https://www.youtube.com/embed/";
 
-    function TvDetailController($routeParams,TvService,CommentService,UserService){
-        console.log("TvDetailController");
-
+    function TvSeasonController($routeParams,TvService,CommentService,UserService){
+        console.log("TvSeasonController");
 
         var vm = this;
 
@@ -21,7 +23,7 @@
             vm.currentActiveComment = -1;
             vm.commenttext = '';
             vm.subcommenttext ='';
-            vm.getTvById = getTvById;
+            vm.$routeParams = $routeParams;
             vm.veriPosterImg = veriPosterImg;
             vm.getCommentSet = getCommentSet;
             vm.addComment = addComment;
@@ -38,13 +40,14 @@
             vm.arrayToString = arrayToString;
             vm.genProfilePath = genProfilePath;
             vm.genPosterPath = genPosterPath;
-            vm.getTvById($routeParams.id);
+            vm.getSeasonById = getSeasonById;
+            vm.getSeasonById($routeParams.id,$routeParams.season_number);
         }
 
         init();
 
-        function getTvById(id){
-            TvService.getTvById(id).then(function(resp) {
+        function getSeasonById(id,season_number){
+            TvService.getTvSeason(id,season_number).then(function(resp) {
                 if (resp === undefined) {
                     alert("Item you are trying to search could not be found");
                 } else {
@@ -251,8 +254,7 @@
             });
         }
         function genProfilePath(path){
-            if(path==null) return './images/Nophoto.jpg';
-            else return vm.image_base_url + vm.profile_size + path;
+            return vm.image_base_url + vm.profile_size + path;
         }
 
         function genPosterPath(path){
