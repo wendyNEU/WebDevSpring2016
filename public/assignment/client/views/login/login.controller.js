@@ -18,8 +18,10 @@
         init();
 
         function login() {
+
             if (!vm.user) return;
-            UserService.findUserByCredentials(vm.user.username, vm.user.password)
+            console.log("start login");
+            UserService.login({"username":vm.user.username,"password":vm.user.password})
                 .then(function (response) {
                     if (response.data == null) {
                         alert("login fail");

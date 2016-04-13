@@ -19,7 +19,13 @@
             getProfile:getProfile,
             islogin:islogin,
             isAdmin:isAdmin,
+            register:register,
+            adminFindAllUsers: adminFindAllUsers,
+            adminCreateUser:adminCreateUser,
+            adminDeleteUserById:adminDeleteUserById,
+            adminUpdateUser:adminUpdateUser,
             //more functions
+            login: login,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             logout: logout
@@ -27,8 +33,16 @@
 
         //return userApi;
 
+        function login(credential){
+            return $http.post("/api/assignment/login",credential);
+        }
+
         function getProfile(){
-            return $http.get("/api/assignment/user/"+$rootScope.curUser._id);
+            return $http.get("/api/assignment/curuser");
+        }
+
+        function register(user){
+            return $http.post("/api/assignment/register",user);
         }
 
         function findUserById(userId) {
@@ -69,7 +83,9 @@
         }
 
         function logout() {
-            return $rootScope.curUser = null;
+            var curuser = jQuery.extend(true, {}, $rootScope.curUser);
+            $rootScope.curUser = null;
+            return $http.post("/api/assignment/logout",curuser);
         }
 
         function islogin(){
@@ -86,6 +102,22 @@
             }else{
                 return false;
             }
+        }
+
+        function adminFindAllUsers(){
+            return $http.get("/api/assignment/admin/user");
+        }
+
+        function adminCreateUser(user) {
+            return $http.post("/api/assignment/admin/user",user);
+        }
+
+        function adminDeleteUserById(userId){
+            return $http.delete("/api/assignment/admin/user/"+userId);
+        }
+
+        function adminUpdateUser(userId, user) {
+            return $http.put("/api/assignment/admin/user/"+userId,user);
         }
 
     }

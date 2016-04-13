@@ -22,24 +22,35 @@
             vm.updateForm = updateForm;
             vm.deleteForm = deleteForm;
             vm.selectForm = selectForm;
+
         }
 
         init();
 
         function findAllFormsForUser() {
-            var userId = UserService.getCurrentUser()._id;
-
             var deferred = $q.defer();
 
-            FormService
-                .findAllFormsForUser(userId)
-                .then(function (response) {
-                    var forms = response.data;
-                    if (forms) {
-                        vm.forms = forms;
+            UserService
+                .getProfile()
+                .then(function(response) {
+                    var curUser = response.data;
+                    if(curUser) {
+                        UserService.setCurrentUser(curUser);
+                        FormService
+                            .findAllFormsForUser(curUser._id)
+                            .then(function (response) {
+                                var forms = response.data;
+                                if (forms) {
+                                    vm.forms = forms;
+                                    deferred.resolve();
+                                } else {
+                                    deferred.reject();
+                                }
+                            });
                         deferred.resolve();
                     } else {
                         deferred.reject();
+                        $location.url("/home");
                     }
                 });
             return deferred.promise;

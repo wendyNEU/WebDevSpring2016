@@ -20,14 +20,11 @@
                 templateUrl: 'views/profile/profile.view.html',
                 controller: 'ProfileController',
                 controllerAs: 'model'
-                /*
-                resolve:{
-                    checkLoggedIn: checkLoggedIn
-                }*/
             })
             .when('/admin', {
                 templateUrl: 'views/admin/admin.view.html',
-                controller: 'AdminController'
+                controller: 'AdminController',
+                controllerAs: 'model'
             })
             .when('/forms', {
                 templateUrl: 'views/forms/forms.view.html',
@@ -83,6 +80,20 @@
     }
 */
     function getLoggedIn(UserService, $q) {
-        UserService.getCurrentUser();
+        var deferred = $q.defer();
+
+        UserService
+            .getProfile()
+            .then(function(response) {
+                var curUser = response.data;
+                if(curUser) {
+                    UserService.setCurrentUser(curUser);
+                    deferred.resolve();
+                } else {
+                    UserService.setCurrentUser(null);
+                    deferred.resolve();
+                }
+            });
+        return deferred.promise;
     }
 })();

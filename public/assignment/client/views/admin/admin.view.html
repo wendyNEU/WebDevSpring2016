@@ -1,4 +1,4 @@
-<div class="row" ng-controller="AdminController">
+<div class="row" ng-controller="AdminController as model">
     <div class="col-sm-10 col-md-10 col-sm-offset-1 col-md-offset-1">
         <h1>Admin</h1>
         <h1></h1>
@@ -29,39 +29,27 @@
                     </thead>
                     <tbody class="ui-sortable">
                     <tr>
-                        <td class="col-xs-3 col-md-2"><input type="text" value="User Name" class="form-control"></td>
-                        <td class="col-xs-3 col-md-2"><input type="text" value="Password" class="form-control"></td>
-                        <td class="col-xs-3 col-md-2"><input type="text" value="Role" class="form-control"></td>
+                        <td class="col-xs-3 col-md-2"><input type="text" value="User Name" class="form-control" ng-model="model.newuser.username"></td>
+                        <td class="col-xs-3 col-md-2"><input type="text" value="Password" class="form-control" ng-model="model.newuser.password"></td>
                         <td class="col-xs-3 col-md-2">
-                            <button class="btn-xs btn-primary glyphicon glyphicon-plus"></button>
-                            <button class="btn-xs btn-primary glyphicon glyphicon-ok"></button>
+                            <input class="form-control" type="text" ng-model="model.rule" class="form-control" placeholder="rule">
+                            <button class="btn btn-default btn-info" ng-click="model.addRule()">Add Rule</button>
+                            <ul class="list-group" ng-repeat="rule in model.newuser.rules">
+                                <li class="list-group-item">{{rule}}<button class="pull-right btn btn-xs btn-warning" ng-click="model.deleteRule($index)"><span class="glyphicon glyphicon-trash"></span></button></li>
+                            </ul>
+                        </td>
+                        <td class="col-xs-3 col-md-2">
+                            <button class="btn-xs btn-primary glyphicon glyphicon-plus" ng-click="model.createUser()"></button>
+                            <button class="btn-xs btn-primary glyphicon glyphicon-ok" ng-click="model.updateUser()"></button>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="col-xs-3 col-md-2">Alice</td>
-                        <td class="col-xs-3 col-md-2"><p hidden>Password1</p></td>
-                        <td class="col-xs-3 col-md-2">Student</td>
+                    <tr ng-repeat="user in model.users">
+                        <td class="col-xs-3 col-md-2">{{user.username}}</td>
+                        <td class="col-xs-3 col-md-2"><p hidden>{{user.password}}</p></td>
+                        <td class="col-xs-3 col-md-2">{{model.arrayToString(user.rules)}}</td>
                         <td class="col-xs-3 col-md-2">
-                            <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
-                            <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-xs-3 col-md-2">Bob</td>
-                        <td class="col-xs-3 col-md-2"><p hidden>Password2</p></td>
-                        <td class="col-xs-3 col-md-2">Faculty | Admin</td>
-                        <td class="col-xs-3 col-md-2">
-                            <button class="btn-xs btn-primary glyphicon glyphicon-remove"></button>
-                            <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-xs-3 col-md-2">Charlie</td>
-                        <td class="col-xs-3 col-md-2"><p hidden>Password2</p></td>
-                        <td class="col-xs-3 col-md-2"></td>
-                        <td class="col-xs-3 col-md-2">
-                            <button class="btn-xs  btn-primary glyphicon glyphicon-remove"></button>
-                            <button class="btn-xs btn-primary glyphicon glyphicon-pencil"></button>
+                            <button class="btn-xs btn-primary glyphicon glyphicon-remove" ng-click="model.deleteUser($index)"></button>
+                            <button class="btn-xs btn-primary glyphicon glyphicon-pencil" ng-click="model.selectUser($index)"></button>
                         </td>
                     </tr>
                     </tbody>

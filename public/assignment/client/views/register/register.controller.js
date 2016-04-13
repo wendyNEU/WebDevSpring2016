@@ -23,7 +23,7 @@
         init();
 
         function register(){
-            UserService.createUser(vm.user)
+            UserService.register(vm.user)
                 .then(function(response){
                     var currentUser = response.data;
                     if(currentUser != null) {

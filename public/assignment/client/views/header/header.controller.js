@@ -6,7 +6,7 @@
         .module('FormBuilderApp')
         .controller('HeaderController', HeaderController);
 
-    function HeaderController($location, UserService) {
+    function HeaderController($location, $q, UserService) {
         console.log("HeaderController");
 
         var vm = this;
@@ -21,8 +21,17 @@
         init();
 
         function logout() {
-            UserService.logout();
-            $location.url("/home");
+            var deferred = $q.defer();
+            UserService.logout()
+                .then(function(response) {
+                    if(response.status==200) {
+                        deferred.resolve();
+                        $location.url("/home");
+                    } else {
+                        deferred.reject();
+                        alert("log out fail");
+                    }
+                });
         }
 
         function isLogin(){

@@ -5,7 +5,7 @@
     angular
         .module('FormBuilderApp')
         .controller('HomeController', HomeController);
-    function HomeController($scope){
+    function HomeController(){
         console.log("HomeController");
     }
 })();

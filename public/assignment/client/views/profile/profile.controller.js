@@ -6,7 +6,7 @@
         .module('FormBuilderApp')
         .controller('ProfileController', ProfileController);
 
-    function ProfileController(UserService,$q){
+    function ProfileController(UserService,$q,$location){
         console.log("ProfileController");
         var vm = this;
 
@@ -50,7 +50,7 @@
             UserService
                 .updateUser(vm.user._id,updateUser)
                 .then(function(response) {
-                    if(response.data.ok==1) {
+                    if(response.status==200) {
                         vm.loadCurUser();
                         deferred.resolve();
                     } else {

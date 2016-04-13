@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 multer();
 app.use(session({
-    secret: 'this is the secret',
+    secret: '1234567890QWERTY',
     resave: true,
     saveUninitialized: true
 }));
