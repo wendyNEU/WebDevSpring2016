@@ -77,10 +77,10 @@ module.exports = function (app, userModel) {
     }
 
     function authenticated (req, res, next) {
-        if (!req.isAuthenticated()) {
-            res.send(401);
-        } else {
+        if (isAuthenticated(req)) {
             next();
+        } else {
+            res.send(401);
         }
     };
 
