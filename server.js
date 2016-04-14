@@ -23,8 +23,8 @@ app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 multer();
-app.use(session({
-    secret: '1234567890QWERTY',
+app.use(express.session({
+    secret: 'webdev',
     resave: true,
     saveUninitialized: true
 }));

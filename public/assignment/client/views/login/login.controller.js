@@ -20,13 +20,11 @@
         function login() {
 
             if (!vm.user) return;
-            console.log("start login");
             UserService.login({"username":vm.user.username,"password":vm.user.password})
                 .then(function (response) {
                     if (response.data == null) {
                         alert("login fail");
-                    }
-                    else {
+                    } else {
                         vm.user = response.data;
                         UserService.setCurrentUser(response.data);
                         $location.path('/profile');
