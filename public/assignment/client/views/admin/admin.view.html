@@ -10,44 +10,56 @@
                     <thead>
                     <tr>
                         <th>
-                            <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
-                            Username
+                            <span class="btn-xs btn-primary glyphicon glyphicon-triangle-top" ng-show="model.sort.title=='username'&&model.sort.order=='descend'"></span>
+                            <span class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom" ng-show="model.sort.title=='username'&&model.sort.order=='ascend'"></span>
+                            <a ng-click="model.sortby('username')">Username</a>
                         </th>
                         <th>
-                            <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
                             Password
                         </th>
                         <th>
-                            <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
+                            <span class="btn-xs btn-primary glyphicon glyphicon-triangle-top" ng-show="model.sort.title=='firstName'&&model.sort.order=='descend'"></span>
+                            <span class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom" ng-show="model.sort.title=='firstName'&&model.sort.order=='ascend'"></span>
+                            <a ng-click="model.sortby('firstName')">First Name</a>
+                        </th>
+                        <th>
+                            <span class="btn-xs btn-primary glyphicon glyphicon-triangle-top" ng-show="model.sort.title=='lastName'&&model.sort.order=='descend'"></span>
+                            <span class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom" ng-show="model.sort.title=='lastName'&&model.sort.order=='ascend'"></span>
+                            <a ng-click="model.sortby('lastName')">Last Name</a>
+                        </th>
+                        <th>
                             Role
                         </th>
                         <th>
-                            <button class="btn-xs btn-primary glyphicon glyphicon-triangle-bottom"></button>
                             Action
                         </th>
                     </tr>
                     </thead>
                     <tbody class="ui-sortable">
                     <tr>
-                        <td class="col-xs-3 col-md-2"><input type="text" value="User Name" class="form-control" ng-model="model.newuser.username"></td>
-                        <td class="col-xs-3 col-md-2"><input type="text" value="Password" class="form-control" ng-model="model.newuser.password"></td>
-                        <td class="col-xs-3 col-md-2">
+                        <td><input type="text" value="User Name" class="form-control" ng-model="model.newuser.username"></td>
+                        <td><input type="text" value="Password" class="form-control" ng-model="model.newuser.password"></td>
+                        <td><input type="text" value="First Name" class="form-control" ng-model="model.newuser.firstName"></td>
+                        <td><input type="text" value="Last Name" class="form-control" ng-model="model.newuser.lastName"></td>
+                        <td>
                             <input class="form-control" type="text" ng-model="model.rule" class="form-control" placeholder="rule">
                             <button class="btn btn-default btn-info" ng-click="model.addRule()">Add Rule</button>
                             <ul class="list-group" ng-repeat="rule in model.newuser.rules">
                                 <li class="list-group-item">{{rule}}<button class="pull-right btn btn-xs btn-warning" ng-click="model.deleteRule($index)"><span class="glyphicon glyphicon-trash"></span></button></li>
                             </ul>
                         </td>
-                        <td class="col-xs-3 col-md-2">
+                        <td>
                             <button class="btn-xs btn-primary glyphicon glyphicon-plus" ng-click="model.createUser()"></button>
                             <button class="btn-xs btn-primary glyphicon glyphicon-ok" ng-click="model.updateUser()"></button>
                         </td>
                     </tr>
                     <tr ng-repeat="user in model.users">
-                        <td class="col-xs-3 col-md-2">{{user.username}}</td>
-                        <td class="col-xs-3 col-md-2"><p hidden>{{user.password}}</p></td>
-                        <td class="col-xs-3 col-md-2">{{model.arrayToString(user.rules)}}</td>
-                        <td class="col-xs-3 col-md-2">
+                        <td>{{user.username}}</td>
+                        <td><p hidden>{{user.password}}</p></td>
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.lastName}}</td>
+                        <td>{{model.arrayToString(user.rules)}}</td>
+                        <td>
                             <button class="btn-xs btn-primary glyphicon glyphicon-remove" ng-click="model.deleteUser($index)"></button>
                             <button class="btn-xs btn-primary glyphicon glyphicon-pencil" ng-click="model.selectUser($index)"></button>
                         </td>

@@ -12,8 +12,8 @@
 
 
         function init(){
-            vm.newuser = {"username":"","password":"","rules":[]};
-            vm.rule = "";
+            vm.newuser = {"username":"","password":"","firstName":"","lastName":"","rules":[]};
+            vm.sort={"title":"","order":""};
             vm.findAllUsers=findAllUsers;
             vm.createUser = createUser;
             vm.updateUser = updateUser;
@@ -21,6 +21,8 @@
             vm.selectUser = selectUser;
             vm.deleteRule = deleteRule;
             vm.addRule = addRule;
+            vm.sortUser = sortUser;
+            vm.sortby = sortby;
             vm.arrayToString = arrayToString;
             vm.findAllUsers()
         }
@@ -41,6 +43,7 @@
                             .then(function(response) {
                                 if(response.data) {
                                     vm.users = response.data;
+                                    vm.sortUser();
                                     deferred.resolve();
                                 } else {
                                     deferred.reject();
@@ -66,7 +69,7 @@
                 .then(function (response) {
                     var user = response.data;
                     if (user) {
-                        vm.newuser = {"username":"","password":"","rules":[]};
+                        vm.newuser = {"username":"","password":"","firstName":"","lastName":"","rules":[]};
                         vm.rule = "";
                         vm.findAllUsers();
                         deferred.resolve();
@@ -90,9 +93,10 @@
                 .adminUpdateUser(vm.newuser._id, updateUser)
                 .then(function (response) {
                     if(response.status==200){
-                        vm.newuser = {"username":"","password":"","rules":[]};
+                        vm.newuser = {"username":"","password":"","firstName":"","lastName":"","rules":[]};
                         vm.rule = "";
                         vm.users = response.data;
+                        vm.sortUser();
                         deferred.resolve();
                     } else {
                         alert("Update Form Fail");
@@ -108,9 +112,10 @@
             UserService.adminDeleteUserById(vm.users[index]._id)
                 .then(function (response) {
                     if (response.status==200) {
-                        vm.newuser = {"username":"","password":"","rules":[]};
+                        vm.newuser = {"username":"","password":"","firstName":"","lastName":"","rules":[]};
                         vm.rule = "";
                         vm.users = response.data;
+                        vm.sortUser();
                         deferred.resolve();
                     } else {
                         alert("Delete Form Fail");
@@ -136,6 +141,28 @@
         function addRule(){
             vm.newuser.rules.push(vm.rule);
             vm.rule="";
+        }
+
+        function sortby(title){
+            vm.sort.title = title;
+            if(vm.sort.order==''||vm.sort.order=='descend'){
+                vm.sort.order = 'ascend';
+            }else{
+                vm.sort.order = 'descend';
+            }
+            vm.sortUser();
+        }
+
+        function sortUser(){
+            if(vm.sort.title) {
+                vm.users.sort(function (a, b) {
+                    if (vm.sort.order == 'ascend') {
+                        return a[vm.sort.title].localeCompare(b[vm.sort.title]);
+                    } else {
+                        return b[vm.sort.title].localeCompare(a[vm.sort.title]);
+                    }
+                });
+            }
         }
     }
 })();
