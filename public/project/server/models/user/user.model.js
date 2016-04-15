@@ -115,8 +115,6 @@ module.exports = function(mongoose,db) {
     }
 
     function like(userId, tvisojson){
-        console.log(userId);
-        console.log(tvisojson);
         var deferred = q.defer();
         UserModel.findById(
             userId,
@@ -138,9 +136,6 @@ module.exports = function(mongoose,db) {
     }
 
     function unlike(userId, tviso_id, type){
-        console.log(userId);
-        console.log(tviso_id);
-        console.log(type);
         var deferred = q.defer();
         UserModel.findById(
             userId,

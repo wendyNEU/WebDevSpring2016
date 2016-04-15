@@ -35,7 +35,6 @@
                             .then(function (response) {
                                 if (response.data) {
                                     vm.users = response.data;
-                                    console.log(vm.users);
                                     deferred.resolve();
                                 } else {
                                     alert("Load Users Failed");
@@ -57,7 +56,6 @@
                 .then(function (response) {
                     if (response.data) {
                         vm.users = response.data;
-                        console.log(vm.users);
                         vm.newUser = {"username": "", "password": "", "rules": "", "email": "", "photo": ""};
                         deferred.resolve();
                     } else {

@@ -45,8 +45,8 @@
                             <h3 align="center">Episode {{$index+1}} : {{episode.name}}</h3>
                             <div>
                                 <strong>Rating:</strong>
-                                <div class="star-rating" title="Rated {{episode.vote_average}} out of 10"><span
-                                        style="width:80%"><strong class="rating">{{episode.vote_average}}</strong> out of 10</span>
+                                <div class="star-rating"><span
+                                        style="width:{{model.roundRate(episode.vote_average)}}"></span>
                                 </div>
                                 <label>Rated {{episode.vote_average}} out of 10, {{episode.vote_count}} people
                                     voted</label>

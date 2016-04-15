@@ -36,7 +36,6 @@
         function getPopular(){
             ActorService.findPopularPerson(vm.page)
                 .then(function (resp) {
-                    console.log(resp);
                     if (resp === undefined || resp==null || resp.length === 0) {
                         vm.page = vm.page - 1;
                         alert("Not more item");
@@ -53,7 +52,6 @@
         function searchActor() {
             ActorService.searchPersonByName(vm.keyword, vm.page)
                 .then(function (resp) {
-                    console.log(resp);
                     if (resp === undefined || resp==null || resp.length === 0) {
                         vm.page = vm.page - 1;
                         alert("Not more item");

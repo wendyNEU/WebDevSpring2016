@@ -38,6 +38,7 @@
             vm.arrayToString = arrayToString;
             vm.genProfilePath = genProfilePath;
             vm.genPosterPath = genPosterPath;
+            vm.roundRate = roundRate;
             vm.getTvById($routeParams.id);
         }
 
@@ -48,7 +49,6 @@
                 if (resp === undefined) {
                     alert("Item you are trying to search could not be found");
                 } else {
-                    console.log(resp);
                     vm.tv = resp;
                     if(!(vm.tv.poster_path===undefined||vm.tv.poster_path===''))
                         vm.tv.posterurl = vm.image_base_url + vm.poster_size + vm.tv.poster_path;
@@ -184,7 +184,6 @@
                     alert("Get Current User Fail");
                 } else {
                     var user = resp.data;
-                    console.log(resp.data);
                     vm.likeitem = false;
                     for(var i in user.like){
                         if(user.like[i].tviso_id==vm.tv.id&&user.like[i].type=='tv'){
@@ -215,7 +214,6 @@
                                     vm.likeitem = true;
                                 }
                             }
-                            console.log(resp.data);
                         }
                     });
                 }
@@ -242,7 +240,6 @@
                                     vm.likeitem = true;
                                 }
                             }
-                            console.log(resp.data);
                         }
                     });
                 }
@@ -263,6 +260,10 @@
                 str = str+arr[i].name+" | ";
             }
             return str.substring(0,str.length-2);
+        }
+
+        function roundRate(rate){
+            return (Math.round(rate*10)).toString()+'%';
         }
 
     }

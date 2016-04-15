@@ -32,8 +32,8 @@
                             </button>
                         </li>
                         <li><strong>Rating:</strong>
-                            <div class="star-rating" title="Rated {{model.movie.vote_average}} out of 10"><span
-                                    style="width:80%"><strong class="rating">{{model.movie.vote_average}}</strong> out of 10</span>
+                            <div class="star-rating"><span
+                                    style="width:{{model.roundRate(model.movie.vote_average)}}"></span>
                             </div>
                             <label>Rated {{model.movie.vote_average}} out of 10</label>
                         </li>

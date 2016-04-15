@@ -34,9 +34,11 @@
             vm.islogin = islogin;
             vm.like= like;
             vm.unlike= unlike;
-            vm.getMovieById($routeParams.id);
+            vm.roundRate = roundRate;
             vm.loadLike = loadLike;
             vm.arrayToString = arrayToString;
+            vm.getMovieById($routeParams.id);
+
         }
 
         init();
@@ -47,7 +49,6 @@
                     alert("Item you are trying to search could not be found");
                 } else {
                     vm.movie = resp;
-                    console.log(vm.movie);
                     if(!(vm.movie.poster_path===undefined||vm.movie.poster_path===''))
                         vm.movie.posterurl = vm.image_base_url + vm.poster_size + vm.movie.poster_path;
 
@@ -73,7 +74,6 @@
                 if (resp === undefined) {
                     alert("Item you are trying to search could not be found");
                 } else {
-                    console.log(resp.data);
                     vm.commentSet = resp.data;
                 }
             });
@@ -95,7 +95,6 @@
                 } else if (resp.length === 0) {
                     alert("Create Comment Fail");
                 } else {
-                    console.log(resp.data);
                     vm.commenttext ='';
                     vm.commentSet = resp.data;
                 }
@@ -186,7 +185,6 @@
                     alert("Get Current User Fail");
                 } else {
                     var user = resp.data;
-                    console.log(resp.data);
                     vm.likeitem = false;
                     for(var i in user.like){
                         if(user.like[i].tviso_id==vm.movie.id&&user.like[i].type=='movie'){
@@ -218,7 +216,6 @@
                                     vm.likeitem = true;
                                 }
                             }
-                            console.log(resp.data);
                         }
                     });
                 }
@@ -246,7 +243,6 @@
                                     vm.likeitem = true;
                                 }
                             }
-                            console.log(resp.data);
                         }
                     });
                 }
@@ -259,6 +255,10 @@
                 str = str+arr[i].name+" | ";
             }
             return str.substring(0,str.length-2);
+        }
+
+        function roundRate(rate){
+            return (Math.round(rate*10)).toString()+'%';
         }
 
     }

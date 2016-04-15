@@ -25,8 +25,6 @@
                 UserService.register(registerUser)
                     .then(function (response) {
                         var currentUser = response.data;
-                        console.log("1");
-                        console.log(response.data);
                         if (currentUser != null) {
                             UserService.setCurrentUser(currentUser);
                             $location.url("/profile");

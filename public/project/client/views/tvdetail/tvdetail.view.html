@@ -1,4 +1,4 @@
-<div class="container" ng-controller="TvDetailController">
+<div class="container" ng-controller="TvDetailController as model">
     <div class="page">
         <div class="breadcrumbs">
             <a href="#/home">Home</a>
@@ -31,8 +31,8 @@
                             </button>
                         </li>
                         <li><strong>Rating:</strong>
-                            <div class="star-rating" title="Rated {{model.tv.vote_average}} out of 10"><span
-                                    style="width:80%"><strong class="rating">{{model.tv.vote_average}}</strong> out of 10</span>
+                            <div class="star-rating"><span
+                                    style="width:{{model.roundRate(model.tv.vote_average)}}"></span>
                             </div>
                             <label>Rated {{model.tv.vote_average}} out of 10</label>
                         </li>

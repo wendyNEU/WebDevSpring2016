@@ -53,7 +53,6 @@
         function getPopularActor(){
             ActorService.findPopularPerson(1)
                 .then(function (resp) {
-                    console.log(resp);
                     if (resp === undefined || resp==null || resp.length === 0) {
                         alert("Not more item");
                     } else {

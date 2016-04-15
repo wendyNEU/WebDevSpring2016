@@ -48,7 +48,6 @@ module.exports = function(mongoose,db) {
                             }
                         });
                 } else {
-                    console.log(commentSet);
                     commentSet.comments.push(comment);
                     commentSet.save(function (err) {
                         if (!err){

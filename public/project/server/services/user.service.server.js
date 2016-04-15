@@ -102,7 +102,6 @@ module.exports = function (app, model) {
             model.findUserById(req.session.curUser._id)
                 .then(
                     function (doc) {
-                        console.log(doc);
                         res.json(doc);
                     },
                     function (err) {

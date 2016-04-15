@@ -45,7 +45,6 @@
                     vm.actor = resp;
                     if(!(vm.actor.profile_path===undefined||vm.actor.profile_path===''))
                         vm.actor.profile_path = vm.image_base_url + vm.poster_size + vm.actor.profile_path;
-                    console.log(vm.actor);
                     vm.getCommentSet();
                     vm.loadLike();
                 }
@@ -167,7 +166,6 @@
                     alert("Get Current User Fail");
                 } else {
                     var user = resp.data;
-                    console.log(resp.data);
                     vm.likeitem = false;
                     for(var i in user.like){
                         if(user.like[i].tviso_id==vm.actor.id&&user.like[i].type=='actor'){
@@ -198,7 +196,6 @@
                                     vm.likeitem = true;
                                 }
                             }
-                            console.log(resp.data);
                         }
                     });
                 }
@@ -225,7 +222,6 @@
                                     vm.likeitem = true;
                                 }
                             }
-                            console.log(resp.data);
                         }
                     });
                 }

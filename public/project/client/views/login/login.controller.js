@@ -21,7 +21,6 @@
             if (vm.user.username&&vm.user.password){
                 UserService.login(vm.user)
                     .then(function (response) {
-                        console.log(response.data);
                         if (response.data == null) {
                             alert("login fail");
                         } else {

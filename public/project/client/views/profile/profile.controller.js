@@ -20,7 +20,6 @@
                 .getProfile()
                 .then(function(response) {
                     var curUser = response.data;
-                    console.log(curUser);
                     if(curUser) {
                         UserService.setCurrentUser(curUser);
                         vm.user = curUser;
@@ -57,8 +56,6 @@
                 .then(function(response) {
                     var curUser = response.data;
                     if(curUser) {
-                        console.log('2');
-                        console.log(curUser);
                         UserService.setCurrentUser(curUser);
                         vm.user = curUser;
                         deferred.resolve();

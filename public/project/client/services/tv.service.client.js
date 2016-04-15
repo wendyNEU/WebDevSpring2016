@@ -129,7 +129,6 @@
             var deferred = $q.defer();
             var service = '/tv/';
             var url = base + service + id + '/season/'+season_number+'?api_key=' + apiKey;
-            console.log(url);
             $http({method: 'GET', url: url}).
             success(function (response) {
                 deferred.resolve(response);
