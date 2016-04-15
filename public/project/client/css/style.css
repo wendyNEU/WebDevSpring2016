@@ -664,7 +664,7 @@ ul.arrow li a:hover {
     background-image: url("../images/icon-contact-user.png");
 }
 
-.contact-form .password{
+.contact-form .password {
     background-image: url("../images/icon-password.png");
 }
 
@@ -2183,12 +2183,46 @@ ul.arrow li a:hover {
     background-position: 100% center;
 }
 
+.pagination {
+    clear: both;
+    text-align: center;
+}
+
+.pagination .page-number {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background: #e7e7e7;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    line-height: 2.6;
+    color: #84878d;
+    font-size: 15px;
+    font-size: 1em;
+    -webkit-transition: .3s ease;
+    transition: .3s ease;
+}
+
+.pagination .page-number.current, .pagination .page-number:hover {
+    background: #ffaa3c;
+    color: white;
+}
+
+.movie-meta, .starring {
+    margin-bottom: 30px;
+    list-style: none;
+}
+
+.movie-meta li, .starring li {
+    margin-bottom: 10px;
+}
+
 .movie-list {
     margin: 0 -15px;
 }
 
 .movie-list .movie {
-    width: 25%;
+    width: 100%;
     padding: 0 15px;
     float: left;
     margin-bottom: 30px;
@@ -2196,6 +2230,7 @@ ul.arrow li a:hover {
 
 @media screen and (min-width: 991px) {
     .movie-list .movie:nth-child(4n+1) {
+        clear: both;
     }
 }
 
@@ -2205,16 +2240,18 @@ ul.arrow li a:hover {
     }
 
     .movie-list .movie:nth-child(4n+1) {
-
+        clear: none;
     }
 
     .movie-list .movie:nth-child(2n+1) {
+        clear: both;
     }
 }
 
 @media screen and (max-width: 480px) {
     .movie-list .movie {
         width: 100%;
+        clear: both;
     }
 }
 
@@ -2255,40 +2292,6 @@ ul.arrow li a:hover {
 
 .movie-list .movie .movie-title a:hover {
     color: #ffaa3c;
-}
-
-.pagination {
-    clear: both;
-    text-align: center;
-}
-
-.pagination .page-number {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
-    background: #e7e7e7;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-    line-height: 2.6;
-    color: #84878d;
-    font-size: 15px;
-    font-size: 1em;
-    -webkit-transition: .3s ease;
-    transition: .3s ease;
-}
-
-.pagination .page-number.current, .pagination .page-number:hover {
-    background: #ffaa3c;
-    color: white;
-}
-
-.movie-meta, .starring {
-    margin-bottom: 30px;
-    list-style: none;
-}
-
-.movie-meta li, .starring li {
-    margin-bottom: 10px;
 }
 
 /*
@@ -2339,13 +2342,13 @@ ul.arrow li a:hover {
     padding-top: 30px;
 }
 
-section#profile{
+section#profile {
     padding: 20px;
-    background-image : url(../images/profile.jpg);
+    background-image: url(../images/profile.jpg);
 }
 
-section#register{
+section#register {
     padding: 20px;
-    background-color : black;
-    background-image : url(../images/map-image.png);
+    background-color: black;
+    background-image: url(../images/map-image.png);
 }

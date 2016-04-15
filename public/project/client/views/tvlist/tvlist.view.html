@@ -22,22 +22,26 @@
             </div>
         </div>
         <div class="movie-list" ng-repeat="tv in model.tvlist">
-            <div class="movie">
-                <a href="#/tv_detail/{{tv.id}}">
-                    <figure class="movie-poster"><img ng-src="{{model.veriPosterImg(tv.posterurl)}}">
-                    </figure>
-                </a>
-                <div class="movie-title"><a href="#/tv_detail/{{tv.id}}">{{tv.name}}</a></div>
+            <div class="clearfix" ng-if="$index<model.tvlist.length&&$index % 4 == 0"></div>
+            <div class="col-md-3">
+                <div class="movie">
+                    <a href="#/tv_detail/{{tv.id}}">
+                        <figure class="movie-poster"><img ng-src="{{model.veriPosterImg(tv.posterurl)}}">
+                        </figure>
+                    </a>
+                    <div class="movie-title"><a href="#/tv_detail/{{tv.id}}">{{tv.name}}</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="pagination">
+                <a class="page-number prev" ng-show="model.page>1" ng-click="model.changePage(model.page-1)"><i
+                        class="fa fa-angle-left"></i></a>
+                <span class="page-number current">{{model.page}}</span>
+                <a class="page-number next" ng-click="model.changePage(model.page+1)"><i class="fa fa-angle-right"></i></a>
             </div>
         </div>
     </div> <!-- .movie-list -->
-    <div class="row">
-        <div class="pagination">
-            <a class="page-number prev" ng-show="model.page>1" ng-click="model.changePage(model.page-1)"><i class="fa fa-angle-left"></i></a>
-            <span class="page-number current">{{model.page}}</span>
-            <a class="page-number next" ng-click="model.changePage(model.page+1)"><i class="fa fa-angle-right"></i></a>
-        </div>
-    </div>
 </div><!-- .container -->
 
 

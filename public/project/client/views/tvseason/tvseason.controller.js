@@ -239,7 +239,8 @@
             });
         }
         function genProfilePath(path){
-            return vm.image_base_url + vm.profile_size + path;
+            if(path)    return vm.image_base_url + vm.profile_size + path;
+            else return './images/noimage.jpg';
         }
 
         function genPosterPath(path){

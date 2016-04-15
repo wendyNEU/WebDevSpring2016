@@ -34,7 +34,6 @@
                 {"value":"upcoming","label":"Upcoming"},
                 {"value":"search","label":"Search"}
             ];
-            console.log($routeParams.page_number);
             vm.selectedfilter = vm.Filters[0];
             vm.movielist = [];
             vm.getPopular();

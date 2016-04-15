@@ -22,12 +22,15 @@
             </div>
         </div>
         <div class="movie-list" ng-repeat="movie in model.movielist">
-            <div class="movie">
-                <a href="#/movie_detail/{{movie.id}}">
-                    <figure class="movie-poster"><img ng-src="{{model.veriPosterImg(movie.posterurl)}}">
-                    </figure>
-                </a>
-                <div class="movie-title"><a href="#/movie_detail/{{movie.id}}">{{movie.title}}</a></div>
+            <div class="clearfix" ng-if="$index<model.movielist.length&&$index % 4 == 0"></div>
+            <div class="col-md-3">
+                <div class="movie">
+                    <a href="#/movie_detail/{{movie.id}}">
+                        <figure class="movie-poster"><img ng-src="{{model.veriPosterImg(movie.posterurl)}}">
+                        </figure>
+                    </a>
+                    <div class="movie-title"><a href="#/movie_detail/{{movie.id}}">{{movie.title}}</a></div>
+                </div>
             </div>
         </div>
     </div> <!-- .movie-list -->
