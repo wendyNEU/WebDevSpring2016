@@ -605,7 +605,6 @@ ul.arrow li a:hover {
     clear: both;
     height: 490px;
     margin-bottom: 30px;
-    background-image: "../images/login-background.jpg";
 }
 
 .contact-detail {
@@ -2206,7 +2205,7 @@ ul.arrow li a:hover {
     }
 
     .movie-list .movie:nth-child(4n+1) {
-        clear: none;
+
     }
 
     .movie-list .movie:nth-child(2n+1) {

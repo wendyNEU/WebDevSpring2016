@@ -18,7 +18,6 @@
         init();
 
         function login() {
-
             if (!vm.user) return;
             UserService.login({"username":vm.user.username,"password":vm.user.password})
                 .then(function (response) {

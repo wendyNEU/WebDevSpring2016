@@ -15,7 +15,7 @@
             <div class="col-lg-6">
                 <form style="text-align: right">
                     <input ng-model="model.keyword" placeholder="search movie">
-                    <button type="button" class="btn" ng-click="model.searchMovie(model.keyword,1)">
+                    <button type="button" class="btn" ng-click="model.changefilter({value:'search'})">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
                 </form>
@@ -33,13 +33,11 @@
     </div> <!-- .movie-list -->
 
     <div class="pagination">
-        <a href="#" class="page-number prev"><i class="fa fa-angle-left"></i></a>
-        <span class="page-number current">1</span>
-        <a href="#" class="page-number">2</a>
-        <a href="#" class="page-number">3</a>
-        <a href="#" class="page-number">4</a>
-        <a href="#" class="page-number">5</a>
-        <a href="#" class="page-number next"><i class="fa fa-angle-right"></i></a>
+        <a class="page-number prev" ng-show="model.page>1" ng-click="model.changePage(model.page-1)"><i
+                class="fa fa-angle-left"></i></a>
+        <span class="page-number current">{{model.page}}</span>
+        <a class="page-number next" ng-click="model.changePage(model.page+1)"><i class="fa fa-angle-right"></i></a>
     </div>
+
 </div>
 

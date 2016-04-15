@@ -9,8 +9,6 @@
         .module('MovieFanApp')
         .controller('TvSeasonController',TvSeasonController);
 
-    var youtubeVideoLinkBase = "https://www.youtube.com/embed/";
-
     function TvSeasonController($routeParams,TvService,CommentService,UserService){
         console.log("TvSeasonController");
 
@@ -56,23 +54,13 @@
                     if(!(vm.tv.poster_path===undefined||vm.tv.poster_path===''))
                         vm.tv.posterurl = vm.image_base_url + vm.poster_size + vm.tv.poster_path;
 
-                    TvService.getTvVideoById(vm.tv.id).then(function(resp) {
-                        if (resp === undefined) {
-                            alert("Item you are trying to search could not be found");
-                        } else {
-                            vm.tv.video = resp.results;
-                            for(var i=0;i<vm.tv.video.length;i++){
-                                vm.tv.video[i].youtubeurl = youtubeVideoLinkBase + vm.tv.video[i].key;
-                            }
-                        }
-                    });
                     vm.getCommentSet();
                     vm.loadLike();
                 }
             });
         }
         function getCommentSet(){
-            CommentService.getCommentSet('tv',vm.tv.id).then(function(resp) {
+            CommentService.getCommentSet('season',vm.tv.id).then(function(resp) {
                 if (resp === undefined) {
                     alert("Item you are trying to search could not be found");
                 } else {
@@ -91,7 +79,7 @@
                 "date":(new Date).toString(),
                 "subcomments":[]
             };
-            CommentService.createComment('tv',vm.tv.id,comment).then(function(resp){
+            CommentService.createComment('season',vm.tv.id,comment).then(function(resp){
                 if (resp === undefined) {
                     alert("Create Comment Fail");
                 } else if (resp.length === 0) {
@@ -112,7 +100,7 @@
                 "username":user.username,
                 "date":(new Date).toString()
             };
-            CommentService.createSubComment('tv',vm.tv.id,vm.commentSet.comments[index]._id, subcomment).then(function(resp){
+            CommentService.createSubComment('season',vm.tv.id,vm.commentSet.comments[index]._id, subcomment).then(function(resp){
                 if (resp === undefined) {
                     alert("Create Sub Comment Fail");
                 } else if (resp.length === 0) {
@@ -125,7 +113,7 @@
         }
 
         function deleteComment(comment_id){
-            CommentService.deleteComment('tv',vm.commentSet.tviso_id,comment_id).then(function(resp){
+            CommentService.deleteComment('season',vm.commentSet.tviso_id,comment_id).then(function(resp){
                 if (resp === undefined) {
                     alert("Create Sub Comment Fail");
                 } else if (resp.length === 0) {
@@ -138,7 +126,7 @@
         }
 
         function deleteSubComment(comment_id, subcomment_id){
-            CommentService.deleteSubComment('tv',vm.tv.id,comment_id,subcomment_id).then(function(resp) {
+            CommentService.deleteSubComment('season',vm.tv.id,comment_id,subcomment_id).then(function(resp) {
                 if (resp === undefined) {
                     alert("Create Sub Comment Fail");
                 } else if (resp.length === 0) {
@@ -190,7 +178,7 @@
                     console.log(resp.data);
                     vm.likeitem = false;
                     for(var i in user.like){
-                        if(user.like[i].tviso_id==vm.tv.id&&user.like[i].type=='tv'){
+                        if(user.like[i].tviso_id==vm.tv.id&&user.like[i].type=='season'){
                             vm.likeitem = true;
                             break;
                         }
@@ -206,16 +194,15 @@
                 } else if (resp.length === 0) {
                     alert("Get Current User Fail");
                 } else {
-                    var user = resp.data;
-                    UserService.like(user._id,'tv',vm.tv.id).then(function(resp){
+                    UserService.like('season',vm.tv.id).then(function(resp){
                         if (resp === undefined) {
-                            alert("Like Movie Fail");
+                            alert("Like Season Fail");
                         } else if (resp.length === 0) {
-                            alert("Like Movie Fail");
+                            alert("Like Season Fail");
                         } else {
                             vm.likeitem=false;
                             for(var i in resp.data){
-                                if(resp.data[i].tviso_id==vm.tv.id&&resp.data[i].type=="tv"){
+                                if(resp.data[i].tviso_id==vm.tv.id&&resp.data[i].type=="season"){
                                     vm.likeitem = true;
                                 }
                             }
@@ -224,7 +211,6 @@
                     });
                 }
             });
-
         }
 
         function unlike(){
@@ -234,16 +220,15 @@
                 } else if (resp.length === 0) {
                     alert("Get Current User Fail");
                 } else {
-                    var user = resp.data;
-                    UserService.unlike(user._id,'tv',vm.tv.id).then(function(resp){
+                    UserService.unlike('season',vm.tv.id).then(function(resp){
                         if (resp === undefined) {
-                            alert("UnLike Movie Fail");
+                            alert("UnLike Season Fail");
                         } else if (resp.length === 0) {
-                            alert("UnLike Movie Fail");
+                            alert("UnLike Season Fail");
                         } else {
                             vm.likeitem=false;
                             for(var i in resp.data){
-                                if(resp.data[i].tviso_id==vm.tv.id&&resp.data[i].type=="tv"){
+                                if(resp.data[i].tviso_id==vm.tv.id&&resp.data[i].type=="season"){
                                     vm.likeitem = true;
                                 }
                             }

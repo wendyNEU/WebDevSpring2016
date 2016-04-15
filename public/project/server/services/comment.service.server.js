@@ -4,7 +4,7 @@
 
 module.exports = function (app, model) {
 
-    app.get("/api/project/comment/:mtype/:tviso_id",findComment);
+    app.get("/api/project/comment/:mtype/:tviso_id", findComment);
 
     app.post("/api/project/comment/:mtype/:tviso_id", createComment);
 
@@ -14,29 +14,63 @@ module.exports = function (app, model) {
 
     app.delete("/api/project/comment/:mtype/:tviso_id/comment/:comment_id/subcomment/:subcomment_id", deleteSubComment);
 
-    function findComment(req,res){
-        var cs = model.findCommentSetByTvisoId(req.params.tviso_id,req.params.mtype);
-        res.json(cs);
+    function findComment(req, res) {
+        model.findCommentSetByTvisoId(req.params.tviso_id, req.params.mtype)
+            .then(
+                function (commentSet) {
+                    res.json(commentSet);
+                },
+                function () {
+                    res.status(400).send(err);
+                }
+            );
     }
 
-    function createComment(req,res){
-        var cs = model.createCommentByTvisoId(req.params.tviso_id,req.params.mtype,req.body);
-        res.json(cs);
+    function createComment(req, res) {
+        model.createCommentByTvisoId(req.params.tviso_id, req.params.mtype, req.body)
+            .then(
+                function (commentSet) {
+                    res.json(commentSet);
+                },
+                function () {
+                    res.status(400).send(err);
+                }
+            );
     }
 
-    function createSubComment(req,res){
-        var cs = model.createSubCommentByCommentId(req.params.tviso_id,req.params.mtype,req.params.comment_id,req.body);
-        res.json(cs);
+    function createSubComment(req, res) {
+        model.createSubCommentByCommentId(req.params.tviso_id, req.params.mtype, req.params.comment_id, req.body)
+            .then(
+                function (subcomments) {
+                    res.json(subcomments);
+                },
+                function () {
+                    res.status(400).send(err);
+                }
+            );
     }
 
-    function deleteComment(req,res){
-        var cs = model.deleteCommentByTvisoId(req.params.tviso_id,req.params.mtype,req.params.comment_id);
-        res.json(cs);
+    function deleteComment(req, res) {
+        model.deleteCommentByTvisoId(req.params.tviso_id, req.params.mtype, req.params.comment_id)
+            .then(
+                function (comments) {
+                    res.json(comments);
+                },
+                function () {
+                    res.status(400).send(err);
+                }
+            );
     }
 
-    function deleteSubComment(req,res){
-        var cs = model.deleteSubCommentByCommentId(req.params.tviso_id,req.params.mtype,req.params.comment_id,req.params.subcomment_id);
-        res.json(cs);
+    function deleteSubComment(req, res) {
+        model.deleteSubCommentByCommentId(req.params.tviso_id, req.params.mtype, req.params.comment_id, req.params.subcomment_id)
+            .then(
+                function (subcomments) {
+                    res.json(subcomments);
+                },
+                function () {
+                    res.status(400).send(err);
+                }
+            );
     }
-
 };

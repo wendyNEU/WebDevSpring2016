@@ -1,9 +1,13 @@
 /**
  * Created by wendy on 3/23/16.
  */
-var mock = require("./comment.mock.json");
-var Guid = require('../../../../../js/guid.js');
-module.exports = function() {
+var q = require("q");
+var mongodb = require("mongodb");
+
+module.exports = function(mongoose,db) {
+    var CommentSetSchema = require("./comment.schema.server.js")(mongoose);
+    var CommentSetModel = mongoose.model('CommentSet', CommentSetSchema);
+
     var api = {
         findCommentSetByTvisoId: findCommentSetByTvisoId,
         createCommentByTvisoId:createCommentByTvisoId,
@@ -14,80 +18,119 @@ module.exports = function() {
     return api;
 
     function findCommentSetByTvisoId(tvisoId,type){
-        for(var i in mock){
-            if(mock[i].tviso_id==tvisoId&&mock[i].type==type){
-                return mock[i];
-            }
-        }
-        return null;
-    }
-
-    function createCommentsSet(tvisoId, type){
-        return {"_id":Guid.create().value,"type":type,"tviso_id":tvisoId,comments:[]};
+        var deferred = q.defer();
+        CommentSetModel.findOne(
+            {tviso_id: tvisoId, type: type},
+            function (err, commentSet) {
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(commentSet);
+                }
+            });
+        return deferred.promise;
     }
 
     function createCommentByTvisoId(tvisoId,type,comment){
-        comment._id = Guid.create().value;
-        comment.subcomments = [];
-        for(var i in mock){
-            if(mock[i].tviso_id==tvisoId&&mock[i].type==type){
-                mock[i].comments.push(comment);
-                return mock[i];
-            }
-        }
-        var tvisoCommentSet = createCommentsSet(tvisoId,type);
-        tvisoCommentSet.comments.push(comment);
-        mock.push(tvisoCommentSet);
-        return tvisoCommentSet;
+        var deferred = q.defer();
+        CommentSetModel.findOne(
+            { tviso_id: tvisoId, type: type },
+            function (err, commentSet) {
+                if (err||commentSet==null) {
+                    var commentSet = {type:type,tviso_id:tvisoId,comments:[comment]};
+                    CommentSetModel.create(
+                        commentSet,
+                        function (err, commentSet) {
+                            if (err) {
+                                deferred.reject(err);
+                            } else {
+                                deferred.resolve(commentSet);
+                            }
+                        });
+                } else {
+                    console.log(commentSet);
+                    commentSet.comments.push(comment);
+                    commentSet.save(function (err) {
+                        if (!err){
+                            deferred.resolve(commentSet);
+                        }else{
+                            deferred.reject(err);
+                        }
+                    });
+                }
+            });
+        return deferred.promise;
     }
 
     function createSubCommentByCommentId(tvisoId,type,comment_id,subcomment){
-        subcomment._id = Guid.create().value;
-        for(var i in mock){
-            if(mock[i].tviso_id==tvisoId&&mock[i].type==type){
-                for(var j in mock[i].comments){
-                    if(mock[i].comments[j]._id==comment_id){
-                        mock[i].comments[j].subcomments.push(subcomment);
-                        return mock[i].comments[j].subcomments;
-                    }
+        var deferred = q.defer();
+        CommentSetModel.findOne(
+            {
+                "tviso_id":tvisoId,
+                "type":type
+            },
+            function (err, commentSet) {
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    commentSet.comments.id(comment_id).subcomments.push(subcomment);
+                    commentSet.save(function (err) {
+                        if (err){
+                            deferred.reject(err);
+                        }else{
+                            deferred.resolve(commentSet.comments.id(comment_id).subcomments);
+                        }
+                    });
                 }
-            }
-        }
-        return null;
+            });
+        return deferred.promise;
     }
 
     function deleteCommentByTvisoId(tvisoId,type,comment_id){
-        for(var i in mock){
-            if(mock[i].tviso_id==tvisoId&&mock[i].type==type){
-                for(var j in mock[i].comments){
-                    if(mock[i].comments[j]._id==comment_id){
-                        mock[i].comments.splice(j,1);
-                        return mock[i].comments;
-                    }
+        var deferred = q.defer();
+        CommentSetModel.findOne(
+            {
+                "tviso_id":tvisoId,
+                "type":type
+            },
+            function (err, commentSet) {
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    commentSet.comments.id(comment_id).remove();
+                    commentSet.save(function (err) {
+                        if (err){
+                            deferred.reject(err);
+                        }else{
+                            deferred.resolve(commentSet.comments);
+                        }
+                    });
                 }
-                return null;
-            }
-        }
-        return null;
+            });
+        return deferred.promise;
     }
 
     function deleteSubCommentByCommentId(tvisoId,type,comment_id,subcomment_id){
-        for(var i in mock){
-            if(mock[i].tviso_id==tvisoId&&mock[i].type==type){
-                for(var j in mock[i].comments){
-                    if(mock[i].comments[j]._id==comment_id){
-                        for(var k in mock[i].comments[j].subcomments){
-                            if(mock[i].comments[j].subcomments[k]._id==subcomment_id){
-                                mock[i].comments[j].subcomments.splice(k,1);
-                                return mock[i].comments;
-                            }
+        var deferred = q.defer();
+        CommentSetModel.findOne(
+            {
+                "tviso_id":tvisoId,
+                "type":type
+            },
+            function (err, commentSet) {
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    commentSet.comments.id(comment_id).subcomments.id(subcomment_id).remove();
+                    commentSet.save(function (err) {
+                        if (err){
+                            deferred.reject(err);
+                        }else{
+                            deferred.resolve(commentSet.comments);
                         }
-                        return null;
-                    }
+                    });
                 }
-                return null;
-            }
-        }
-        return null;
+            });
+        return deferred.promise;
     }
 }

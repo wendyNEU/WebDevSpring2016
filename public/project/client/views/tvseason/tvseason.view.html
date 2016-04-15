@@ -27,10 +27,6 @@
                                     ng-click="model.unlike()"><span class="glyphicon glyphicon-thumbs-down"></span>
                                 <span class="label-icon">Unlike</span>
                             </button>
-                            <button ng-show="model.tv.video.length>0" type="button" class="btn btn-info btn-md"
-                                    data-toggle="modal"
-                                    data-target="#myModal">Trailer
-                            </button>
                         </li>
                         <li><strong>Air Date: </strong> {{model.tv.air_date}}</li>
                     </ul>
@@ -132,35 +128,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div id="trailer" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators" ng-repeat="video in model.tv.video">
-                            <li data-target="#trailer" data-slide-to="{{$index}}" class="active"></li>
-                        </ol>
-                        <div class="carousel-inner" ng-repeat="video in model.tv.video">
-                            <div class="item active">
-                                <div class="thumbnail">
-                                    <div class="video-container">
-                                        <iframe width="870" height="550" ng-src="{{video.youtubeurl}}"
-                                                frameborder="0" allowfullscreen=""></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>

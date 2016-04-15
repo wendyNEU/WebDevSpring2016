@@ -18,19 +18,20 @@
         init();
 
         function login() {
-            if (!vm.user) return;
-            UserService.findUserByCredentials(vm.user.username, vm.user.password)
-                .then(function (response) {
-                    console.log(response.data);
-                    if (response.data == null) {
-                        alert("login fail");
-                    }
-                    else {
-                        vm.user = response.data;
-                        UserService.setCurrentUser(response.data);
-                        $location.path('/profile');
-                    }
-                })
+            if (vm.user.username&&vm.user.password){
+                UserService.login(vm.user)
+                    .then(function (response) {
+                        console.log(response.data);
+                        if (response.data == null) {
+                            alert("login fail");
+                        } else {
+                            vm.user = response.data;
+                            $location.path('/profile');
+                        }
+                    })
+            }else {
+                alert("Input ");
+            }
         }
     }
 })();

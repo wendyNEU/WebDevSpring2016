@@ -17,15 +17,24 @@
         init();
 
         function register(){
-            console.log(vm.user);
-            UserService.createUser(vm.user)
-                .then(function(response){
-                    var currentUser = response.data;
-                    if(currentUser != null) {
-                        UserService.setCurrentUser(currentUser);
-                        $location.url("/profile");
-                    }
-                });
+            if(vm.user.password==vm.user.veripassword){
+                var registerUser = {};
+                registerUser.username = vm.user.username;
+                registerUser.password = vm.user.password;
+                registerUser.email = vm.user.email;
+                UserService.register(registerUser)
+                    .then(function (response) {
+                        var currentUser = response.data;
+                        console.log("1");
+                        console.log(response.data);
+                        if (currentUser != null) {
+                            UserService.setCurrentUser(currentUser);
+                            $location.url("/profile");
+                        }
+                    });
+            }else {
+                alert("Password doesn't match");
+            }
         }
     }
 })();

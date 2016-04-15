@@ -17,11 +17,11 @@
                         <div class="row">
                             <div class="col-md-2 col-md-offset-1">
                                 <div class="form-group" align="center">
-                                    <img class="image-responsive" src="./images/Nophoto.jpg" alt="HTML5 Icon" style="width:150px;height:150px;">
+                                    <img class="image-responsive" src="{{model.user.photo}}" alt="HTML5 Icon" style="width:150px;height:150px;">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="file" class="form-control" placeholder="Upload Photo" name="photo" accept="image/*">
+                                    <input type="file" class="form-control" placeholder="Upload Photo" ng-model="model.uploadPhoto" accept="image/*">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>

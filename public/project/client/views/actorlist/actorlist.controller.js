@@ -6,7 +6,7 @@
         .module('MovieFanApp')
         .controller('ActorController', ActorController);
 
-    function ActorController(ActorService, $route,$routeParams) {
+    function ActorController(ActorService, $route) {
         console.log("ActorController");
 
         var vm = this;
@@ -20,27 +20,29 @@
                 {"value":"popular","label":"Popular"},
                 {"value":"search","label":"Search"}
             ];
+            vm.page = 1;
+            vm.filtervalue = 'popular';
             vm.selectedfilter = vm.Filters[0];
             vm.actorlist = [];
             vm.getPopular = getPopular;
             vm.veriPosterImg = veriPosterImg;
             vm.searchActor = searchActor;
             vm.changefilter = changefilter;
+            vm.changePage = changePage;
             vm.getPopular();
         }
         init();
 
         function getPopular(){
-            ActorService.findPopularPerson(1)
+            ActorService.findPopularPerson(vm.page)
                 .then(function (resp) {
-                    if (resp === undefined) {
-                        alert("Item you are trying to search could not be found");
-                    } else if (resp.length === 0) {
-                        alert("Item you are trying to search could not be found");
+                    console.log(resp);
+                    if (resp === undefined || resp==null || resp.length === 0) {
+                        vm.page = vm.page - 1;
+                        alert("Not more item");
                     } else {
                         vm.actorlist = resp.results;
-
-                        for (i = 0; i < resp.results.length; i++) {
+                        for (var i = 0; i < resp.results.length; i++) {
                             if (vm.actorlist[i].profile_path != null && vm.actorlist[i].profile_path !== '')
                                 vm.actorlist[i].profile_path = vm.image_base_url + vm.poster_size + vm.actorlist[i].profile_path;
                         }
@@ -48,17 +50,15 @@
                 });
         }
 
-        function searchActor(title, page) {
-            ActorService.searchPersonByName(title, page)
+        function searchActor() {
+            ActorService.searchPersonByName(vm.keyword, vm.page)
                 .then(function (resp) {
-                    if (resp === undefined) {
-                        alert("Item you are trying to search could not be found");
-                    } else if (resp.length === 0) {
-                        alert("Item you are trying to search could not be found");
-                        $location.path("/home");
+                    console.log(resp);
+                    if (resp === undefined || resp==null || resp.length === 0) {
+                        vm.page = vm.page - 1;
+                        alert("Not more item");
                     } else {
                         vm.selectedfilter = vm.Filters[1];
-                        vm.keyword = "";
                         vm.actorlist = resp.results;
                         for (var i = 0; i < resp.results.length; i++) {
                             if (vm.actorlist[i].profile_path != null && vm.actorlist[i].profile_path !== '')
@@ -77,10 +77,21 @@
         }
 
         function changefilter(filtervalue){
+            vm.page = 1;
+            vm.filtervalue = filtervalue.value;
             if(filtervalue.value=='popular'){
                 vm.getPopular();
             }else{
-                vm.searchMovie(vm.keyword,1);
+                vm.searchActor();
+            }
+        }
+
+        function changePage(page){
+            vm.page = page;
+            if(vm.filtervalue=='popular'){
+                vm.getPopular();
+            }else{
+                vm.searchActor();
             }
         }
     }

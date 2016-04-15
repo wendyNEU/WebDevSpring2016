@@ -22,6 +22,8 @@
                 {"value":"airtoday","label":"Air Today"},
                 {"value":"search","label":"Search"}
             ];
+            vm.page = 1;
+            vm.filtervalue = 'popular';
             vm.selectedfilter = vm.Filters[0];
             vm.tvlist = [];
             vm.getPopular = getPopular;
@@ -31,20 +33,18 @@
             vm.veriPosterImg = veriPosterImg;
             vm.searchTV = searchTV;
             vm.changefilter = changefilter;
-
+            vm.changePage = changePage;
             vm.getPopular();
         }
         init();
 
         function getPopular(){
-            TvService.findPopularTV(1)
+            TvService.findPopularTV(vm.page)
                 .then(function(resp) {
-                    if (resp === undefined) {
-                        alert("Item you are trying to search could not be found");
-                    } else if (resp.length === 0) {
-                        alert("Item you are trying to search could not be found");
-                        $location.path("/home");
-                    } else {
+                    if (resp === undefined || resp==null || resp.length === 0) {
+                        vm.page = vm.page - 1;
+                        alert("Not more item");
+                    }  else {
                         vm.tvlist = resp.results;
                         for (var i = 0; i < resp.results.length; i++) {
                             if (vm.tvlist[i].poster_path != null && vm.tvlist[i].poster_path !== '')
@@ -55,13 +55,11 @@
         }
 
         function getTopRate(){
-            TvService.findTopRateTV(1)
+            TvService.findTopRateTV(vm.page)
                 .then(function(resp) {
-                    if (resp === undefined) {
-                        alert("Item you are trying to search could not be found");
-                    } else if (resp.length === 0) {
-                        alert("Item you are trying to search could not be found");
-                        $location.path("/home");
+                    if (resp === undefined || resp==null || resp.length === 0) {
+                        vm.page = vm.page - 1;
+                        alert("Not more item");
                     } else {
                         vm.tvlist = resp.results;
                         for (var i = 0; i < resp.results.length; i++) {
@@ -73,14 +71,12 @@
         }
 
         function getOnAir(){
-            TvService.findTvOnAir(1)
+            TvService.findTvOnAir(vm.page)
                 .then(function(resp) {
-                    if (resp === undefined) {
-                        alert("Item you are trying to search could not be found");
-                    } else if (resp.length === 0) {
-                        alert("Item you are trying to search could not be found");
-                        $location.path("/home");
-                    } else {
+                    if (resp === undefined || resp==null || resp.length === 0) {
+                        vm.page = vm.page - 1;
+                        alert("Not more item");
+                    }  else {
                         vm.tvlist = resp.results;
                         for (var i = 0; i < resp.results.length; i++) {
                             if (vm.tvlist[i].poster_path != null && vm.tvlist[i].poster_path !== '')
@@ -91,13 +87,11 @@
         }
 
         function getAirToday(){
-            TvService.findTvOnAirToday(1)
+            TvService.findTvOnAirToday(vm.page)
                 .then(function(resp) {
-                    if (resp === undefined) {
-                        alert("Item you are trying to search could not be found");
-                    } else if (resp.length === 0) {
-                        alert("Item you are trying to search could not be found");
-                        $location.path("/home");
+                    if (resp === undefined || resp==null || resp.length === 0) {
+                        vm.page = vm.page - 1;
+                        alert("Not more item");
                     } else {
                         vm.tvlist = resp.results;
                         for (var i = 0; i < resp.results.length; i++) {
@@ -107,17 +101,14 @@
                     }
                 });
         }
-        function searchTV(title,page){
-            TvService.searchTVByTitle(title,page)
+        function searchTV(){
+            TvService.searchTVByTitle(vm.keyword,vm.page)
                 .then(function(resp) {
-                    if (resp === undefined) {
-                        alert("Item you are trying to search could not be found");
-                    } else if (resp.length === 0) {
-                        alert("Item you are trying to search could not be found");
-                        $location.path("/home");
+                    if (resp === undefined || resp==null || resp.length === 0) {
+                        vm.page = vm.page - 1;
+                        alert("Not more item");
                     } else {
                         vm.selectedfilter = vm.Filters[4];
-                        vm.keyword = "";
                         vm.tvlist = resp.results;
                         for (var i = 0; i < resp.results.length; i++) {
                             if (vm.tvlist[i].poster_path != null && vm.tvlist[i].poster_path !== '')
@@ -136,6 +127,8 @@
         }
 
         function changefilter(filtervalue){
+            vm.page = 1;
+            vm.filtervalue = filtervalue.value;
             if(filtervalue.value=='popular'){
                 vm.getPopular();
             }else if(filtervalue.value=='toprate'){
@@ -145,7 +138,22 @@
             }else if(filtervalue.value=='airtoday'){
                 vm.getAirToday();
             }else{
-                vm.searchTV(vm.keyword,1);
+                vm.searchTV();
+            }
+        }
+
+        function changePage(page){
+            vm.page = page;
+            if(vm.filtervalue=='popular'){
+                vm.getPopular();
+            }else if(vm.filtervalue=='toprate'){
+                vm.getTopRate();
+            }else if(vm.filtervalue=='onair'){
+                vm.getOnAir();
+            }else if(vm.filtervalue=='airtoday'){
+                vm.getAirToday();
+            }else{
+                vm.searchTV();
             }
         }
     }

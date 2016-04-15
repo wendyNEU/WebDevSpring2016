@@ -46,7 +46,6 @@
                 if (resp === undefined) {
                     alert("Item you are trying to search could not be found");
                 } else {
-
                     vm.movie = resp;
                     console.log(vm.movie);
                     if(!(vm.movie.poster_path===undefined||vm.movie.poster_path===''))
@@ -74,6 +73,7 @@
                 if (resp === undefined) {
                     alert("Item you are trying to search could not be found");
                 } else {
+                    console.log(resp.data);
                     vm.commentSet = resp.data;
                 }
             });
@@ -95,6 +95,7 @@
                 } else if (resp.length === 0) {
                     alert("Create Comment Fail");
                 } else {
+                    console.log(resp.data);
                     vm.commenttext ='';
                     vm.commentSet = resp.data;
                 }
@@ -205,7 +206,7 @@
                     alert("Get Current User Fail");
                 } else {
                     var user = resp.data;
-                    UserService.like(user._id,'movie',vm.movie.id).then(function(resp){
+                    UserService.like('movie',vm.movie.id).then(function(resp){
                         if (resp === undefined) {
                             alert("Like Movie Fail");
                         } else if (resp.length === 0) {
@@ -233,7 +234,7 @@
                     alert("Get Current User Fail");
                 } else {
                     var user = resp.data;
-                    UserService.unlike(user._id,'movie',vm.movie.id).then(function(resp){
+                    UserService.unlike('movie',vm.movie.id).then(function(resp){
                         if (resp === undefined) {
                             alert("UnLike Movie Fail");
                         } else if (resp.length === 0) {

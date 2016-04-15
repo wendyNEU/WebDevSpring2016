@@ -6,7 +6,7 @@
         .module('MovieFanApp')
         .controller('MovieController', MovieController);
 
-    function MovieController(MovieService,$route,$location){
+    function MovieController(MovieService,$route,$location,$routeParams){
         console.log("MovieController");
 
         var vm = this;
@@ -17,6 +17,8 @@
             vm.image_base_url = 'http://image.tmdb.org/t/p';
             vm.poster_size='/w500';
             vm.keyword = "";
+            vm.page = 1;
+            vm.filtervalue = 'popular';
             vm.veriPosterImg = veriPosterImg;
             vm.getPopular = getPopular;
             vm.getTopRate = getTopRate;
@@ -24,6 +26,7 @@
             vm.getUpcoming = getUpcoming;
             vm.searchMovie = searchMovie;
             vm.changefilter = changefilter;
+            vm.changePage = changePage;
             vm.Filters = [
                 {"value":"popular","label":"Popular"},
                 {"value":"toprate","label":"Top Rate"},
@@ -31,6 +34,7 @@
                 {"value":"upcoming","label":"Upcoming"},
                 {"value":"search","label":"Search"}
             ];
+            console.log($routeParams.page_number);
             vm.selectedfilter = vm.Filters[0];
             vm.movielist = [];
             vm.getPopular();
@@ -38,10 +42,11 @@
         init();
 
         function getPopular(){
-            MovieService.findPopularMovie(1)
+            MovieService.findPopularMovie(vm.page)
                 .then(function(resp) {
-                    if (resp === undefined) {
-                        alert("Item you are trying to search could not be found");
+                    if (resp === undefined || resp==null || resp.length === 0) {
+                        vm.page = vm.page - 1;
+                        alert("Not more item");
                     } else {
                         vm.movielist = resp.results;
                         for (i = 0; i < resp.results.length; i++) {
@@ -53,10 +58,11 @@
         }
 
         function getTopRate(){
-            MovieService.findTopRateMovie(1)
+            MovieService.findTopRateMovie(vm.page)
                 .then(function(resp) {
-                    if (resp === undefined) {
-                        alert("Item you are trying to search could not be found");
+                    if (resp === undefined || resp==null || resp.length === 0) {
+                        vm.page = vm.page - 1;
+                        alert("Not more item");
                     } else {
                         vm.movielist = resp.results;
                         for (i = 0; i < resp.results.length; i++) {
@@ -68,10 +74,11 @@
         }
 
         function getNowPlaying(){
-            MovieService.findMovieNowPlaying(1)
+            MovieService.findMovieNowPlaying(vm.page)
                 .then(function(resp) {
-                    if (resp === undefined) {
-                        alert("Item you are trying to search could not be found");
+                    if (resp === undefined || resp==null || resp.length === 0) {
+                        vm.page = vm.page - 1;
+                        alert("Not more item");
                     } else {
                         vm.movielist = resp.results;
                         for (i = 0; i < resp.results.length; i++) {
@@ -83,10 +90,11 @@
         }
 
         function getUpcoming() {
-            MovieService.findMovieUpcoming(1)
+            MovieService.findMovieUpcoming(vm.page)
                 .then(function(resp) {
-                    if (resp === undefined) {
-                        alert("Item you are trying to search could not be found");
+                    if (resp === undefined || resp==null || resp.length === 0) {
+                        vm.page = vm.page - 1;
+                        alert("Not more item");
                     } else {
                         vm.movielist = resp.results;
                         for (i = 0; i < resp.results.length; i++) {
@@ -98,14 +106,14 @@
         }
 
 
-        function searchMovie(title,page){
-            MovieService.searchMoviesByTitle(title,page)
+        function searchMovie(){
+            MovieService.searchMoviesByTitle(vm.keyword,vm.page)
                 .then(function(resp) {
-                    if (resp === undefined) {
-                        alert("Item you are trying to search could not be found");
+                    if (resp === undefined || resp==null || resp.length === 0) {
+                        vm.page = vm.page - 1;
+                        alert("Not more item");
                     } else {
                         vm.selectedfilter = vm.Filters[4];
-                        vm.keyword="";
                         vm.movielist = resp.results;
                         for (i = 0; i < resp.results.length; i++) {
                             if (vm.movielist[i].poster_path != null && vm.movielist[i].poster_path !== '')
@@ -124,6 +132,8 @@
         }
 
         function changefilter(filtervalue){
+            vm.page = 1;
+            vm.filtervalue = filtervalue.value;
             if(filtervalue.value=='popular'){
                 vm.getPopular();
             }else if(filtervalue.value=='toprate'){
@@ -133,7 +143,22 @@
             }else if(filtervalue.value=='upcoming'){
                 vm.getUpcoming();
             }else{
-                vm.searchMovie(vm.keyword,1);
+                vm.searchMovie();
+            }
+        }
+
+        function changePage(page){
+            vm.page = page;
+            if(vm.filtervalue=='popular'){
+                vm.getPopular();
+            }else if(vm.filtervalue=='toprate'){
+                vm.getTopRate();
+            }else if(vm.filtervaluee=='nowplaying'){
+                vm.getNowPlaying();
+            }else if(vm.filtervalue=='upcoming'){
+                vm.getUpcoming();
+            }else{
+                vm.searchMovie();
             }
         }
 

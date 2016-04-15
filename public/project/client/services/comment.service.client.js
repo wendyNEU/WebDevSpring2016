@@ -6,7 +6,7 @@
     angular.module("MovieFanApp")
         .factory("CommentService", CommentService);
 
-    function CommentService($http,$rootScope) {
+    function CommentService($http) {
 
         var api = {
             getCommentSet:getCommentSet,

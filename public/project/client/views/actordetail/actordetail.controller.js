@@ -186,8 +186,7 @@
                 } else if (resp.length === 0) {
                     alert("Get Current User Fail");
                 } else {
-                    var user = resp.data;
-                    UserService.like(user._id,'actor',vm.actor.id).then(function(resp){
+                    UserService.like('actor',vm.actor.id).then(function(resp){
                         if (resp === undefined) {
                             alert("Like Movie Fail");
                         } else if (resp.length === 0) {
@@ -214,8 +213,7 @@
                 } else if (resp.length === 0) {
                     alert("Get Current User Fail");
                 } else {
-                    var user = resp.data;
-                    UserService.unlike(user._id,'actor',vm.actor.id).then(function(resp){
+                    UserService.unlike('actor',vm.actor.id).then(function(resp){
                         if (resp === undefined) {
                             alert("UnLike Movie Fail");
                         } else if (resp.length === 0) {

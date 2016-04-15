@@ -12,15 +12,18 @@
             findUserById: findUserById,
             findUserByUsername:findUserByUsername,
             findUserByCredentials: findUserByCredentials,
-            findAllUsers: findAllUsers,
-            createUser: createUser,
-            deleteUserbyId: deleteUserById,
+            adminFindAllUsers: adminFindAllUsers,
+            adminCreateUser: adminCreateUser,
+            adminUpdateUser:adminUpdateUser,
+            adminDeleteUserbyId: adminDeleteUserById,
             updateUser: updateUser,
             getProfile:getProfile,
             islogin:islogin,
             isAdmin:isAdmin,
             like: like,
             unlike:unlike,
+            register:register,
+            login:login,
             //more functions
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
@@ -30,7 +33,15 @@
         //return userApi;
 
         function getProfile(){
-            return $http.get("/api/project/user/"+$rootScope.curUser._id);
+            return $http.get("/api/project/loggedin");
+        }
+
+        function register(user){
+            return $http.post('/api/project/register',user);
+        }
+
+        function login(credential){
+            return $http.post("/api/assignment/login",credential);
         }
 
         function findUserById(userId) {
@@ -45,28 +56,32 @@
             return $http.get("/api/project/user?username="+username+"&password="+password);
         }
 
-        function findAllUsers() {
-            return $http.get("/api/project/user");
+        function adminFindAllUsers() {
+            return $http.get("/api/project/admin/user");
         }
 
-        function createUser(user) {
-            return $http.post("/api/project/user",user);
+        function adminCreateUser(user) {
+            return $http.post("/api/project/admin/user",user);
         }
 
-        function deleteUserById(userId){
-            return $http.delete("/api/project/user/"+userId);
+        function adminDeleteUserById(userId){
+            return $http.delete("/api/project/admin/user/"+userId);
         }
 
         function updateUser(userId, user) {
             return $http.put("/api/project/user/"+userId,user);
         }
 
-        function like(userId,type,tviso_id){
-            return $http.post("/api/project/user/"+userId,{"tviso_id":tviso_id,"type":type});
+        function adminUpdateUser(userId, user) {
+            return $http.put("/api/project/admin/user/"+userId,user);
         }
 
-        function unlike(userId,type,tviso_id){
-            return $http.delete("/api/project/user/"+userId+"/"+type+"/"+tviso_id);
+        function like(type,tviso_id){
+            return $http.post("/api/project/user/like",{"tviso_id":tviso_id,"type":type});
+        }
+
+        function unlike(type,tviso_id){
+            return $http.delete("/api/project/user/unlike/"+type+"/"+tviso_id);
         }
 
         function setCurrentUser(user) {
@@ -79,7 +94,9 @@
         }
 
         function logout() {
-            return $rootScope.curUser = null;
+            var curuser = jQuery.extend(true, {}, $rootScope.curUser);
+            $rootScope.curUser = null;
+            return $http.post("/api/assignment/logout",curuser);
         }
 
         function islogin(){
@@ -91,7 +108,7 @@
         }
 
         function isAdmin(){
-            if(islogin()&&$rootScope.curUser.rules=="admin"){
+            if(islogin()&&$rootScope.curUser.rules!=undefined&&$rootScope.curUser.rules=="admin"){
                 return true;
             }else{
                 return false;
