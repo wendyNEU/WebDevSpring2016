@@ -34,25 +34,13 @@
         init();
 
         function update(){
-            /*
-            console.log(vm.uploadPhoto);
-            if(vm.uploadPhoto!='') {
-                if(vm.uploadPhoto.endsWith("png")){
-                    vm.user.photo.contentType ='image/png';
-                    vm.user.photo.data = fs.readFileSync(vm.uploadPhoto);
-                }else if(vm.uploadPhoto.endsWith("jpg")){
-                    vm.user.photo.contentType ='image/jpg';
-                    vm.user.photo.data = fs.readFileSync(vm.uploadPhoto);
-                }else if(vm.uploadPhoto.endsWith("jpeg")){
-                    vm.user.photo.contentType ='image/jpeg';
-                    vm.user.photo.data = fs.readFileSync(vm.uploadPhoto);
-                }else{
-                    alert("invalid image");
-                }
-            }*/
             var deferred = $q.defer();
+            var updateUser = jQuery.extend({}, vm.user);
+            if(updateUser.hasOwnProperty('_id')){
+                delete updateUser._id;
+            }
             UserService
-                .updateUser(vm.user._id,vm.user)
+                .updateUser(vm.user._id,updateUser)
                 .then(function(response) {
                     var curUser = response.data;
                     if(curUser) {
