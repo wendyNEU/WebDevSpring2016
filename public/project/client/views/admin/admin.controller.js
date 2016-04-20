@@ -52,7 +52,13 @@
 
         function createUser() {
             var deferred = $q.defer();
-            UserService.adminCreateUser(vm.newUser)
+            var createUser = {};
+            createUser.username = vm.newUser.username;
+            createUser.password = vm.newUser.password;
+            createUser.rules = vm.newUser.rules;
+            createUser.email = vm.newUser.email;
+            createUser.photo = vm.newUser.photo;
+            UserService.adminCreateUser(createUser)
                 .then(function (response) {
                     if (response.data) {
                         vm.users = response.data;

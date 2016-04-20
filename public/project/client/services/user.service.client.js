@@ -15,7 +15,7 @@
             adminFindAllUsers: adminFindAllUsers,
             adminCreateUser: adminCreateUser,
             adminUpdateUser:adminUpdateUser,
-            adminDeleteUserbyId: adminDeleteUserById,
+            adminDeleteUserById: adminDeleteUserById,
             updateUser: updateUser,
             getProfile:getProfile,
             islogin:islogin,
